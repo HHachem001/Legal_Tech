@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary Generator</title>
+    <style>
+        /* Add your CSS styles here */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 200px;
+            border-radius: 5px;
+            padding: 15px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            resize: none;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #3498db;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        button:disabled {
+            background-color: #b3c2c8;
+            cursor: not-allowed;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        #spinner {
+            display: none;
+            margin-right: 10px;
+            animation: spin 1s linear infinite;
+        }
+
+        #spinner.show {
+            display: inline-block;
+        }
+
+        #output-div {
+            display: none;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+		.exit-button {
+            display: block;
+            width: 10%;
+            padding: 10px;
+            background-color: #e74c3c;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .exit-button:hover {
+            background-color: #c0392b;
+        }
+	  .disclaimer-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 1);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            color: #fff;
+        }
+
+        .disclaimer-content {
+            /* Add styles for the content */
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .hazard-sign {
+            font-size: 50px;
+            color: #ffcc00; /* Hazard sign color */
+        }
+
+        .disclaimer-buttons {
+            margin-top: 10px;
+        }
+
+        .disclaimer-buttons button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .agree-button {
+            background-color: #4caf50; /* Green */
+            color: #fff;
+            margin-right: 5px;
+        }
+
+        .deny-button {
+            background-color: #e74c3c; /* Red */
+            color: #fff;
+            margin-left: 10px;
+        }
+		.agree-button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+
+        .deny-button:hover {
+            background-color: #c0392b; /* Darker red on hover */
+        }
+    </style>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+
+
+      <!-- Add the disclaimer popup -->
+    <div id="disclaimer-popup" class="disclaimer-popup">
+        <div class="disclaimer-content">
+            <div class="hazard-sign">⚠️</div>
+            <h2>Disclaimer</h2>
+            <ul>
+                <li>This AI summarization feature is experimental and will have unpredictable behavior.</li>
+                <li>It is resource-intensive and will cause the page to freeze.</li>
+                <li>The generated summaries might are always be accurate and will contain hallucinated content.</li>
+                <li>Use at your own risk.</li>
+				<li>Utilizes the BART LLM.</li>
+				<li>Hashim Hachem - 2023</li>
+            </ul>
+        </div>
+        <div class="disclaimer-buttons">
+        <button class="agree-button" onclick="agree()">Agree</button>
+        </div>
+		<button class="deny-button" onclick="deny()">Deny</button>
+    </div>
+
+	
+    <div class="container">
+	<h1> Step 1: Upload your contract <h1>
+	<input type="file" id="pdf-upload" accept=".pdf">
+	<h1> Step 2: Click on summarize my contract <h1>
+        <textarea id="long-text-input" placeholder="Paste your contract here, or upload your contract"></textarea>
+        <button id="generate-button" disabled>
+            <span id="spinner">🔄</span> Summarize My Contract
+        </button>
+        <div id="output-div"></div>
+		
+
+        
+		
+		<button class="exit-button" onclick="exitPage()">Exit</button>
+		
+    </div>
+
+
+  <script type="module">
+    import { pipeline } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.8.0';
+
+    const longTextInput = document.getElementById('long-text-input');
+    const pdfUploadInput = document.getElementById('pdf-upload');
+    const generateButton = document.getElementById('generate-button');
+    const output = document.getElementById('output-div');
+    const spinner = document.getElementById('spinner');
+
+    pdfUploadInput.addEventListener('change', handlePdfUpload);
+    generateButton.addEventListener('click', generateSummary);
+
+    async function handlePdfUpload() {
+        const selectedFile = pdfUploadInput.files[0];
+
+        if (!selectedFile) {
+            alert('No file selected.');
+            return;
+        }
+
+        spinner.classList.add('show');
+        generateButton.setAttribute("disabled", true);
+
+        try {
+            const text = await extractTextFromPDF(selectedFile);
+            longTextInput.value = text; // Display extracted text in the textarea
+        } catch (error) {
+            alert('Error processing the PDF file. Please try again.');
+        } finally {
+            spinner.classList.remove('show');
+            generateButton.removeAttribute("disabled");
+        }
+    }
+
+        async function extractTextFromPDF(pdfFile) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+            const typedarray = new Uint8Array(event.target.result);
+            pdfjsLib.getDocument(typedarray).promise.then(function (pdf) {
+                const numPages = pdf.numPages;
+                const textContent = [];
+
+                function processPage(pageNum) {
+                    pdf.getPage(pageNum).then(function (page) {
+                        page.getTextContent().then(function (content) {
+                            content.items.forEach(function (item) {
+                                // Clean the text and only include words
+                                const words = item.str.split(/\s+/).filter(word => /^[a-zA-Z]+$/.test(word));
+                                textContent.push(words.join(' '));
+                            });
+
+                            if (pageNum < numPages) {
+                                // Continue processing the next page
+                                processPage(pageNum + 1);
+                            } else {
+                                // All pages have been processed
+                                resolve(textContent.join('\n')); // Return the complete text
+                            }
+                        });
+                    });
+                }
+
+                processPage(1); // Start processing from page 1
+            });
+        };
+        reader.onerror = reject;
+        reader.readAsArrayBuffer(pdfFile);
+    });
+}
+
+           async function generateSummary() {
+    spinner.classList.add('show');
+    generateButton.setAttribute("disabled", true);
+
+    const input = longTextInput.value;
+    const summarization = await pipeline('summarization', 'Xenova/bart-large-cnn'); //swap bart for t5-base for a smaller LLM
+
+     try {
+        // Split the input into chunks of approximately 300 words
+        const chunkSize = 300;
+        const chunks = input.match(new RegExp(`.{1,${chunkSize}}`, 'gs')) || [];
+
+        // Generate summaries for each chunk
+        const results = [];
+        for (const chunk of chunks) {
+            const result = await summarization(chunk, {
+                min_length: 10,
+                max_length: 120,
+                length_penalty: 2.0,
+                num_beams: 4,
+            });
+            results.push(result[0].summary_text);
+        }
+
+        // Combine the summaries from different chunks
+        const combinedSummary = results.join(' ');
+
+        // Display the summary
+        output.innerHTML = combinedSummary;
+        output.style.display = 'block';
+    } catch (error) {
+        alert('Error generating the summary. Please try again.');
+    } finally {
+        spinner.classList.remove('show');
+        generateButton.removeAttribute("disabled");
+    }
+}
+
+
+    </script>
+	
+	<script>
+	
+	function exitPage() {
+            // Redirect to redirect.html
+            window.location.href = 'redirect.html';
+        }
+	
+	</script> 
+	
+	 
+     <script>
+        // Display the disclaimer popup on page load
+        window.onload = function () {
+            showDisclaimerPopup();
+        };
+
+        function showDisclaimerPopup() {
+            const popup = document.getElementById('disclaimer-popup');
+            popup.style.display = 'block';
+        }
+
+        function hideDisclaimerPopup() {
+            const popup = document.getElementById('disclaimer-popup');
+            popup.style.display = 'none';
+        }
+
+        function agree() {
+            // If the user agrees, hide the disclaimer popup
+            hideDisclaimerPopup();
+            // Enable the generate button or perform other actions
+        }
+
+        function deny() {
+            // If the user denies, redirect to redirect.html
+            window.location.href = 'redirect.html';
+        }
+    </script>
+
+</body>
+</html>

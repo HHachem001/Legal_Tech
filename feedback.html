@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A.I. Feedback Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+			background-color: #DFDFDF;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #feedbackForm {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+			box-shadow: 0 0 30px rgba(0, 0, 0, 0.3); /* Adjust the values for intensity */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        #inputText {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        #submitButton {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #submitButton:hover {
+            background-color: #1c6aa0;
+        }
+		
+		#exitButton {
+            background-color: #FF0000;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #exitButton:hover {
+            background-color: #CC0000;
+        }
+
+		#outputDivPopup {
+            display: none; /* Hide initially */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            border: 2px solid #4caf50;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            text-align: left;
+            word-wrap: break-word;
+            z-index: 1001; /* Make it appear above the overlay */
+        }
+
+        #outputDivPopupClose {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #4caf50;
+        }
+
+         #outputDiv {
+            display: none; /* Hide initially */
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            word-wrap: break-word;
+        }
+        #outputDiv p {
+            margin: 0;
+        }
+
+        #outputDiv .response {
+            margin-top: 10px;
+            color: #555;
+        }
+
+        #loadingOverlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #loadingMessage {
+            font-size: 16px;
+            color: #333;
+        }
+
+        #loadingSpinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #ccc;
+            border-top: 4px solid #4caf50;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+		
+		h1 {
+			color: #333; /* Set text color to a dark shade */
+			font-family: 'Arial', sans-serif; /* Use a sans-serif font */
+			text-align: center; /* Center-align the text */
+			margin: 20px 0; /* Add some margin for spacing */
+		}
+		
+		.disclaimer {
+			color: #666; /* Adjust the color as needed */
+			font-style: italic;
+			margin-top: 10px;
+		}
+    </style>
+</head>
+<body>
+    
+
+    <form id="feedbackForm">
+	<h1>Your feedback helps improves Legal Draft</h1>
+        <label for="inputText">Enter your feedback below:</label>
+        <textarea id="inputText" required></textarea>
+        <button type="button" id="submitButton">Submit Feedback</button>
+		<button type="button" id="exitButton">Exit</button>
+		</div>
+		<p class="disclaimer">Your feedback will be processed by AI to enhance Legal Draft services and user experience.</p>
+		</div>
+    </form>
+
+    <div id="outputDiv"></div>
+
+    <div id="loadingOverlay">
+        <div id="loadingMessage">Processing Feedback...  </div>
+        <div id="loadingSpinner"></div>
+    </div>
+	
+	<div id="outputDivPopup">
+        <div id="outputDivPopupClose" onclick="closePopup()">X</div>
+        <div id="outputDivContent"></div>
+    </div>
+
+    <script type="module">
+        import { pipeline } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.4.1';
+
+              async function performSentimentAnalysis() {
+        // Show loading overlay
+        document.getElementById('loadingOverlay').style.display = 'flex';
+
+        // Get input text
+        let inputText = document.getElementById('inputText').value;
+
+        // Specify the classifier task
+        let classifier = await pipeline('sentiment-analysis');
+
+        // Classify the input text
+        let result = await classifier(inputText);
+
+        // Hide loading overlay
+        document.getElementById('loadingOverlay').style.display = 'none';
+
+        // Display sentiment information in the outputDivPopup
+        let sentimentLabel = result[0].label;
+        let confidenceScore = result[0].score;
+        let positiveResponse = "We are thrilled that you had a positive experience! Your feedback means a lot to us. Thank you for your support!";
+        let negativeResponse = "I'm sorry to hear that you're facing difficulties. We appreciate your feedback and would like to help. Please feel free to provide more details so we can address the issue.";
+        let response = sentimentLabel === 'POSITIVE' ? positiveResponse : negativeResponse;
+
+        let outputDivContent = document.getElementById('outputDivContent');
+        outputDivContent.innerHTML = `<p>Sentiment: ${sentimentLabel}</p><p>Confidence: ${confidenceScore}</p><div class="response">${response}</div>`;
+
+        // Show the outputDivPopup
+        document.getElementById('outputDivPopup').style.display = 'block';
+
+        // Add an event listener to the close button in the popup
+        document.getElementById('outputDivPopupClose').addEventListener('click', closePopup);
+    }
+
+    // Function to close the popup
+    function closePopup() {
+        document.getElementById('outputDivPopup').style.display = 'none';
+    }
+
+    // Add an event listener to the button
+    document.getElementById('submitButton').addEventListener('click', performSentimentAnalysis);
+
+    // Function to redirect to Welcome.html
+    function redirectToWelcome() {
+        window.location.href = 'redirect.html';
+    }
+
+    // Add an event listener to the exit button
+    document.getElementById('exitButton').addEventListener('click', redirectToWelcome);
+</script>
+</body>
+</html>
+
+
+
+

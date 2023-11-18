@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Letter Generator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #E1E1E1;
+    color: #333;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 50px auto;
+    max-width: 800px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+ h1 {
+        background-color: #002855; 
+        color: #fff; 
+        padding: 10px; 
+        text-align: center; 
+        margin-top: 0; 
+        display: block; 
+        width: 100%; 
+        border-radius: 5px; 
+        font-style: italic; 
+		}
+p {
+    color: #666;
+    margin-bottom: 30px;
+	        text-align: center; 
+
+}
+
+.letter-button {
+    width: 100%;
+    margin: 10px 0;
+    font-size: 18px;
+    white-space: normal;
+    text-align: left;
+    padding: 15px;
+    background-color: #0078d4; /* A darker blue for buttons */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.letter-button:hover {
+    background-color: #0056b3; /* Slightly darker blue on hover */
+}
+
+/* Adjustments for Bootstrap tooltips */
+.tooltip-inner {
+    max-width: 300px;
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 576px) {
+    .container {
+        margin: 20px auto;
+    }
+}
+  /* Red Exit Button */
+        .exit-button {
+            background-color: #dc3545; /* Red color for the exit button */
+            color: #fff;
+        }
+
+        .exit-button:hover {
+            background-color: #c82333; /* Slightly darker red on hover */
+        }
+
+   </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Legal Letter Center</h1>
+        <p>Generate various types of professional letters. Some features may not be available yet.</p>
+        <div class="row">
+            <div class="col-md-6">
+                <button type="button" class="btn btn-primary letter-button" data-toggle="tooltip" data-placement="top" title="Create a public notice letter." onclick="location.href='public_notice.html'">Public Notice Letter</button>
+            </div>
+            <div class="col-md-6">
+                <button type="button" class="btn btn-primary letter-button" data-toggle="tooltip" data-placement="top" title="Generate a community outreach letter." onclick="location.href='community_outreach.html'">Community Outreach Letter</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <button type="button" class="btn btn-primary letter-button" data-toggle="tooltip" data-placement="top" title="Create a public meeting invitation." onclick="location.href='public_meeting_invitation.html'">🚧 Public Meeting Invitation</button>
+            </div>
+            <div class="col-md-6">
+                <button type="button" class="btn btn-primary letter-button" data-toggle="tooltip" data-placement="top" title="Generate a thank you letter for public participation." onclick="location.href='thank_you_participation.html'">🚧 Thank You for Public Participation</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <button type="button" class="btn btn-primary letter-button" data-toggle="tooltip" data-placement="top" title="Create a government service announcement." onclick="location.href='government_service_announcement.html'">🚧 Government Service Announcement</button>
+            </div>
+            <div class="col-md-6">
+                <button type="button" class="btn btn-primary letter-button" data-toggle="tooltip" data-placement="top" title="Generate a public health advisory." onclick="location.href='public_health_advisory.html'">🚧 Public Health Advisory</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <button type="button" class="btn btn-primary letter-button" data-toggle="tooltip" data-placement="top" title="Create a public survey request." onclick="location.href='public_survey_request.html'">🚧 Public Survey Request</button>
+            </div>
+            <div class="col-md-6">
+                <button type="button" class="btn btn-primary letter-button" data-toggle="tooltip" data-placement="top" title="Generate a complaint response letter." onclick="location.href='complaint_response.html'">🚧 Complaint Response Letter</button>
+            </div>
+        </div>
+
+		<div class="row">
+            <div class="col-md-6">
+                <button type="button" class="btn btn-primary letter-button" data-toggle="tooltip" data-placement="top" title="Create a public records request response." onclick="location.href='public_records_request_response.html'">🚧 Public Records Request Response</button>
+            </div>
+            <div class="col-md-6">
+                <button type="button" class="btn btn-primary letter-button" data-toggle="tooltip" data-placement="top" title="Generate a public safety alert." onclick="location.href='public_safety_alert.html'">🚧 Public Safety Alert</button>
+            </div>
+        </div>
+		
+		<div class="row">
+            <div class="col-md-6">
+                <button type="button" class="btn btn-primary letter-button" data-toggle="tooltip" data-placement="top" title="Create a community event invitation." onclick="location.href='community_event_invitation.html'">Community Event Invitation</button>
+            </div>
+            <div class="col-md-6">
+                <button type="button" class="letter-button exit-button" data-toggle="tooltip" data-placement="top" title="Exit back to the main menu" onclick="location.href='redirect.html'">Exit</button>
+            </div
+        </div>
+	</div>
+     
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+		
+		function exitPage() {
+            // Redirect to an exit page or perform other exit actions if needed
+            window.location.href = 'redirect.html';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Generator with Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+		
+		 h1 {
+        background-color: #002855; 
+        color: #fff; 
+        padding: 10px; 
+        text-align: center; 
+        margin-top: 0; 
+        display: block; 
+        width: 97%; 
+        border-radius: 5px; 
+        font-style: italic; 
+		}
+		
+		.disclaimer {
+            font-size: 14px;
+            color: #777;
+			font-style: italic;
+        }
+
+        #documentContainer {
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+			border-radius: 8px;
+        }
+
+        #contentContainer {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        #navigationPanel {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            padding: 10px;
+            background-color: #ddd;
+            border-radius: 5px;
+            margin-right: 20px;
+        }
+
+        #navigationPanel a.nav-link {
+            text-decoration: none;
+            color: #333;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        #navigationPanel a.nav-link:hover {
+            background-color: #ccc;
+        }
+
+        #navigationPanel a.nav-link.active {
+            background-color: #ccc;
+        }
+
+        .document-section {
+            opacity: 0;
+            display: none;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            flex: 1;
+        }
+
+        .document-section.active {
+            display: flex;
+            flex-direction: column;
+            opacity: 1;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            resize: vertical; /* Allow vertical resizing */
+        }
+
+        /* Styles for the chat container */
+        #chat-container {
+            width: 400px;
+            background-color: #fff;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            overflow: hidden;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+        }
+
+        #chat-header {
+            background-color: #002855;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            position: relative;
+        }
+
+        #exit-btn {
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            border-radius: 4px;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+        }
+
+        #chat-messages {
+            padding: 20px;
+            height: 200px;
+            overflow-y: auto;
+        }
+
+        #user-input {
+            padding: 10px;
+            background-color: #f8f8f8;
+            border-top: 1px solid #ddd;
+            display: flex;
+        }
+
+        #input-text {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 8px;
+            border-radius: 4px;
+        }
+
+        #send-btn {
+            background-color: #2980b9;
+            color: #fff;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-left: 10px;
+        }
+
+        #chat-icon-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            z-index: 999;
+        }
+
+        #chat-icon {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        #chat-icon-text {
+            font-size: 12px;
+            color: #777;
+        }
+
+        /* Add this style to hide the user input and "Send" button */
+        #user-input {
+            display: none;
+        }
+		.user-tag {
+    color: blue;
+}
+
+.bot-tag {
+    color: green;
+}
+
+#chat-messages div {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+#chat-messages .user-tag {
+    font-weight: bold;
+}
+
+#chat-messages .bot-tag {
+    font-weight: bold;
+}
+.button-A1 {
+  background: #5E5DF0;
+  border-radius: 999px;
+  box-shadow: #5E5DF0 0 10px 20px -10px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-family: Inter,Helvetica,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Noto Color Emoji","Segoe UI Symbol","Android Emoji",EmojiSymbols,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans",sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  opacity: 1;
+  outline: 0 solid transparent;
+  padding: 8px 18px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: fit-content;
+  word-break: break-word;
+  border: 0;
+}
+
+.button-A1:hover {
+  background: #3e40b8; /* Change the color for hover state (green in this case) */
+}
+    </style>
+</head>
+
+<body>
+
+    <div id="documentContainer">
+        <h1>Public Notice Letter Generator</h1>
+
+        <div id="contentContainer">
+            <div id="navigationPanel">
+                <a href="#" onclick="showSection(1)" class="nav-link">Basic Notice Details</a>
+                <a href="#" onclick="showSection(2)" class="nav-link">Brief Description</a>
+                <a href="#" onclick="showSection(3)" class="nav-link">Detailed Description</a>
+                <a href="#" onclick="showSection(4)" class="nav-link">Related Event</a>
+                <a href="#" onclick="showSection(5)" class="nav-link">Website</a>
+                <a href="#" onclick="showSection(6)" class="nav-link">Contact Information</a>
+				<button onclick="toggleChatContainer()" class="button-A1">
+    A.I. Assistant
+</button>
+				<button onclick="confirmExit()" style="background-color: #e74c3c; color: #fff; border: none; padding: 8px; cursor: pointer; border-radius: 4px; margin-top: 10px;">
+    Exit
+</button>
+            </div>
+
+            <div class="document-section active" id="section1">
+                <h2>Enter basic notice details below:</h2>
+                <p>Enter the name of the recipient, your name, etc.</p>
+                <textarea id="recipientInput" placeholder="Name of the recipient"></textarea>
+                <br>
+                <textarea id="yournameInput" placeholder="Your name"></textarea>
+                <br>
+                <textarea id="yourpositionInput" placeholder="Your position"></textarea>
+                <br>
+                <textarea id="departmentInput" placeholder="Your department"></textarea>
+                <br>
+                <button onclick="nextSection()">Next</button>
+            </div>
+
+            <div class="document-section" id="section2">
+                <h2>Brief Description of the Notice</h2>
+                <p>Enter a short description of the notice (i.e, water main repair)</p>
+                <textarea id="noticedescriptionInput" placeholder="subject of the notice"></textarea>
+                <br>
+                <button onclick="nextSection()">Next</button>
+            </div>
+
+            <div class="document-section" id="section3">
+                <h2>Detailed Description of the Notice</h2>
+                <p>Now, enter a detailed description of the notice</p>
+                <textarea id="noticedetailInput" placeholder="Details go here"></textarea>
+                <br>
+                <button onclick="nextSection()">Next</button>
+            </div>
+
+            <div class="document-section" id="section4">
+                <h2>Related Event</h2>
+                <p>Enter the broader thing that the notice is related to</p>
+                <textarea id="relatedInput" placeholder="What is it related to...?"></textarea>
+                <br>
+                <button onclick="nextSection()">Next</button>
+            </div>
+
+            <div class="document-section" id="section5">
+                <h2>Website</h2>
+                <p>Visit our Website at</p>
+                <textarea id="websiteInput" placeholder="URL"></textarea>
+                <br>
+                <button onclick="nextSection()">Next</button>
+            </div>
+
+            <div class="document-section" id="section6">
+                <h2>Office Contact Information</h2>
+                <p>Enter address of Office for constituent contact</p>
+                <textarea id="officeInput" placeholder="contact information"></textarea>
+                <br>
+                <button onclick="generateDocument()">Generate Document</button>
+            </div>
+			
+        </div>
+		<p class="disclaimer">Created by Hashim Hachem 2023. This is an educational demo and should not be relied on as a source of legal authority.</p>
+    </div>
+
+  
+    <!-- Chatbot Container -->
+    <div id="chat-container">
+        <div id="chat-header">
+            ✨ Your A.I. Assistant
+            <div id="exit-btn" onclick="toggleChatContainer()">Hide</div>
+        </div>
+        <div id="chat-messages">
+            <!-- Add a message informing the user about model loading -->
+            <div class="info-message">
+                <p class="disclaimer">Disclaimer: Chatbot answers are generated by an AI model and may not be entirely accurate or reliable.</p>
+                <p>Please wait while we load the AI model ~800MB. This may take a moment.</p>
+            </div>
+        </div>
+        <div id="user-input">
+<input type="text" id="input-text" placeholder="Type here and press enter..." onkeydown="if (event.keyCode === 13) sendMessage()">
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/docxtemplater@3.42.0/build/docxtemplater.js"></script>
+    <script src="https://unpkg.com/pizzip@3.1.4/dist/pizzip.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>
+    <script src="https://unpkg.com/pizzip@3.1.4/dist/pizzip-utils.js"></script>
+    <!--[if IE]>
+        <script type="text/javascript" src="https://unpkg.com/pizzip@3.1.4/dist/pizzip-utils-ie.js"></script>
+    <![endif]-->
+    <script>
+        let currentSection = 1;
+
+        function showSection(section) {
+            const currentSectionElement = document.getElementById(`section${currentSection}`);
+            currentSectionElement.classList.remove("active");
+            currentSection = section;
+            const nextSectionElement = document.getElementById(`section${currentSection}`);
+            nextSectionElement.classList.add("active");
+
+            // Highlight current section in navigation
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => link.classList.remove('active'));
+            navLinks[currentSection - 1].classList.add('active');
+        }
+
+        function nextSection() {
+            showSection(currentSection + 1);
+        }
+        function generateDocument() {
+            const data = {
+                recipient: document.getElementById("recipientInput").value,
+                subject: document.getElementById("noticedescriptionInput").value,
+                details: document.getElementById("noticedetailInput").value,
+                event: document.getElementById("relatedInput").value,
+                website: document.getElementById("websiteInput").value,
+                contact: document.getElementById("officeInput").value,
+                Your_Name: document.getElementById("yournameInput").value,
+                Your_Position: document.getElementById("yourpositionInput").value,
+                Government_Department: document.getElementById("departmentInput").value,
+            };
+
+            loadFile("https://hhachem001.github.io/Legal_Tech/templates/Public_Notice_Letter.docx", function (error, content) {
+                if (error) {
+                    throw error;
+                }
+
+                const zip = new PizZip(content);
+                const doc = new window.docxtemplater(zip, {
+                    paragraphLoop: true,
+                    linebreaks: true,
+                });
+
+                doc.render(data);
+
+                const blob = doc.getZip().generate({
+                    type: "blob",
+                    mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    compression: "DEFLATE",
+                });
+
+                const currentDate = new Date();
+                const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+                const formattedDate = currentDate.toLocaleDateString('en-US', options).replace(/\//g, '-');
+
+                saveAs(blob, `public_notice_${formattedDate}.docx`);
+            });
+        }
+
+        function loadFile(url, callback) {
+            PizZipUtils.getBinaryContent(url, callback);
+        }
+		
+    </script>
+	
+	<script type="module">
+        import { pipeline } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.8.0';
+
+        // Initialize the pipeline for text-to-text generation
+        let generator;
+
+        async function loadModel() {
+            generator = await pipeline('text2text-generation', 'Xenova/LaMini-Flan-T5-783M');
+        }
+
+        // Call the loadModel function to load the AI model.
+        loadModel();
+
+        document.addEventListener('DOMContentLoaded', startChat);
+
+        function startChat() {
+            appendMessage('Bot', 'Hello! I\'m your A.I. assistant. What would you like me to do? I can summarize content, fix grammar, and more!');
+        }
+
+        async function sendMessageToXenova(message) {
+            const output = await generator(message, { max_new_tokens: 100 });
+            appendMessage('Bot', output[0].generated_text);
+        }
+
+        async function handleUserInput(input) {
+            appendMessage('User', input);
+            await sendMessageToXenova(input);
+        }
+
+// Add this function to your existing event listener for user input
+        async function sendMessage() {
+    console.log('sendMessage called'); // Add this line
+    const inputField = document.getElementById('input-text');
+    const userMessage = inputField.value;
+    await handleUserInput(userMessage);
+    inputField.value = '';
+}
+
+// Add an event listener for keydown
+    document.addEventListener('DOMContentLoaded', function () {
+        const inputField = document.getElementById('input-text');
+        inputField.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    });
+        let chatContainerVisible = false;
+
+        function toggleChatContainer() {
+            const chatContainer = document.getElementById('chat-container');
+            const userInput = document.getElementById('user-input');
+            chatContainer.style.display = chatContainerVisible ? 'none' : 'block';
+            userInput.style.display = chatContainerVisible ? 'none' : 'flex';
+            chatContainerVisible = !chatContainerVisible;
+        }
+		
+        function appendMessage(sender, message) {
+    const messageElement = document.createElement('div');
+
+    // Set different styles based on the sender
+    if (sender === 'User') {
+        messageElement.innerHTML = `<span class="user-tag">User:</span> ${message}`;
+    } else if (sender === 'Bot') {
+        messageElement.innerHTML = `<span class="bot-tag">Legal Draft:</span> ${message}`;
+    }
+
+    const chatMessages = document.getElementById('chat-messages');
+    chatMessages.appendChild(messageElement);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+        
+    </script>
+	
+	 <script>
+        let chatContainerVisible = false;
+
+        function toggleChatContainer() {
+            const chatContainer = document.getElementById('chat-container');
+            const userInput = document.getElementById('user-input');
+            chatContainer.style.display = chatContainerVisible ? 'none' : 'block';
+            userInput.style.display = chatContainerVisible ? 'none' : 'flex';
+            chatContainerVisible = !chatContainerVisible;
+        }
+    </script>
+	
+	<script>
+    function confirmExit() {
+        // Display a confirmation dialog
+        const isConfirmed = confirm("Any unsaved work from your public notice will be lost forever. Are you sure you want to exit?");
+        
+        // If the user confirms, redirect to redirect.html
+        if (isConfirmed) {
+            window.location.href = 'PublicLetterGen.html';
+        }
+    }
+</script>
+
+</body>
+</html>

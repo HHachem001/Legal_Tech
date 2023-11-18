@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contract Analyzer</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #002855;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    main {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #fff;
+	  font-style: italic;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      color: #555;
+    }
+
+    textarea {
+      width: calc(100% - 20px);
+      height: 200px;
+      margin-top: 5px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+      #exitButton {
+      background-color: #d9534f; /* Updated to red */
+      color: #fff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    #result {
+      margin-top: 20px;
+      color: #333;
+    }
+
+    #result p {
+      margin-bottom: 10px;
+    }
+	#exitButton, #clearButton {
+      background-color: #d9534f;
+      color: #fff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    #clearButton:hover {
+      background-color: #c9302c;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.12.313/pdf.js"></script>
+</head>
+<body>
+
+  <header>
+    <h1>Contract Analyzer</h1>
+    <h2>Version 1.1</h2>
+  </header>
+
+  <main>
+    <label for="fileInput">Upload PDF and click Analyze:</label>
+    <input type="file" id="fileInput" accept=".pdf">
+
+    <label for="contractText">OR paste your contract text below:</label>
+    <textarea id="contractText" placeholder="Paste your contract text here"></textarea>
+
+    <button onclick="analyzeContract()">Analyze</button>
+    <!-- Clear button added -->
+    <button id="clearButton" onclick="clearText()">Clear Text</button>
+
+    <div id="result">
+      <!-- Result will be displayed here -->
+    </div>
+
+    <!-- Exit button -->
+    <button id="exitButton" onclick="exitPage()">Exit</button>
+  </main>
+
+  <script>
+    function analyzeContract() {
+      const fileInput = document.getElementById('fileInput');
+      const contractText = document.getElementById('contractText');
+      const resultElement = document.getElementById('result');
+      resultElement.innerHTML = '';
+
+      if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+
+        if (file.type === 'application/pdf') {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            const fileContent = e.target.result;
+
+            extractTextFromPDF(fileContent)
+              .then((extractedText) => {
+                processContractText(extractedText, resultElement);
+              })
+              .catch((error) => {
+                console.error(error);
+                alert('Error extracting text from PDF.');
+              });
+          };
+
+          reader.readAsArrayBuffer(file);
+        } else {
+          alert('Please upload a PDF file.');
+        }
+      } else {
+        // If no file is uploaded, use the text from the textarea
+        const textFromTextarea = contractText.value;
+        processContractText(textFromTextarea, resultElement);
+      }
+    }
+
+    function processContractText(contractText, resultElement) {
+      const essentialTerms = [
+        'parties', 'consideration', 'terms', 'termination', 'governing law',
+        'confidentiality', 'indemnification', 'warranty', 'payment', 'delivery',
+        'force majeure', 'insurance', 'assignment', 'dispute resolution', 'representations and warranties',
+        'non-compete', 'non-disclosure', 'intellectual property', 'amendment', 'notices',
+        'remedies', 'audit', 'compliance', 'conflict of interest', 'damages',
+        'entire agreement', 'force majeure', 'insurance', 'limitation of liability', 'non-solicitation',
+        'prevailing party', 'confidentiality', 'indemnification', 'representations and warranties', 'payment terms',
+        'warranty disclaimer', 'time of essence', 'venue', 'waiver', 'severability',
+        'counterparts', 'rights and remedies', 'successors and assigns', 'covenants', 'governing law and jurisdiction',
+      ];
+
+      const missingTerms = essentialTerms.filter(term => !new RegExp(term, 'i').test(contractText));
+
+      if (missingTerms.length > 0) {
+        resultElement.innerHTML = `<p>Score: ${(1 - missingTerms.length / essentialTerms.length) * 100}%</p>`;
+        resultElement.innerHTML += '<p>Missing essential terms that may or may not apply: → → → → → → → → → ' + missingTerms.join(', ') + '</p>';
+      } else {
+        resultElement.innerHTML = '<p>Score: 100%</p>';
+        resultElement.innerHTML += '<p>All essential terms found!</p>';
+      }
+    }
+
+    function extractTextFromPDF(pdfContent) {
+      return new Promise((resolve, reject) => {
+        const loadingTask = pdfjsLib.getDocument({ data: pdfContent });
+
+        loadingTask.promise
+          .then((pdf) => {
+            const numPages = pdf.numPages;
+            const textContentPromises = [];
+
+            for (let i = 1; i <= numPages; i++) {
+              textContentPromises.push(pdf.getPage(i).then(page => page.getTextContent()));
+            }
+
+            return Promise.all(textContentPromises);
+          })
+          .then((pageTextContents) => {
+            const fullText = pageTextContents
+              .map((textContent) => textContent.items.map((item) => item.str).join(' '))
+              .join('\n');
+            resolve(fullText);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    }
+
+    function extractTextFromDOCX(docxContent) {
+      // Implement this function or use a library to extract text from a DOCX
+      return 'Text extracted from DOCX.';
+    }
+
+    function exitPage() {
+      // Redirect to redirect.html
+      window.location.href = 'redirect.html';
+    }
+	
+	 function clearText() {
+      // Display confirmation dialog
+      const confirmClear = window.confirm('Are you sure you want to clear the text? Any unsaved work will be lost.');
+
+      if (confirmClear) {
+        // Clear the text and refresh the page
+        document.getElementById('contractText').value = '';
+        window.location.reload();
+      }
+    }
+  </script>
+
+</body>
+</html>

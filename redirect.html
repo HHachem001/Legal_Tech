@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LegalDraft Toolbox - Welcome</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* Your CSS styles here */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #E1E1E1;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 850px;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .header {
+            background-color: #002855;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+            font-size: 24px;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin: 0;
+			font-style: italic;
+        }
+
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .welcome-message {
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .department-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .department-button {
+            background-color: #0078d4;
+            border: none;
+            color: #fff;
+            padding: 20px;
+            margin: 10px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 10px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .department-button:hover {
+            background-color: #005aa0;
+        }
+
+        .department-button span {
+            font-size: 18px;
+        }
+
+        .department-button i {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .disclaimer {
+            font-size: 14px;
+            color: #777;
+			font-style: italic;
+        }
+
+        #toggleBackgroundButton {
+            background-color: #0078d4;
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        #toggleBackgroundButton:hover {
+            background-color: #005aa0;
+        }
+
+        .logout-button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #logout-button {
+            background-color: #ff3b30;
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        #logout-button:hover {
+            background-color: #ff291c;
+        }
+
+        /* Popup styles */
+        .popup-container {
+            background-color: #fff;
+            max-width: 400px;
+            margin: 0 auto;
+            border: 2px solid #002855;
+            box-shadow: 2px 2px 100px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            display: none;
+            z-index: 9999;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .popup-header {
+            background-color: #002855;
+            color: #fff;
+            padding: 10px;
+            font-weight: bold;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .popup-header:hover {
+            background-color: #005aa0;
+        }
+
+        .popup-close {
+            font-size: 20px;
+            padding-right: 10px;
+            cursor: pointer; /* Added cursor style */
+        }
+
+        .popup-content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .popup-button {
+            background-color: #0078d4;
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .popup-button:hover {
+            background-color: #005aa0;
+        }
+
+        /* Background container styles */
+        #background-container {
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+		img {
+            width: 310px;
+            height: 300px;
+            margin: -70px;
+        }
+		    #chat-container {
+            width: 400px;
+            background-color: #fff;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            overflow: hidden;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+        }
+
+        #chat-header {
+            background-color: #002855;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            position: relative;
+        }
+
+        #exit-btn {
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            border-radius: 4px;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+        }
+
+        #chat-messages {
+            padding: 20px;
+            height: 200px;
+            overflow-y: auto;
+        }
+
+        #user-input {
+            padding: 10px;
+            background-color: #f8f8f8;
+            border-top: 1px solid #ddd;
+            display: flex;
+        }
+
+        #input-text {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 8px;
+            border-radius: 4px;
+        }
+
+        #send-btn {
+            background-color: #2980b9;
+            color: #fff;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-left: 10px;
+        }
+
+        #chat-icon-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            z-index: 999;
+        }
+
+        #chat-icon {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        #chat-icon-text {
+            font-size: 12px;
+            color: #777;
+        }
+
+        /* Add this style to hide the user input and "Send" button */
+        #user-input {
+            display: none;
+        }
+		.user-tag {
+    color: blue;
+}
+
+.bot-tag {
+    color: green;
+}
+
+#chat-messages div {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+#chat-messages .user-tag {
+    font-weight: bold;
+}
+
+#chat-messages .bot-tag {
+    font-weight: bold;
+}
+.button-A1 {
+  background: #5E5DF0;
+  border-radius: 999px;
+  box-shadow: #5E5DF0 0 10px 20px -10px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-family: Inter,Helvetica,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Noto Color Emoji","Segoe UI Symbol","Android Emoji",EmojiSymbols,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans",sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  opacity: 1;
+  outline: 0 solid transparent;
+  padding: 8px 18px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: fit-content;
+  word-break: break-word;
+  border: 0;
+}
+
+.button-A1:hover {
+  background: #3e40b8; /* Change the color for hover state (green in this case) */
+}
+    </style>
+</head>
+
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Welcome to Legal Draft!</h1>
+        </div>
+        <div class="content">
+            <div class="welcome-message">
+                
+				<img src="logo.png" alt="LegalDraft Logo">
+                <h4>Version: 11.023A</h4>
+				<h2>Choose an option below to begin:</h2>
+            </div>
+            <div class="department-buttons">
+                <button class="department-button" onclick="openPopup('LegalSummarizer')">
+                    <i class="fas fa-gavel"></i>
+                    <span>Contract Judge</span>
+                </button>
+                <button class="department-button" onclick="openPopup('DatabaseSearch')">
+                    <i class="fas fa-balance-scale"></i>
+                    <span>Database Search</span>
+                </button>
+                <button class="department-button" onclick="openPopup('DraftDocument')">
+                    <i class="fas fa-file-contract"></i>
+                    <span>Draft Document</span>
+                </button>
+				<button class="department-button" onclick="redirectFeedback()">
+					<i class="fas fa-comments"></i>
+					<span>Feedback</span>
+				</button>
+            </div>
+            <p class="disclaimer">Created by Hashim Hachem 2023. This is an educational demo and should not be relied on as a source of legal authority.</p>
+          <button onclick="toggleChatContainer()" class="button-A1">
+    Legal Draft A.I.
+</button>
+		  <div class="logout-button-container">
+                <button id="logout-button" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup containers -->
+    <div class="popup-container" id="popup-LegalSummarizer">
+        <div class="popup-header" onclick="closePopup('LegalSummarizer')">
+    <span>Contract Analyzer Toolbox:</span>
+    <span class="popup-close">✖</span>
+</div>
+        <div class="popup-content">
+            <p>What would you like to do:</p>
+            <button class="popup-button" onclick="performAction('LegalSummarizer Action 2', 'contractjudger.html')">Analyze / Score your Contract</button>
+            <button class="popup-button" onclick="performAction('LegalSummarizer Action 3', 'contractsummary.html')">EXPERIMENTAL: Summarize your Contract</button>
+        </div>
+    </div>
+
+    <div class="popup-container" id="popup-DatabaseSearch">
+        <div class="popup-header" onclick="closePopup('DatabaseSearch', 'redirect.html')">
+            <span>Database Search</span>
+            <span class="popup-close">✖</span>
+        </div>
+        <div class="popup-content">
+            <p>Where would you like to search:</p>
+            <button class="popup-button" onclick="performAction('Housing Court Action 1', 'construction.html')">Massachusetts General Laws</button>
+            <button class="popup-button" onclick="performAction('Housing Court Action 2', 'construction.html')">Rhode Island General Laws</button>
+        </div>
+    </div>
+
+    <div class="popup-container" id="popup-DraftDocument">
+        <div class="popup-header" onclick="closePopup('DraftDocument', 'redirect.html')">
+            <span>Draft Document</span>
+            <span class="popup-close">✖</span>
+        </div>
+        <div class="popup-content">
+            <p>Is the letter / memo going to your supervising attorney or the public?</p>
+            <button class="popup-button" onclick="performAction('Contract Review Action 1', 'LegalMemo.html')">Supervising Attorney</button>
+            <button class="popup-button" onclick="performAction('Contract Review Action 2', 'PublicLetterGen.html')">General Public</button>
+        </div>
+    </div>
+
+    <div id="background-container"></div>
+
+
+ <!-- Chatbot Container -->
+    <div id="chat-container">
+        <div id="chat-header">
+            ✨ Your Legal Draft A.I. Assistant
+            <div id="exit-btn" onclick="toggleChatContainer()">Hide</div>
+        </div>
+        <div id="chat-messages">
+            <!-- Add a message informing the user about model loading -->
+            <div class="info-message">
+                <p class="disclaimer">Disclaimer: Chatbot answers are generated by an AI model and may not be entirely accurate or reliable.</p>
+                <p>Please wait while we load the AI model ~800MB. This may take a moment.</p>
+            </div>
+        </div>
+        <div id="user-input">
+<input type="text" id="input-text" placeholder="Type here and press enter..." onkeydown="if (event.keyCode === 13) sendMessage()">
+        </div>
+    </div>
+	
+    <script>
+	let currentOpenPopup = null;
+
+
+        function openPopup(department) {
+    // Close the current open popup (if any)
+    if (currentOpenPopup) {
+        document.getElementById(currentOpenPopup).style.display = 'none';
+    }
+
+    // Open the new popup
+    var popup = document.getElementById('popup-' + department);
+    if (popup) {
+        popup.style.display = 'block';
+        // Update the current open popup
+        currentOpenPopup = 'popup-' + department;
+    }
+}
+       // Function to close the popup for a specific department without redirecting
+function closePopup(department) {
+    var popup = document.getElementById('popup-' + department);
+    if (popup) {
+        popup.style.display = 'none';
+    }
+}
+
+
+        // Function to perform an action (e.g., open a page) for a specific department
+        function performAction(action, pageURL) {
+            window.location.href = pageURL; // Redirect to the specified page URL
+        }
+
+        // Function to handle user logout
+        function logout() {
+            window.location.href = 'Landing Page.html'; // Redirect to the logout page
+        }
+
+        
+    </script>
+	
+	<script>
+    function redirectFeedback() {
+        window.location.href = 'feedback.html';
+    }
+</script>
+
+	<script type="module">
+        import { pipeline } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.8.0';
+
+        // Initialize the pipeline for text-to-text generation
+        let generator;
+
+        async function loadModel() {
+            generator = await pipeline('text2text-generation', 'Xenova/LaMini-Flan-T5-783M');
+        }
+
+        // Call the loadModel function to load the AI model.
+        loadModel();
+
+        document.addEventListener('DOMContentLoaded', startChat);
+
+        function startChat() {
+            appendMessage('Bot', 'Hello! I\'m your A.I. assistant. What would you like me to do? I can summarize content, fix grammar, and more!');
+        }
+
+        async function sendMessageToXenova(message) {
+            const output = await generator(message, { max_new_tokens: 100 });
+            appendMessage('Bot', output[0].generated_text);
+        }
+
+        async function handleUserInput(input) {
+            appendMessage('User', input);
+            await sendMessageToXenova(input);
+        }
+
+// Add this function to your existing event listener for user input
+        async function sendMessage() {
+    console.log('sendMessage called'); // Add this line
+    const inputField = document.getElementById('input-text');
+    const userMessage = inputField.value;
+    await handleUserInput(userMessage);
+    inputField.value = '';
+}
+
+// Add an event listener for keydown
+    document.addEventListener('DOMContentLoaded', function () {
+        const inputField = document.getElementById('input-text');
+        inputField.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    });
+        let chatContainerVisible = false;
+
+        function toggleChatContainer() {
+            const chatContainer = document.getElementById('chat-container');
+            const userInput = document.getElementById('user-input');
+            chatContainer.style.display = chatContainerVisible ? 'none' : 'block';
+            userInput.style.display = chatContainerVisible ? 'none' : 'flex';
+            chatContainerVisible = !chatContainerVisible;
+        }
+		
+        function appendMessage(sender, message) {
+    const messageElement = document.createElement('div');
+
+    // Set different styles based on the sender
+    if (sender === 'User') {
+        messageElement.innerHTML = `<span class="user-tag">User:</span> ${message}`;
+    } else if (sender === 'Bot') {
+        messageElement.innerHTML = `<span class="bot-tag">Legal Draft:</span> ${message}`;
+    }
+
+    const chatMessages = document.getElementById('chat-messages');
+    chatMessages.appendChild(messageElement);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+        
+    </script>
+	
+	 <script>
+        let chatContainerVisible = false;
+
+        function toggleChatContainer() {
+            const chatContainer = document.getElementById('chat-container');
+            const userInput = document.getElementById('user-input');
+            chatContainer.style.display = chatContainerVisible ? 'none' : 'block';
+            userInput.style.display = chatContainerVisible ? 'none' : 'flex';
+            chatContainerVisible = !chatContainerVisible;
+        }
+    </script>
+	
+</body>
+</html>
