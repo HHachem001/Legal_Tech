@@ -2,6 +2,12 @@
 
 Legal Draft is a tool designed for law school interns who secure internships in the public/government sector. The project aims to assist interns with basic tasks such as drafting memos in the proper format for their supervising attorneys or composing letters to the general public. The goal is to streamline these tasks and reduce the likelihood of errors, especially in fundamental aspects like memo formatting.
 
+## Goal
+
+- **No API Key required:** The goal was to create a self contained website that does not rely on costly API keys for A.I. Integration
+- **Integrated JavaScript:** All JavaScript code is contained within the HTML files to simply file management
+- **All code is client-side:** The features listed below do not rely on server-side resources. You can download this project and run it locally on your computer
+  
 ## Features
 
 - **Document Drafting:** Legal Draft helps interns draft memos and letters in the correct format for legal communication.
