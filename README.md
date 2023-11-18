@@ -5,8 +5,8 @@ Legal Draft is a tool designed for law school interns who secure internships in 
 ## Goal
 
 - **No API Key required:** The goal was to create a self contained website that does not rely on costly API keys for A.I. Integration
-- **Integrated JavaScript:** All JavaScript code is contained within the HTML files to simply file management
-- **All code is client-side:** The features listed below do not rely on server-side resources. You can download this project and run it locally on your computer
+- **Integrated JavaScript:** All JavaScript code is contained within the HTML code using <script> tags to simply file management
+- **All code is client-side:** The features listed below do not rely on server-side processing. You can download this project and run it locally on your computer
   
 ## Features
 
