@@ -1,5 +1,6 @@
 # [Vist the Legal Draft Website](https://hhachem001.github.io/Legal_Tech/LandingPage.html)
 
+![logo](https://hhachem001.github.io/Legal_Tech/logo.png)
 
 # Legal Draft
 
