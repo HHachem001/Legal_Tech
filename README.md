@@ -37,6 +37,6 @@ Legal Draft is a prototype toolbox designed for law school interns who secure in
 
 ## Acknowledgments
 
-- **Creator:** Legal Draft was created by Hashim Hachem with the assistance GPT3.5.
+- **Creator:** Legal Draft was created by Hashim Hachem with the assistance of GPT3.5.
 
 - **Assistance:** Special thanks to GitHub Copilot for their assistance in the development process.
