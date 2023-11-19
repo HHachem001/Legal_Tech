@@ -19,7 +19,7 @@ Legal Draft is a tool designed for law school interns who secure internships in 
   
 - **AI Contract Evaluation Tools:** Legal Draft features AI tools for evaluating contracts, providing interns with valuable insights.
 
-- **Inspiration from Docassemble:** Legal Draft draws inspiration from Suffolk University Law School's Docassemble, developed by the Legal Innovation & Technology Lab.
+- **Inspiration from Docassemble:** Legal Draft draws inspiration from [Suffolk University Law School's Docassemble, developed by the Legal Innovation & Technology Lab](https://suffolklitlab.org/portfolio/).
 
 - **Under Construction:** Additional features are still under development, including a database search feature to enhance the tool's capabilities.
 
