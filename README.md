@@ -28,6 +28,13 @@ Legal Draft is a prototype toolbox designed for law school interns who secure in
 
 - **Document Generation:** Legal Draft utilizes the [DOCXTemplater library](https://github.com/open-xml-templating/docxtemplater) for document generation, ensuring efficient and accurate document creation.
 
+## Current Known Issues in Legal Draft Version 11.023A
+
+- Downloading the A.I. Model causes the page to stutter / freeze
+- Page does not display loading status while A.I. is generating a response. User may be led to believe page is frozen while it is in fact generating a response
+- Document generator may occasionally place "undefined" in document text instead of users text.
+- Tokenizer feature in the experimental contract summarizer does not properly re-assemble the generated output causing some words to be cut off.
+
 ## Acknowledgments
 
 - **Creator:** Legal Draft was created by Hashim Hachem with the assistance GPT3.5.
