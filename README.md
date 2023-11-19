@@ -25,9 +25,9 @@ Legal Draft is a tool designed for law school interns who secure internships in 
 
 ## Technologies Used
 
-- **AI Utilization:** The project leverages Transformers.js for AI functionality, enhancing the user experience.
+- **AI Utilization:** The project leverages the [Transformer.js AI library](https://github.com/xenova/transformers.js) for AI functionality, enhancing the user experience.
 
-- **Document Generation:** Legal Draft utilizes DOCXtemplater for document generation, ensuring efficient and accurate document creation.
+- **Document Generation:** Legal Draft utilizes the [DOCXTemplater library](https://github.com/open-xml-templating/docxtemplater) for document generation, ensuring efficient and accurate document creation.
 
 ## Acknowledgments
 
