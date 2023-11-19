@@ -1,4 +1,4 @@
-# [Legal Draft Website](https://hhachem001.github.io/Legal_Tech/LandingPage.html)
+# [Vist the Legal Draft Website](https://hhachem001.github.io/Legal_Tech/LandingPage.html)
 
 
 # Legal Draft
