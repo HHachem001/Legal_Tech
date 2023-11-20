@@ -697,18 +697,31 @@ function closePopup(department) {
         }
     </script>
 	
-	 <script>
-        // Function to check if the page was redirected from LandingPage.html
+	<script>
+        // Function to check if the page was redirected from an authorized page
         function checkReferrer() {
             var referrer = document.referrer;
-            var landingPageURL = "https://hhachem001.github.io/Legal_Tech/LandingPage.html";
+            var authorizedURLs = [
+                "https://hhachem001.github.io/Legal_Tech/LandingPage.html",
+                "https://hhachem001.github.io/Legal_Tech/construction.html",
+                "https://hhachem001.github.io/Legal_Tech/LegalMemo.html",
+                "https://hhachem001.github.io/Legal_Tech/PublicLetterGen.html",
+                "https://hhachem001.github.io/Legal_Tech/community_event_invitation.html",
+                "https://hhachem001.github.io/Legal_Tech/community_outreach.html",
+                "https://hhachem001.github.io/Legal_Tech/feedback.html",
+                "https://hhachem001.github.io/Legal_Tech/contractjudger.html",
+                "https://hhachem001.github.io/Legal_Tech/contractsummary.html",
+                "https://hhachem001.github.io/Legal_Tech/public_notice.html",
+                // Add more authorized page URLs as needed
+            ];
 
-            if (referrer === landingPageURL) {
+            // Check if the referrer URL is in the array of authorized URLs
+            if (authorizedURLs.includes(referrer)) {
                 // Continue loading the content or performing actions
-                alert("Access granted. You were redirected from the authorized page.");
+                alert("Access granted. You were redirected from an authorized login page.");
             } else {
                 // Display an error message and prevent further execution
-                document.body.innerHTML = "<h1>Illegal Access!</h1><p>This page can only be accessed through the authorized login page.</p>";
+                document.body.innerHTML = "<h1>ILLEGAL ACCESS!</h1><p>....This page can only be accessed through the authorized login page.</p>";
             }
         }
 
