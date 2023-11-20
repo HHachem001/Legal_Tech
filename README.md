@@ -31,12 +31,12 @@ Legal Draft is a prototype toolbox designed for law school interns who secure in
 ## Current Known Issues in Legal Draft Beta v11.023A
 
 - Downloading the A.I. Model causes the page to stutter / freeze
-- Page does not display loading status while A.I. is generating a response. User may be led to believe page is frozen while it is in fact generating a response
-- Document generator may occasionally place "undefined" in document text instead of users text.
+- ~~Page does not display loading status while A.I. is generating a response. User may be led to believe page is frozen while it is in fact generating a response~~ Fixed by adding a loading mechanism / visual feedback
+- ~~Document generator may occasionally place "undefined" in document text instead of users text.~~ Fixed
 - Tokenizer feature in the experimental contract summarizer does not properly re-assemble the generated output causing some words to be cut off.
 
 ## Acknowledgments
 
-- **Creator:** Legal Draft and the Legal Draft A.I. Frontend was designed and created by Hashim Hachem.
+- **Creator:** The Legal Draft website and the Legal Draft A.I. Bot Frontend was designed and created by Hashim Hachem.
 
 - **Assistance:** Special thanks to GitHub Copilot for their assistance in the development process.
