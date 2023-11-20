@@ -96,27 +96,27 @@
                 <input type="submit" value="Login">
             </form>
 		<p id="disclaimer">This is an educational demo and should not be relied on as a source of legal authority.</p>
-		<p id="disclaimer">Login: admin</p>
-		<p id="disclaimer">Password: admin</p>
+		<p id="disclaimer">User name and password: admin</p>
 		<p id="disclaimer">Created by Hashim Hachem - 2023 </p>
         </div>
     </div>
 </body>
 </html>
+<!-- Include CryptoJS library -->
+<!-- Include CryptoJS library from CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+
 <script>
     document.getElementById('login-form').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent the default form submission behavior
+        event.preventDefault();
 
-        // Get the entered username and password
         var username = document.getElementById('username').value;
-        var password = document.getElementById('password').value;
+        var password = CryptoJS.MD5(document.getElementById('password').value).toString();
 
-        // Check if the credentials are correct (for demo purposes)
-        if (username === 'admin' && password === 'admin') {
-            // Redirect to another page (change 'redirect.html' to the desired page)
+        // Simulate server-side check (replace with your actual logic)
+        if (username === 'admin' && password === '21232f297a57a5a743894a0e4a801fc3') {
             window.location.href = 'https://hhachem001.github.io/Legal_Tech/redirect.html';
         } else {
-            // Display an error message (you can customize this)
             alert('Invalid username or password. Please try again.');
         }
     });
