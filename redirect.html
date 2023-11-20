@@ -697,5 +697,24 @@ function closePopup(department) {
         }
     </script>
 	
+	 <script>
+        // Function to check if the page was redirected from LandingPage.html
+        function checkReferrer() {
+            var referrer = document.referrer;
+            var landingPageURL = "https://hhachem001.github.io/Legal_Tech/LandingPage.html";
+
+            if (referrer === landingPageURL) {
+                // Continue loading the content or performing actions
+                alert("Access granted. You were redirected from the authorized page.");
+            } else {
+                // Display an error message and prevent further execution
+                document.body.innerHTML = "<h1>Illegal Access!</h1><p>This page can only be accessed through the authorized login page.</p>";
+            }
+        }
+
+        // Call the checkReferrer function when the page loads
+        window.onload = checkReferrer;
+    </script>
+	
 </body>
 </html>
