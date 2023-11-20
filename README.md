@@ -8,7 +8,7 @@ Legal Draft is a prototype toolbox designed for law school interns who secure in
 
 - **No API Key required:** The goal was to create a self contained website that does not rely on costly API keys for A.I. Integration
 - **Integrated JavaScript:** All JavaScript code is contained within the HTML code using <script> tags and content delivery networks to simply file management
-- **All code is client-side:** The features listed below do not rely on server-side processing. You can download this project and run it locally on your computer
+- **All code is client-side:** The features listed below do not rely on server-side processing. You can download this project and run it locally on your computer. The only downside is that it is only as fast as your computer and your internet speed. 
   
 ## Features
 
