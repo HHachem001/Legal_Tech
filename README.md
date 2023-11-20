@@ -37,6 +37,7 @@ Legal Draft is a prototype toolbox designed for law school interns who secure in
 - Added redirect blockers to ensure that the user utilizes the official login page
 - Added ready-status message to the chatbot so the user know when to proceed
 - Added "Thinking..." status to the chatbot
+- Added disclaimer on Login Page that user must agree to in order to access Legal Draft
 
 ## Current Known Issues in Legal Draft Beta v11.023B
 
