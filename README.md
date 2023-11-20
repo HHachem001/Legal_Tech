@@ -40,10 +40,12 @@ Legal Draft is a prototype toolbox designed for law school interns who secure in
 
 ## Current Known Issues in Legal Draft Beta v11.023B
 
+- "Thinking..." status in the chatbot may not always appear on the page if the LLM was already loaded into browser cache upon first visit
 - Downloading the A.I. Model causes the page to stutter / freeze
 - ~~Page does not display loading status while A.I. is generating a response. User may be led to believe page is frozen while it is in fact generating a response~~ Fixed by adding a loading mechanism / visual feedback
 - ~~Document generator may occasionally place "undefined" in document text instead of users text.~~ Fixed
-- Tokenizer feature in the experimental contract summarizer does not properly re-assemble the generated output causing some words to be cut off.
+- Tokenizer feature in the experimental contract summarizer does not properly re-assemble the generated output causing some words to be cut off at the beginning or end of a sentence.
+- Authorization pop-up appears everytime the user goes back to the main-menu / redirect page
 
 ## Acknowledgments
 
