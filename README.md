@@ -51,4 +51,4 @@ Legal Draft is a prototype toolbox designed for law school interns who secure in
 
 - **Creator:** The Legal Draft website and the Legal Draft A.I. Bot Frontend was designed and created by Hashim Hachem.
 
-- **Assistance:** Special thanks to GitHub Copilot for their assistance in the development process.
+- **Assistance:** Special thanks to GitHub Copilot for their assistance in the development process and for providing free access to the Copilot A.I.
