@@ -27,6 +27,16 @@ Legal Draft is a prototype toolbox designed for law school interns who secure in
 - **AI Utilization:** The project leverages the [Transformer.js AI library](https://github.com/xenova/transformers.js) for AI functionality, enhancing the user experience.
 
 - **Document Generation:** Legal Draft utilizes the [DOCXTemplater library](https://github.com/open-xml-templating/docxtemplater) for document generation, ensuring efficient and accurate document creation.
+  
+## New Features in Legal Draft Beta v11.023B
+
+- Added loading indicator to the Legal Draft A.I. Chatbot
+- Added error messages to indicate whether the A.I. model has been loaded into the browser cache
+- Updated A.I. Pipeline on the feedback page from version 2.4.1 to version 2.8.0
+- Added MD5 hash encryption to default login password
+- Added redirect blockers to ensure that the user utilizes the official login page
+- Added ready-status message to the chatbot so the user know when to proceed
+- Added "Thinking..." status to the chatbot
 
 ## Current Known Issues in Legal Draft Beta v11.023B
 
