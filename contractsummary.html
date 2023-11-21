@@ -280,7 +280,7 @@
     generateButton.setAttribute("disabled", true);
 
     const input = longTextInput.value;
-    const summarization = await pipeline('summarization', 'Xenova/bart-large-cnn'); //swap bart for t5-base for a smaller LLM
+    const summarization = await pipeline('summarization', 'Xenova/distilbart-cnn-6-6'); //swap bart for t5-base for a smaller LLM
 
      try {
         // Split the input into chunks of approximately 300 words
