@@ -122,65 +122,6 @@
   </main>
 
   <script>
-    function analyzeContract() {
-      const fileInput = document.getElementById('fileInput');
-      const contractText = document.getElementById('contractText');
-      const resultElement = document.getElementById('result');
-      resultElement.innerHTML = '';
-
-      if (fileInput.files.length > 0) {
-        const file = fileInput.files[0];
-
-        if (file.type === 'application/pdf') {
-          const reader = new FileReader();
-          reader.onload = function (e) {
-            const fileContent = e.target.result;
-
-            extractTextFromPDF(fileContent)
-              .then((extractedText) => {
-                processContractText(extractedText, resultElement);
-              })
-              .catch((error) => {
-                console.error(error);
-                alert('Error extracting text from PDF.');
-              });
-          };
-
-          reader.readAsArrayBuffer(file);
-        } else {
-          alert('Please upload a PDF file.');
-        }
-      } else {
-        // If no file is uploaded, use the text from the textarea
-        const textFromTextarea = contractText.value;
-        processContractText(textFromTextarea, resultElement);
-      }
-    }
-
-    function processContractText(contractText, resultElement) {
-      const essentialTerms = [
-        'parties', 'consideration', 'terms', 'termination', 'governing law',
-        'confidentiality', 'indemnification', 'warranty', 'payment', 'delivery',
-        'force majeure', 'insurance', 'assignment', 'dispute resolution', 'representations and warranties',
-        'non-compete', 'non-disclosure', 'intellectual property', 'amendment', 'notices',
-        'remedies', 'audit', 'compliance', 'conflict of interest', 'damages',
-        'entire agreement', 'force majeure', 'insurance', 'limitation of liability', 'non-solicitation',
-        'prevailing party', 'confidentiality', 'indemnification', 'representations and warranties', 'payment terms',
-        'warranty disclaimer', 'time of essence', 'venue', 'waiver', 'severability',
-        'counterparts', 'rights and remedies', 'successors and assigns', 'covenants', 'governing law and jurisdiction',
-      ];
-
-      const missingTerms = essentialTerms.filter(term => !new RegExp(term, 'i').test(contractText));
-
-      if (missingTerms.length > 0) {
-        resultElement.innerHTML = `<p>Score: ${(1 - missingTerms.length / essentialTerms.length) * 100}%</p>`;
-        resultElement.innerHTML += '<p>Missing essential terms that may or may not apply: → → → → → → → → → ' + missingTerms.join(', ') + '</p>';
-      } else {
-        resultElement.innerHTML = '<p>Score: 100%</p>';
-        resultElement.innerHTML += '<p>All essential terms found!</p>';
-      }
-    }
-
     function extractTextFromPDF(pdfContent) {
       return new Promise((resolve, reject) => {
         const loadingTask = pdfjsLib.getDocument({ data: pdfContent });
@@ -207,12 +148,173 @@
           });
       });
     }
+    // Define types of contracts and associated regex patterns
+       const contractTypes = {
+      'sales agreement': /sales\s*(agreement|contract)/i,
+      'purchase agreement': /purchase\s*(agreement|contract)/i,
+      'service agreement': /service\s*(agreement|contract)/i,
+      'employment contract': /employment\s*(agreement|contract)/i,
+      'lease agreement': /lease\s*(agreement|contract)/i,
+      'partnership agreement': /partnership\s*(agreement|contract)/i,
+      'non-disclosure agreement': /non-disclosure\s*(agreement|contract)/i,
+      'consulting agreement': /consulting\s*(agreement|contract)/i,
+      'loan agreement': /loan\s*(agreement|contract)/i,
+      'franchise agreement': /franchise\s*(agreement|contract)/i,
+      'distribution agreement': /distribution\s*(agreement|contract)/i,
+      'joint venture agreement': /joint\s*venture\s*(agreement|contract)/i,
+      'intellectual property agreement': /intellectual\s*property\s*(agreement|contract)/i,
+      'software license agreement': /software\s*license\s*(agreement|contract)/i,
+      'marketing agreement': /marketing\s*(agreement|contract)/i,
+      'sponsorship agreement': /sponsorship\s*(agreement|contract)/i,
+      'manufacturing agreement': /manufacturing\s*(agreement|contract)/i,
+      'agency agreement': /agency\s*(agreement|contract)/i,
+      'real estate contract': /real\s*estate\s*(agreement|contract)/i,
+      'construction contract': /construction\s*(agreement|contract)/i,
+      'maintenance agreement': /maintenance\s*(agreement|contract)/i,
+      'subcontractor agreement': /subcontractor\s*(agreement|contract)/i,
+      // Add more types and corresponding regex patterns as needed
+    };
+	
+    function analyzeContract() {
+      const fileInput = document.getElementById('fileInput');
+      const contractText = document.getElementById('contractText');
+      const resultElement = document.getElementById('result');
+      resultElement.innerHTML = '';
 
-    function extractTextFromDOCX(docxContent) {
-      // Implement this function or use a library to extract text from a DOCX
-      return 'Text extracted from DOCX.';
+      let detectedContractType = detectContractType(contractText.value);
+
+      if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+
+        if (file.type === 'application/pdf') {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            const fileContent = e.target.result;
+
+            extractTextFromPDF(fileContent)
+              .then((extractedText) => {
+                detectedContractType = detectContractType(extractedText);
+                processContractText(extractedText, resultElement, detectedContractType);
+              })
+              .catch((error) => {
+                console.error(error);
+                alert('Error extracting text from PDF.');
+              });
+          };
+
+          reader.readAsArrayBuffer(file);
+        } else {
+          alert('Please upload a PDF file.');
+        }
+      } else {
+        // If no file is uploaded, use the text from the textarea
+        const textFromTextarea = contractText.value;
+        processContractText(textFromTextarea, resultElement, detectedContractType);
+      }
     }
 
+    function detectContractType(text) {
+      for (const [type, pattern] of Object.entries(contractTypes)) {
+        if (pattern.test(text)) {
+          return type;
+        }
+      }
+      return null; // Unable to determine contract type
+    }
+
+    function processContractText(contractText, resultElement, detectedContractType) {
+      const essentialTerms = getEssentialTerms(detectedContractType);
+
+      const missingTerms = essentialTerms.filter(term => !new RegExp(term, 'i').test(contractText));
+
+      if (missingTerms.length > 0) {
+        resultElement.innerHTML = `<p>Score: ${(1 - missingTerms.length / essentialTerms.length) * 100}%</p>`;
+        resultElement.innerHTML += `<p>Missing essential terms that may or may not apply for what appears to be a ${detectedContractType}: ➤ ➤ ➤ ➤ ➤ ➤ ➤ ➤  ${missingTerms.join(', ')}</p>`;
+      } else {
+        resultElement.innerHTML = `<p>Score: 100% for ${detectedContractType}</p>`;
+        resultElement.innerHTML += '<p>All essential terms found!</p>';
+      }
+    }
+
+    function getEssentialTerms(contractType) {
+       // Define essential terms for each contract type
+    const essentialTermsMap = {
+      'sales agreement': [
+        'seller', 'buyer', 'product', 'quantity', 'price', 'delivery', 'payment', 'warranty', 'return policy', 'governing law'
+      ],
+      'purchase agreement': [
+        'seller', 'buyer', 'product', 'quantity', 'price', 'delivery', 'payment', 'warranty', 'return policy', 'governing law'
+      ],
+      'service agreement': [
+        'service provider', 'client', 'scope of work', 'payment', 'term', 'confidentiality', 'termination', 'governing law'
+      ],
+      'employment contract': [
+        'employer', 'employee', 'job title', 'salary', 'benefits', 'term', 'termination', 'non-compete', 'governing law'
+      ],
+      'lease agreement': [
+        'landlord', 'tenant', 'property', 'rent', 'term', 'maintenance', 'utilities', 'termination', 'governing law'
+      ],
+      'partnership agreement': [
+        'partners', 'capital contribution', 'profit sharing', 'management', 'dissolution', 'governing law'
+      ],
+      'non-disclosure agreement': [
+        'disclosing party', 'receiving party', 'confidential information', 'duration', 'exceptions', 'governing law'
+      ],
+      'consulting agreement': [
+        'consultant', 'client', 'services', 'payment', 'term', 'termination', 'confidentiality', 'governing law'
+      ],
+      'loan agreement': [
+        'lender', 'borrower', 'principal amount', 'interest rate', 'repayment terms', 'default', 'governing law'
+      ],
+      'franchise agreement': [
+        'franchisor', 'franchisee', 'fees', 'territory', 'term', 'termination', 'obligations', 'governing law'
+      ],
+      'distribution agreement': [
+        'distributor', 'manufacturer', 'products', 'territory', 'term', 'termination', 'delivery', 'governing law'
+      ],
+      'joint venture agreement': [
+        'parties', 'contributions', 'management', 'profits', 'termination', 'governing law'
+      ],
+      'intellectual property agreement': [
+        'licensor', 'licensee', 'intellectual property', 'license scope', 'term', 'termination', 'governing law'
+      ],
+      'software license agreement': [
+        'licensor', 'licensee', 'software', 'license scope', 'term', 'termination', 'fees', 'governing law'
+      ],
+      'marketing agreement': [
+        'marketing company', 'client', 'services', 'compensation', 'term', 'termination', 'governing law'
+      ],
+      'sponsorship agreement': [
+        'sponsor', 'sponsee', 'benefits', 'term', 'termination', 'obligations', 'governing law'
+      ],
+      'manufacturing agreement': [
+        'manufacturer', 'buyer', 'products', 'quantity', 'price', 'term', 'termination', 'governing law'
+      ],
+      'agency agreement': [
+        'principal', 'agent', 'scope of authority', 'compensation', 'term', 'termination', 'governing law'
+      ],
+      'real estate contract': [
+        'seller', 'buyer', 'property', 'price', 'closing', 'title', 'terms', 'governing law'
+      ],
+      'construction contract': [
+        'contractor', 'owner', 'scope of work', 'price', 'schedule', 'termination', 'governing law'
+      ],
+      'maintenance agreement': [
+        'service provider', 'client', 'services', 'payment', 'term', 'termination', 'governing law'
+      ],
+      'subcontractor agreement': [
+        'prime contractor', 'subcontractor', 'scope of work', 'payment', 'term', 'termination', 'governing law'
+      ],
+      // Add more types and corresponding essential terms as needed
+    };
+
+      return essentialTermsMap[contractType] || [];
+    }
+
+    // Your other functions (extractTextFromPDF, extractTextFromDOCX, exitPage, clearText) remain unchanged
+  </script>
+	
+<script> 
     function exitPage() {
       // Redirect to redirect.html
       window.location.href = 'https://hhachem001.github.io/Legal_Tech/redirect.html';
