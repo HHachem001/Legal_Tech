@@ -27,6 +27,15 @@ Legal Draft is a prototype toolbox designed for law school interns who secure in
 - **AI Utilization:** The project leverages the [Transformer.js AI library](https://github.com/xenova/transformers.js) for AI functionality, enhancing the user experience.
 
 - **Document Generation:** Legal Draft utilizes the [DOCXTemplater library](https://github.com/open-xml-templating/docxtemplater) for document generation, ensuring efficient and accurate document creation.
+
+## Upcoming features in Legal Draft Beta v11.023C
+
+- Functionality will be added to document generation where the user can use A.I. to fill in any blank space in a sentence (if they are unsure of the proper word to use in that context).
+- Database search functionality
+- More letter templates 
+- Contract Summarizer will give the user the option to select a header or section from their contract to summarize (as opposed to summarizing the entire document)
+- Better Regular Expression logic will be added to the Contract Judge tool
+  
   
 ## New Features in Legal Draft Beta v11.023B
 
