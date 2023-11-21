@@ -41,7 +41,7 @@ Legal Draft is a prototype toolbox designed for law school interns who secure in
 
 ## Current Known Issues in Legal Draft Beta v11.023B
 
-- ChatBot does not give answers related to legal document drafting and legal questions (Currently it answers any question). 
+- ChatBot does not give answers related to legal document drafting and legal questions (Currently it answers any question, although current tests show progress). 
 - "Thinking..." status in the chatbot may not always appear on the page if the LLM was already loaded into browser cache upon first visit
 - Downloading the A.I. Model causes the page to stutter / freeze
 - ~~Page does not display loading status while A.I. is generating a response. User may be led to believe page is frozen while it is in fact generating a response~~ Fixed by adding a loading mechanism / visual feedback
