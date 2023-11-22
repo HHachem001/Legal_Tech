@@ -8,22 +8,31 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            margin: 20px;
-			
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5; /* Background color for the entire page */
+        }
+
+        .container {
+            max-width: 800px; /* Adjust the max-width as needed */
+            margin: 20px auto;
+            background-color: #fff; /* Background color for the container */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle lift */
+            border-radius: 8px; /* Border radius for rounded corners */
+            overflow: hidden; /* Overflow hidden to contain inner elements */
         }
 
         h1 {
             text-align: center;
-			 font-size: 28px;
-            margin: 0;
-			font-style: italic;
+            font-size: 28px;
+            margin: 20px 0;
+            font-style: italic;
         }
 
         #searchInput {
-            width: 100%;
+            width: calc(92% - 20px);
             padding: 10px;
-            margin: 10px 0 20px 0; /* Increased bottom margin */
-            width: 80%;;
+            margin: 10px;
             box-sizing: border-box;
         }
 
@@ -46,7 +55,8 @@
         tr:hover {
             background-color: #f5f5f5;
         }
-			#exitButton {
+
+        #exitButton {
             background-color: #FF0000;
             color: white;
             padding: 10px 15px;
@@ -62,20 +72,22 @@
 </head>
 <body>
 
-    <h1>Massachusetts General Laws Database Search</h1>
-	<h1> Laws Sorted A-Z </h1>
+    <div class="container">
+        <h1>Massachusetts General Laws Database Search</h1>
+        <h1>Laws Sorted A-Z</h1>
 
+        <input type="text" id="searchInput" placeholder="Search by typing in keywords...">
+        <button type="button" id="exitButton">Exit</button>
 
-
-    <input type="text" id="searchInput" placeholder="Search by typing in keywords...">
-	<button type="button" id="exitButton">Exit</button>
-
-    <table id="myTable">
-    <tbody>
-	<tr><th>Subject</th>
-			<th>Citations</th>
-		</tr><tr><td>209A restraining order (abuse prevention)</td>
-			<td><a href="/lists/mass-general-laws-c209a">MGL c.209A</a></td>
+        <table id="myTable">
+            <tbody>
+            <tr>
+                <th>Subject</th>
+                <th>Citations</th>
+            </tr>
+            <tr>
+                <td>209A restraining order (abuse prevention)</td>
+                <td><a href="/lists/mass-general-laws-c209a">MGL c.209A</a></td>
 		</tr><tr><td>Abandoned property</td>
 			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartII/TitleII/Chapter200A">MGL c.200A</a></td>
 		</tr><tr><td>
@@ -1350,9 +1362,9 @@
 			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2008/Chapter321">St.2008, c.321</a></td>
 		</tr><tr><td>Zoning </td>
 			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="b9dde41a-ff43-4fd9-9a0a-a97809b68289" href="/info-details/massachusetts-law-about-zoning">Law About Zoning</a></td>
-		</tr>
 		</tbody>
-		</table>
+        </table>
+    </div>
 
     <script>
     document.addEventListener('DOMContentLoaded', function () {
