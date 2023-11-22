@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Massachusetts General Laws Database</title>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+			
+        }
+
+        h1 {
+            text-align: center;
+			 font-size: 28px;
+            margin: 0;
+			font-style: italic;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0 20px 0; /* Increased bottom margin */
+            width: 80%;;
+            box-sizing: border-box;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+			#exitButton {
+            background-color: #FF0000;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #exitButton:hover {
+            background-color: #CC0000;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Massachusetts General Laws Database Search</h1>
+	<h1> Laws Sorted A-Z </h1>
+
+
+
+    <input type="text" id="searchInput" placeholder="Search by typing in keywords...">
+	<button type="button" id="exitButton">Exit</button>
+
+    <table id="myTable">
+    <tbody>
+	<tr><th>Subject</th>
+			<th>Citations</th>
+		</tr><tr><td>209A restraining order (abuse prevention)</td>
+			<td><a href="/lists/mass-general-laws-c209a">MGL c.209A</a></td>
+		</tr><tr><td>Abandoned property</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartII/TitleII/Chapter200A">MGL c.200A</a></td>
+		</tr><tr><td>
+			<ul><li>Lost goods &amp; stray animals</li>
+			</ul></td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXX/Chapter134">MGL c.134</a></td>
+		</tr><tr><td>
+			<ul><li>Procedures for administration of abandoned property</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="82073b9c-88e3-46c0-a252-52f503d8407e" href="/regulations/960-CMR-400-procedures-for-the-administration-of-abandoned-property">960 CMR 4</a> </td>
+		</tr><tr><td>
+			<ul><li>Unclaimed and abandoned property</li>
+			</ul></td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXX/Chapter135">MGL c.135</a></td>
+		</tr><tr><td>
+			<ul><li>Vessels (boats)</li>
+			</ul></td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleII/Chapter10/Section35GG">MGL c.10, § 35GG</a><br /><a href="https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleIV/Chapter255/Section17">MGL c.255, § 17</a></td>
+		</tr><tr><td>Abortion</td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="095463a4-1702-493b-8719-e81aa7fa30d2" href="/info-details/massachusetts-law-about-abortion">Law About Abortion</a></td>
+		</tr><tr><td>
+			<ul><li>Parental consent for minor's abortion</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="29728c4a-445b-4bdf-84d5-d6cf45b91643" href="/info-details/mass-general-laws-c112-ss-12r">MGL c.112, § 12R</a></td>
+		</tr><tr><td>
+			<ul><li>Parental consent for minor's abortion (one parent)</li>
+			</ul></td>
+			<td><a href="http://masscases.com/cases/sjc/424/424mass586.html">Planned Parenthood of Mass. v. Att'y Gen'l, 424 Mass. 586 </a>(1997)</td>
+		</tr><tr><td>Abuse of elderly persons</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleII/Chapter19A/Section14">MGL c.19A, §§ 14-26</a></td>
+		</tr><tr><td>Abuse prevention</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartII/TitleIII/Chapter209A">MGL c.209A</a></td>
+		</tr><tr><td>Adoption</td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="511dabc0-860c-4c1b-8f6f-242a1c203bc7" href="/info-details/massachusetts-law-about-adoption">Law About Adoption</a></td>
+		</tr><tr><td>
+			<ul><li>Records</li>
+			</ul></td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartII/TitleIII/Chapter210/Section5D">MGL c.210, § 5D</a></td>
+		</tr><tr><td>Adverse possession</td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="08355dcc-f94b-4ef4-995e-08bd20f3158e" href="/info-details/massachusetts-law-about-adverse-possession">Law About Adverse Possession</a></td>
+		</tr><tr><td>AEDs (Automatic External Defibrillators) in Health Clubs</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXV/Chapter93/Section78A">MGL c. 93, § 78A</a></td>
+		</tr><tr><td>Affordable housing</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40B/Section20">MGL c.40B, § 20</a>, <a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40B/Section21">§ 21</a>, <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="b2b375a0-09ca-453e-be48-f51463e090ed" href="/info-details/mass-general-laws-c40b-ss-22">§ 22</a>, <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="37003396-b457-4aed-9e54-2ef0716bcad2" href="/info-details/mass-general-laws-c40b-ss-23">§ 23</a></td>
+		</tr><tr><td>Age of majority</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleI/Chapter4/Section7">MGL c.4, § 7 (cl.48-51)</a></td>
+		</tr><tr><td>Aguilar-Spinelli test (of informant information)</td>
+			<td><a href="https://scholar.google.com/scholar_case?case=5535754772693257767">Aguilar v. Texas</a>, 378 U.S. 108 (1964)<br /><a href="https://scholar.google.com/scholar_case?case=17799029384462151344">Spinelli v. United States</a>, 393 U.S. 410 (1969)</td>
+		</tr><tr><td>Alimony</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartII/TitleIII/Chapter208/Section34">MGL c.208, § 34</a></td>
+		</tr><tr><td>Allergies, Food, Restaurant Requirements</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXX/Chapter140/Section6B">MGL c.140, § 6B(b)(2) </a><br /><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="0c0e8cb5-09bb-4e25-bc70-b0e2120b4e60" href="/regulations/105-CMR-59000-state-sanitary-code-chapter-x-minimum-sanitation-standards-for-food-establishments">105 CMR 590.003(B)(17)</a>  <br /><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="8ee37c7c-9a2d-4f33-afcf-10cf6543337f" href="/lists/retail-food">Dept. of Public Health Information</a></td>
+		</tr><tr><td>Ally's Law (Restroom access)</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter270/Section26">MGL c.270, § 26</a></td>
+		</tr><tr><td>Amanda's Law (taking pictures of crime victims)</td>
+			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2022/Chapter146">St.2022, c.146</a></td>
+		</tr><tr><td>Anatomical gifts</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXVI/Chapter113A">MGL c.113A</a></td>
+		</tr><tr><td>
+			<ul><li>Required requests</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="2a487e45-d243-4007-a48d-1c0aa9f9fdff" href="/regulations/105-CMR-13000-hospital-licensure">105 CMR 130.380</a></td>
+		</tr><tr><td>Annulment</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartII/TitleIII/Chapter207/Section14">MGL c.207, § 14</a></td>
+		</tr><tr><td>Anti-SLAPP laws (Strategic Lawsuits Against Public Participation)</td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="a5a3e744-904e-49d2-860b-8096d9ecdf2c" href="/info-details/massachusetts-law-about-anti-slapp">About Mass. Anti-SLAPP</a></td>
+		</tr><tr><td>Anti-snob zoning (40B)</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40B/Section20">MGL c.40B, § 20</a>, <a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40B/Section21">§ 21</a>, <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="b2b375a0-09ca-453e-be48-f51463e090ed" href="/info-details/mass-general-laws-c40b-ss-22">§ 22</a>, <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="37003396-b457-4aed-9e54-2ef0716bcad2" href="/info-details/mass-general-laws-c40b-ss-23">§ 23</a><br /><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="c79f2664-b8da-4b4f-935e-2daab44b6a69" href="/regulations/760-CMR-5600-comprehensive-permit-low-or-moderate-income-housing">760 CMR 56</a> </td>
+		</tr><tr><td>Anti-stalking law</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter265/Section43">MGL c.265, § 43</a></td>
+		</tr><tr><td>Armed career criminal</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter269/Section10g">MGL c.269, §10G</a><br /><a href="https://www.law.cornell.edu/uscode/text/18/924">18 U.S.C. § 924(e)</a></td>
+		</tr><tr><td>Assignment of wages</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXXI/Chapter154">MGL c.154</a></td>
+		</tr><tr><td>Autism, Health Insurance Coverage</td>
+			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2010/Chapter207">St.2010, c.207</a></td>
+		</tr><tr><td>Automobile insurance</td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="662e6379-e3fa-4ced-8def-9d3d5b6d9c8a" href="/info-details/massachusetts-law-about-auto-insurance">Mass. Law About Auto Insurance</a></td>
+		</tr><tr><td>Automobile lemon law (new &amp; used cars)</td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="6c9a90d4-b344-492e-907c-7bdb4190bb8c" href="/info-details/mass-general-laws-c90-ss-7n-14">MGL c.90, § 7N 1/4</a> &amp; <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="b4082e91-586c-456a-ab82-1e495e880599" href="/info-details/mass-general-laws-c90-ss-7n-12">§ 7N 1/2</a></td>
+		</tr><tr><td>
+			<ul><li>Lemon aid laws (voiding sale contracts)</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="1bd48ba4-19c9-415d-b8cd-a5a59c7cadb9" href="/info-details/mass-general-laws-c90-ss-7n">MGL c.90, § 7N</a></td>
+		</tr><tr><td>
+			<ul><li>Motor vehicle arbitration</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="123eafc4-e829-4ed0-9da1-9cc8c9a9dbeb" href="/regulations/201-CMR-1100-new-and-used-motor-vehicle-arbitration">201 CMR 11</a> </td>
+		</tr><tr><td>
+			<ul><li>Motor vehicle sales &amp; repair shop regulations</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="3e469012-d83e-4fec-ad93-1e3eb03b96c9" href="/regulations/940-CMR-500-motor-vehicle-regulations">940 CMR 5</a> </td>
+		</tr><tr><td>
+			<ul><li>Private party sales</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="9f34d85c-c9c5-48a4-828e-e72a467ffefd" href="/private-party-car-sales">Office of Consumer Affairs and Business Regulation</a></td>
+		</tr><tr><td>Baby Safe Haven law</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXVII/Chapter119/Section39%201~2">MGL c.119, § 39-1/2</a></td>
+		</tr><tr><td>Bail jumping</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleII/Chapter276/Section82A">MGL c.276, § 82A</a></td>
+		</tr><tr><td>Ban the Box: limits criminal record questions on job applications</td>
+			<td><a href="/info-details/mass-general-laws-c151b-ss-4">MGL c.151B, § 4 (9-1/2)</a></td>
+		</tr><tr><td>Bank accounts, Seizure</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleIV/Chapter246/Section28A">MGL c.246, § 28A</a></td>
+		</tr><tr><td>BB guns</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter269/Section12B">MGL c. 269, § 12B</a></td>
+		</tr><tr><td>Beagle bill</td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="4ecdd4cc-7910-4a03-9c48-a05f398cae63" href="/info-details/mass-general-laws-c140-ss-174d-12">MGL c.140 § 174D 1/2</a></td>
+		</tr><tr><td>Bed bugs</td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="d31e73cb-6c73-454e-b07c-4ebef4cc42c4" href="/regulations/105-CMR-41000-minimum-standards-of-fitness-for-human-habitation-state-sanitary-code-chapter-ii">105 CMR 410.550</a>  </td>
+		</tr><tr><td>Benefit corporations</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXXII/Chapter156E">MGL c.156E</a></td>
+		</tr><tr><td>Benevolent gestures statute</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleII/Chapter233/Section23D">MGL c.233, § 23D</a></td>
+		</tr><tr><td>Bicycles</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter85/Section11B">MGL c.85, §§ 11B-11E</a></td>
+		</tr><tr><td>Birth control</td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="1e26516a-40a7-4fb2-afb8-8cd7033a109b" href="/info-details/massachusetts-law-about-contraception">Law About Contraception</a></td>
+		</tr><tr><td>Blue laws</td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="2a19da3c-9c8a-409e-8f07-a107750c09e8" href="/guides/massachusetts-blue-laws-and-working-on-sundays-and-holidays">Mass. Blue Laws</a>  </td>
+		</tr><tr><td>Booster seats</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter90/Section7AA">MGL c.90, § 7AA</a></td>
+		</tr><tr><td>Bottle bill</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXV/Chapter94/Section321">MGL c.94, §§ 321-323E</a></td>
+		</tr><tr><td>
+			<ul><li>Recycling beverage containers</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="91fcecb9-7618-4524-831d-e92ebc9e9c86" href="/regulations/301-CMR-400-provisions-for-recycling-of-beverage-containers">301 CMR 4</a> </td>
+		</tr><tr><td>
+			<ul><li>Reporting deposits and refunds</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="d237c548-487e-4f2b-ae1d-1621098b0ef5" href="/regulations/204-CMR-300-reporting-by-bottlers-and-distributors-of-deposits-received-and-refunded-and-of-handling-charges-paid">204 CMR 3</a> </td>
+		</tr><tr><td>
+			<ul><li>Abandoned deposits</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="a78e6fb0-a939-4143-bd8f-8b66650f8134" href="/regulations/830-CMR-9400-abandoned-deposit-amounts">830 CMR 94</a></td>
+		</tr><tr><td>BRAVE Act (veterans' benefits)</td>
+			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2018/Chapter218">St.2018, c.218</a></td>
+		</tr><tr><td>Breakfast after the bell</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXII/Chapter69/Section1C">MGL c.69, § 1C</a></td>
+		</tr><tr><td>Breathalyzer</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter90/Section24K">MGL c.90, § 24K</a></td>
+		</tr><tr><td>
+			<ul><li>Safe Roads regulations</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="76f84453-e6dc-499d-b5d5-2cf5801e2393" href="/regulations/501-CMR-200-safe-roads">501 CMR 2</a> </td>
+		</tr><tr><td>Bucket shops</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter271/Section35">MGL c.271, §§ 35-36</a></td>
+		</tr><tr><td>Building codes</td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="d6b588f1-15e6-447c-89b5-84de3372fbb4" href="/lists/mass-general-laws-c143">MGL c.143</a></td>
+		</tr><tr><td>
+			<ul><li>Building Code</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="495bac47-5187-4003-8000-8f546d72315c" href="/massachusetts-state-building-code-780-cmr">780 CMR</a></td>
+		</tr><tr><td>Bullying</td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="6d5f6249-38a0-498b-966d-d378625ccc62" href="/info-details/massachusetts-law-about-bullying-and-cyberbullying">Law About Bullying and Cyberbullying</a></td>
+		</tr><tr><td>Bump stocks</td>
+			<td>Banned by <a href="/info-details/mass-general-laws-c140-ss-121">MGL c.140, § 121</a></td>
+		</tr><tr><td>Calorie reporting for restaurants</td>
+			<td><a href="http://cspinet.org/new/pdf/healthreformmenulabeling.pdf">PL 111-148, § 4205 </a></td>
+		</tr><tr><td>Campaign expenditures and contributions</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVIII/Chapter55">MGL c.55</a><br /><a href="/law-library/970-cmr">970 CMR</a></td>
+		</tr><tr><td>Campaign financing</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleII/Chapter10/Section42">MGL c.10, § 42</a></td>
+		</tr><tr><td>Campus sexual violence act</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleII/Chapter6/Section168d">MGL c.6, § 168D</a> &amp; <a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleII/Chapter6/Section168E">§ 168E</a></td>
+		</tr><tr><td>Capital punishment</td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="5c18d3b7-d7e5-41bd-afd4-f35215bd238d" href="/info-details/massachusetts-law-about-the-death-penalty">Law About the Death Penalty</a></td>
+		</tr><tr><td>CARE Act (Health care: Caregiver Advise, Record, Enable)</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXVI/Chapter111/Section236">MGL c.111, § 236</a></td>
+		</tr><tr><td>Caregiver Authorization Affidavit</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartII/TitleII/Chapter201F">MGL c.201F</a></td>
+		</tr><tr><td>Carjacking</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter265/Section21A">MGL c.265, § 21A</a></td>
+		</tr><tr><td>Castle Law</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleII/Chapter278/Section8A">MGL c.278, § 8A</a></td>
+		</tr><tr><td>Chapter 766 (special education)</td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="3896dc0c-e033-4ad5-96fb-b5ee5c6ab364" href="/lists/mass-general-laws-c71b">MGL c.71B</a><br /><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="58ca454b-527b-4cb7-ad0e-9d1909c3c291" href="/regulations/603-CMR-2800-special-education">603 CMR 28</a> </td>
+		</tr><tr><td>Checks, dishonored</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXV/Chapter93/Section40A">MGL c.93, § 40A</a></td>
+		</tr><tr><td>Child abandonment</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXVII/Chapter119/Section39">MGL c.119, § 39</a></td>
+		</tr><tr><td>Child custody</td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="86532970-55d5-48c5-a851-3fd180536632" href="/info-details/massachusetts-law-about-child-custody-and-parenting-time">Law About Child Custody</a></td>
+		</tr><tr><td>Child endangerment</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter265/Section13L">MGL c.265, § 13L</a></td>
+		</tr><tr><td>Child labor</td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="448d268f-0913-48dc-a9c5-14b7381c4ad4" href="/info-details/massachusetts-law-about-child-labor">Law About Child Labor</a></td>
+		</tr><tr><td>Child requiring assistance</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXVII/Chapter119/Section21">MGL c.119, § 21 </a><br /><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXVII/Chapter119/Section39E">MGL c.119, §§ 39E-39I</a></td>
+		</tr><tr><td>Child support</td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="4b64b3aa-0775-48d4-b3bd-b617409ff1b8" href="/info-details/massachusetts-law-about-child-support">Law About Child Support</a></td>
+		</tr><tr><td>Child support (Children over 18)</td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="99381825-e015-44fc-8ac6-773b9c4b621c" href="/info-details/massachusetts-law-about-child-support-over-age-18">Law About Child Support Over Eighteen</a></td>
+		</tr><tr><td>CHINS (Children in need of services). Now known as CRA (Child requiring assistance)</td>
+			<td><a href="/info-details/mass-general-laws-c119-ss-21">MGL c.119, § 21</a><br /><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXVII/Chapter119/Section39E">MGL c.119, §§ 39E-39I</a></td>
+		</tr><tr><td>
+			<ul><li>Dept. of Social Services: Intake</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="05375c0e-7ed8-4006-be8c-60688f1c32e4" href="/regulations/110-CMR-400-intake">110 CMR 4</a> </td>
+		</tr><tr><td>
+			<ul><li>Dept. of Social Services: Services</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="4ab7c675-3fac-4f8f-850d-06c71015eaad" href="/regulations/110-CMR-700-services">110 CMR 7</a> </td>
+		</tr><tr><td>
+			<ul><li>Dept. of Youth Services</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="cd36e79e-5a5e-4b03-81e7-fa8d544c557a" href="/law-library/109-cmr">109 CMR 1-12</a></td>
+		</tr><tr><td>Christian's Law (Drowning prevention)</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter90B/Section5A">MGL c.90B, § 5A</a><br /><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXVI/Chapter111/Section127A1~2">MGL c.111, § 127A 1/2 </a><br />
+			See also: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="656050e2-0f98-4e80-ac5e-1534b3cd9d5b" href="/info-details/christians-law">Christian's Law</a></td>
+		</tr><tr><td>Circuit Breaker Tax Credit (Property tax credit for seniors)</td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="abe57ee2-26e5-42df-9e4a-288ee55f15a7" href="/info-details/mass-general-laws-c62-ss-6">MGL c.62, § 6(k)</a></td>
+		</tr><tr><td>Citizen's arrest</td>
+			<td><a href="http://masscases.com/cases/app/11/11massappct165.html">Comm. v. Harris</a>, 11 Mass. App. Ct. 165 (1981)</td>
+		</tr><tr><td>Civil &amp; criminal commitment (Mental health laws)</td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="9a3bf32c-5058-4d08-b82a-5d6e47bc8d90" href="/lists/mass-general-laws-c123">MGL c.123</a></td>
+		</tr><tr><td>Civil motor vehicle infractions (CMVI)</td>
+			<td><a href="/media/828736/download">Civil Motor Vehicle Assessment Schedule</a> </td>
+		</tr><tr><td>Civil rights, punishment for violation</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter265/Section37">MGL c.265, § 37</a> &amp; <a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter265/Section39">§ 39</a></td>
+		</tr><tr><td>Civil rights, unlawful discrimination</td>
+			<td><a href="/lists/mass-general-laws-c151b">MGL c.151B</a></td>
+		</tr><tr><td>Civil rights, violation of constitutional rights</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleII/Chapter12/Section11h">MGL c.12, § 11H</a>, <a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleII/Chapter12/Section11I">§ 11I</a>, <a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleII/Chapter12/Section11j">§ 11J</a></td>
+		</tr><tr><td>Civil service</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleIV/Chapter31">MGL c.31</a></td>
+		</tr><tr><td>
+			<ul><li>Hearing Rules of Procedure</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="44a22dcf-0ec7-45f9-bc6e-a1aa68de1ff1" href="/regulations/801-CMR-100-standard-adjudicatory-rules-of-practice-and-procedure">801 CMR 1</a> </td>
+		</tr><tr><td>Clean Waters Act</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleII/Chapter21">MGL c.21, §§ 26-53</a></td>
+		</tr><tr><td>
+			<ul><li>Div. of Water Pollution Control</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="39f4e58e-8088-4000-9bef-4d95c113d611" href="/law-library/314-cmr">314 CMR 2-18</a></td>
+		</tr><tr><td>CMVI (Civil Motor Vehicle Infractions)</td>
+			<td><a href="/media/828736/download">Civil Motor Vehicle Assessment Schedule</a> </td>
+		</tr><tr><td>COBRA</td>
+			<td>P.L.99-272, Title X as appearing in <a href="http://www.law.cornell.edu/uscode/text/29/chapter-18/subchapter-I/subtitle-B/part-6">29 USC 1161-1168</a></td>
+		</tr><tr><td>
+			<ul><li>mini COBRA</li>
+			</ul></td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXXII/Chapter176J/Section9">MGL c.176J, § 9</a></td>
+		</tr><tr><td>Cockfighting</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter272/Section94">MGL c.272, §§ 94-95</a></td>
+		</tr><tr><td>Common day of rest law</td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="c6aca727-a95a-4b63-836f-fece1516bce9" href="/guides/working-on-sundays-and-holidays-blue-laws">Mass. Blue Laws</a>  </td>
+		</tr><tr><td>Common law marriage</td>
+			<td>While Massachusetts recognizes a valid common law marriage from another state, a common law marriage cannot be created in Massachusetts.</td>
+		</tr><tr><td>Community Preservation Act</td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="b2f1ba55-401c-44b0-b59b-e9e1e2be90ab" href="/lists/mass-general-laws-c44b">MGL c.44B</a></td>
+		</tr><tr><td>Community property</td>
+			<td>Mass. is not a community property state. See instead: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="71b3abd7-0ea3-4ec6-a9e2-4f514eb443c8" href="/info-details/massachusetts-law-about-divorce">Law About Divorce</a></td>
+		</tr><tr><td>Compulsory motor vehicle liability insurance</td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="662e6379-e3fa-4ced-8def-9d3d5b6d9c8a" href="/info-details/massachusetts-law-about-auto-insurance">Law About Auto Insurance</a></td>
+		</tr><tr><td>Condominium conversion</td>
+			<td><a href="https://archives.lib.state.ma.us/handle/2452/39633">St.1983, c.527</a></td>
+		</tr><tr><td>Condominiums</td>
+			<td><a href="/lists/mass-general-laws-c183a">MGL c.183A</a></td>
+		</tr><tr><td>Conflict of interest, public officials &amp; employees</td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="0e89a5e8-ad9a-413b-99c8-1270e3eb5eaf" href="/info-details/massachusetts-law-about-ethics">Law About Ethics</a></td>
+		</tr><tr><td>Consumer credit cost disclosure</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXX/Chapter140D">MGL c.140D</a></td>
+		</tr><tr><td>Consumer protection</td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="99ea0165-c056-4cc4-8d67-c071d9ebf1a9" href="/info-details/massachusetts-law-about-consumer-protection">Law About Consumer Protection</a></td>
+		</tr><tr><td>Continued without a finding</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleII/Chapter278/Section18">MGL c.278, § 18</a></td>
+		</tr><tr><td>Controlled substances (drugs &amp; narcotics)</td>
+			<td><a href="/lists/mass-general-laws-c94c">MGL c.94C</a></td>
+		</tr><tr><td>CORI (Criminal Offender Record Information)</td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="44521d9a-2986-4542-9d68-98d72b46e9b4" href="/info-details/massachusetts-law-about-criminal-records">Law About Criminal Records</a></td>
+		</tr><tr><td>Cotto order</td>
+			<td><a href="http://masscases.com/cases/sjc/471/471mass97.html">Commonwealth v. Cotto</a>, 471 Mass. 97 (2015)</td>
+		</tr><tr><td>CRA (Child Requiring Assistance)</td>
+			<td><a href="/info-details/mass-general-laws-c119-ss-21">MGL c.119, § 21</a><br /><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXVII/Chapter119/Section39E">MGL c.119, §§ 39E-39I</a></td>
+		</tr><tr><td>Credit: Mass. Fair Credit Reporting Act</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXV/Chapter93/Section50">MGL c.93, §§ 50-68</a></td>
+		</tr><tr><td>Crime Victims Rights and Compensation</td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="321b6f88-6849-4d34-9624-80c0ff48bfe2" href="/info-details/massachusetts-law-about-victims-and-witnesses-of-crimes">Law About Victims and Witnesses</a></td>
+		</tr><tr><td>Criminal &amp; civil commitment (mental health laws)</td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="9a3bf32c-5058-4d08-b82a-5d6e47bc8d90" href="/lists/mass-general-laws-c123">MGL c.123</a></td>
+		</tr><tr><td>Criminal harassment ("Sandy's law")</td>
+			<td><a href="/lists/mass-general-laws-c265">MGL c.265</a></td>
+		</tr><tr><td>Crowdfunding</td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="5e7c025c-61c9-45ef-94c8-609e7893e3f1" href="/regulations/950-CMR-14400-general-provisions">950 CMR 14.402 (B) (13) (o)</a> </td>
+		</tr><tr><td>CROWN act</td>
+			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2022/Chapter117">St.2022, c.117</a></td>
+		</tr><tr><td>Custody of children</td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="86532970-55d5-48c5-a851-3fd180536632" href="/info-details/massachusetts-law-about-child-custody-and-parenting-time">Law About Child Custody</a></td>
+		</tr><tr><td>Date rape drugs </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter272/Section3">MGL c.272, § 3</a></td>
+		</tr><tr><td>Day of rest ("blue laws") </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="c6aca727-a95a-4b63-836f-fece1516bce9" href="/guides/working-on-sundays-and-holidays-blue-laws">Mass. Blue Laws</a>  </td>
+		</tr><tr><td>Daylight saving time </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleI/Chapter4/Section10">MGL c.4, § 10</a></td>
+		</tr><tr><td>Death penalty </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="5c18d3b7-d7e5-41bd-afd4-f35215bd238d" href="/info-details/massachusetts-law-about-the-death-penalty">Law About the Death Penalty</a></td>
+		</tr><tr><td>Debt collection, unfair </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="f1c1aa9d-cc07-4f8b-a588-f69e662cb5a1" href="/info-details/massachusetts-law-about-debt-collection">Law About Debt Collection</a></td>
+		</tr><tr><td>Delinquent children </td>
+			<td><a href="/lists/mass-general-laws-c119">MGL c.119, §§ 52-64</a></td>
+		</tr><tr><td>
+			<ul><li>Division of Youth Services Regulations</li>
+			</ul></td>
+			<td><a href="/law-library/109-cmr">109 CMR</a></td>
+		</tr><tr><td>
+			<ul><li>Youth Services</li>
+			</ul></td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXVII/Chapter120">MGL c.120</a></td>
+		</tr><tr><td>Derelict fee statute </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartII/TitleI/Chapter183/Section58">MGL c.183, § 58</a></td>
+		</tr><tr><td>Desertion and nonsupport </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter273">MGL c.273</a></td>
+		</tr><tr><td>Destination wedding, registering in Mass.</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartII/TitleIII/Chapter207/Section36">MGL c.207, § 36</a></td>
+		</tr><tr><td>Disclosure, apology and offer (medical malpractice) </td>
+			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2012/Chapter224">St.2012, c.224</a></td>
+		</tr><tr><td>Discrimination laws </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="ec88139a-b334-4b73-bd93-c163a755ca36" href="/info-details/massachusetts-law-about-discrimination">Law About Discrimination</a></td>
+		</tr><tr><td>Disorderly conduct </td>
+			<td><a href="/info-details/mass-general-laws-c272-ss-53">MGL c.272, § 53</a> &amp; <a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter272/Section54">§ 54</a></td>
+		</tr><tr><td>Divorce </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="71b3abd7-0ea3-4ec6-a9e2-4f514eb443c8" href="/info-details/massachusetts-law-about-divorce">Law About Divorce</a></td>
+		</tr><tr><td>DNR ("Do Not Resuscitate") program </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="37191dde-02cf-4dd2-8c79-dfe2ac568a75" href="/lists/molst-and-comfort-care-dnr-verification">Office of Emergency Medical Services</a></td>
+		</tr><tr><td>Do Not Call </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="62f364ea-a9f3-49c4-aabe-11c32eff9a2b" href="/info-details/massachusetts-law-about-telemarketing">Law About Telemarketing</a></td>
+		</tr><tr><td>Dog bite law </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXX/Chapter140/Section155">MGL c.140, § 155</a></td>
+		</tr><tr><td>Dog laws </td>
+			<td><a href="/lists/mass-general-laws-c140-ssss-136a-175">MGL c.140, §§ 136A-174D</a><br />
+			See Also: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="2a42320b-4f49-480d-87c5-92ace7449aea" href="/info-details/massachusetts-law-about-animals">Law About Animals</a></td>
+		</tr><tr><td>Domestic violence </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="f6a5b46f-a330-4d10-82d4-1766dd4c9c6f" href="/info-details/massachusetts-law-about-domestic-violence-209a">Law About Domestic Violence</a></td>
+		</tr><tr><td>Domestic Violence and Abuse Leave Act (DVLA)</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXXI/Chapter149/Section52e">MGL c.149, § 52E</a></td>
+		</tr><tr><td>Don't Ask Don't Tell Review Board</td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="6c37e96a-7f02-42d4-91ed-af8160bfa914" href="/info-details/mass-general-laws-c115-ss-16">MGL c.115, § 16</a></td>
+		</tr><tr><td>Dost factors</td>
+			<td><a href="https://scholar.google.com/scholar_case?case=9482047682589425170">US v. Dost, 636 F. Supp. 828 </a>(1986)</td>
+		</tr><tr><td>Dover amendment </td>
+			<td><a href="/info-details/mass-general-laws-c40a-ss-3">MGL c.40A, § 3</a></td>
+		</tr><tr><td>Downs instruction</td>
+			<td><a href="http://masscases.com/cases/app/53/53massappct195.html">Comm. v. Downs</a>, 53 Mass. App. Ct. 195 (2001)<br /><a href="http://masscases.com/cases/sjc/478/478mass142.html">Comm. v. Wolfe</a>, 478 Mass. 142 (2017)</td>
+		</tr><tr><td>Dram shop law </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXX/Chapter138/Section69">MGL c.138, § 69</a></td>
+		</tr><tr><td>Drop shipment rule</td>
+			<td><a href="/info-details/mass-general-laws-c64h-ss-1">MGL c.64H, § 1</a></td>
+		</tr><tr><td>Drunk driving laws </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="ff1239a5-faf9-4f66-8fd5-166f6d8e786c" href="/info-details/massachusetts-law-about-drunk-or-drugged-driving">Law About Drunk Driving</a></td>
+		</tr><tr><td>Duquette Waiver </td>
+			<td><a href="http://masscases.com/cases/sjc/386/386mass834.html">Comm. v. Duquette</a>, 386 Mass. 834 (1982)</td>
+		</tr><tr><td>Durable Power of Attorney, Uniform </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="29178a81-3e79-4a2b-a6cd-3bd81451b344" href="/law-library/mass-general-laws-c190b">MGL c.190B, Art. V, Pt. 5</a></td>
+			</tr><tr><td>Eavesdropping/Wiretapping (including tape recording private conversations) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter272/Section99">MGL c.272, § 99</a></td>
+		</tr><tr><td>Education laws (public schools) </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="e51b2327-bedb-4533-8da9-eb8d3e027937" href="/lists/mass-general-laws-c71">MGL c.71</a></td>
+		</tr><tr><td>Eggshell rule: a wrongdoer takes his victim as he finds him</td>
+			<td>Criminal: <a href="http://masscases.com/cases/sjc/433/433mass305.html">Comm. v. Tevlin</a>, 433 Mass. 305 (2001)<br />
+			Tort: <a href="http://masscases.com/cases/sjc/292/292mass251.html">Wallace v. Ludwig</a>, 292 Mass. 251 (1935)</td>
+		</tr><tr><td>Eight hour work day (public employees) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXXI/Chapter149">MGL c.149, §§ 30-44</a></td>
+		</tr><tr><td>Elections, Clean </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="52ba8cbc-67ce-4870-889f-808bc46ef430" href="/info-details/massachusetts-law-about-elections-and-voting">Law About Elections and Voting</a></td>
+		</tr><tr><td>ELMO Program (Electronic Monitoring of Offenders) </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="101aa44c-4ee3-414e-bb01-b6a1193fc42d" href="/info-details/learn-about-the-electronic-monitoring-program">Commissioner of Probation</a></td>
+		</tr><tr><td>Emancipation of minor </td>
+			<td>Mass. does not have a procedure for emancipation of minors. See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="802715b8-3e6b-4545-8f32-9014169e571a" href="/info-details/massachusetts-law-about-emancipation-of-minors">Law About Emancipation</a></td>
+		</tr><tr><td>Employees' right to bargain </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXXI/Chapter150A/Section3">MGL c.150A, § 3</a></td>
+		</tr><tr><td>Endangered Species Act</td>
+			<td>
+			<p><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIX/Chapter131A">MGL c.131A </a><br /><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="d593aaaf-76dd-4a6d-a9a2-e5ad22372995" href="/regulations/321-CMR-1000-massachusetts-endangered-species-act">321 CMR 10</a></p>
+			</td>
+		</tr><tr><td>Equal choices law (Medicaid) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXVII/Chapter118E/Section9">MGL c.118E, § 9</a></td>
+		</tr><tr><td>Equal pay, sex discrimination </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXXI/Chapter149/Section105A">MGL c.149, §§ 105A-105D</a></td>
+		</tr><tr><td>Equal pay, teachers </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXII/Chapter71/Section40">MGL c.71, § 40</a></td>
+		</tr><tr><td>Equal rights </td>
+			<td><a href="/lists/mass-general-laws-c151b">MGL c.151B</a></td>
+		</tr><tr><td>ERPO (Extreme Risk Protection Orders)</td>
+			<td><a href="/law-library/mass-general-laws-c140-ssss-131r-131y">MGL c.140, §§ 131R-131Y</a></td>
+		</tr><tr><td>Erroneous convictions law </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleIV/Chapter258D">MGL c.258D</a></td>
+		</tr><tr><td>Estate tax </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="ecf81559-0802-4dcf-bfc3-7d3791b64014" href="/info-details/massachusetts-law-about-estate-taxation">Law About Estate Tax</a></td>
+		</tr><tr><td>Ethics </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="0e89a5e8-ad9a-413b-99c8-1270e3eb5eaf" href="/info-details/massachusetts-law-about-ethics">Law About Ethics</a></td>
+		</tr><tr><td>Eviction </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="ccb036e2-dae5-4bd3-9ddf-1cf40fcb0d39" href="/info-details/massachusetts-law-about-eviction">Law About Eviction</a></td>
+		</tr><tr><td>Exempt property </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleII/Chapter235/Section34">MGL c.235, § 34</a></td>
+		</tr><tr><td>Exotic pets </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="dddb0e2e-4f87-4ebb-9c6e-30dc5214a093" href="/regulations/321-CMR-900-exemption-list">321 CMR 9</a> </td>
+		</tr><tr><td>Extreme risk protection order </td>
+			<td><a href="/law-library/mass-general-laws-c140-ssss-131r-131y">MGL c.140, §§ 131R-131Y</a></td>
+		</tr><tr><td>Facial recognition</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleII/Chapter6/Section220">MGL c.6, § 220</a></td>
+		</tr><tr><td>Fair Credit Reporting Act </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXV/Chapter93/Section50">MGL c.93, §§ 50-68</a></td>
+		</tr><tr><td>Fair educational practices </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXXI/Chapter151C">MGL c.151C</a></td>
+		</tr><tr><td>Fair employment practices </td>
+			<td><a href="/lists/mass-general-laws-c151b">MGL c.151B</a></td>
+		</tr><tr><td>Fair housing </td>
+			<td><a href="/lists/mass-general-laws-c151b">MGL c.151B</a></td>
+		</tr><tr><td>Fair information practices </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleX/Chapter66A">MGL c.66A</a></td>
+		</tr><tr><td>
+			<ul><li>Fair Information Practices Act regulations (Attorney General) </li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="c58d095a-9cb8-40f9-8ab7-14e8e433b404" href="/regulations/940-CMR-1100-fair-information-practices-act">940 CMR 11</a>   </td>
+		</tr><tr><td>
+			<ul><li>Fair information practices regulations (Secretary of the Commonwealth) </li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="a77c78a8-f38d-4207-9446-fbb85c444fa7" href="/regulations/950-CMR-3300-fair-information-practices-regulations">950 CMR 33</a> </td>
+		</tr><tr><td>Fair Share amendment</td>
+			<td><a href="https://malegislature.gov/Laws/Constitution#amendmentArticleCXXI">Article of Amendment CXXI</a></td>
+		</tr><tr><td>False claims act</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleII/Chapter12/Section5A">MGL c.12, §§ 5A-5O</a><br /><a href="https://www.law.cornell.edu/uscode/text/31/3729">31 U.S.C. §§ 3729 et seq.</a> </td>
+		</tr><tr><td>Family Support, Uniform Interstate </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartII/TitleIII/Chapter209D">MGL c.209D</a></td>
+		</tr><tr><td>Felony (definition &amp; penalty) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter274/Section1">MGL c.274, § 1</a></td>
+		</tr><tr><td>Felony murder </td>
+			<td><a href="http://masscases.com/cases/sjc/477/477mass805.html">Comm. v. Brown</a>, 477 Mass. 805 (2017)<br /><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter265/Section1">MGL c.265, § 1</a><br /><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter265/Section17">MGL c.265, § 17</a><br /><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter265/Section18">MGL c.265, § 18</a><br /><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter265/Section21">MGL c.265, § 21</a></td>
+		</tr><tr><td>Female circumcision</td>
+			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2020/Chapter149">St.2020, c.149</a></td>
+		</tr><tr><td>First responder law </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXVI/Chapter111/Section201">MGL c.111, § 201</a></td>
+		</tr><tr><td>
+			<ul><li>First responder training</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="01702366-1087-4d2c-b0fc-943b359d40e6" href="/regulations/105-CMR-17100-massachusetts-first-responder-training">105 CMR 171</a> </td>
+		</tr><tr><td>Flavored tobacco ban</td>
+			<td><a href="/info-details/mass-general-laws-c270-ss-28">MGL c.270, § 28</a></td>
+		</tr><tr><td>Food Allergy Awareness Act </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXX/Chapter140/Section6B">MGL c.140, § 6B</a><br /><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="0c0e8cb5-09bb-4e25-bc70-b0e2120b4e60" href="/regulations/105-CMR-59000-state-sanitary-code-chapter-x-minimum-sanitation-standards-for-food-establishments">105 CMR 590.003(B)(17)</a>  <br /><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="8ee37c7c-9a2d-4f33-afcf-10cf6543337f" href="/lists/retail-food">Dept. of Public Health</a></td>
+		</tr><tr><td>Foreclosure, mortgage </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="df7ed753-9751-44e9-ac77-d6cbebe16035" href="/info-details/massachusetts-law-about-mortgage-foreclosure">Law About Foreclosure</a></td>
+		</tr><tr><td>Forty-eight hour work week (children) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXXI/Chapter149/Section56">MGL c.149, § 56</a></td>
+		</tr><tr><td>Foster parents' bill of rights</td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="bfd1235b-6c60-4f44-a8e1-c645b5076e84" href="/info-details/mass-general-laws-c119-ss-23c">MGL c.119, § 23C</a></td>
+		</tr><tr><td>Freedom of Information </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="99ef411e-ce3c-4608-95ee-57c08a51ba94" href="/info-details/massachusetts-law-about-freedom-of-information-and-public-records">Law About Freedom of Information</a></td>
+			</tr><tr><td>Garageman's lien </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleIV/Chapter255/Section25">MGL c.255, § 25</a></td>
+		</tr><tr><td>Garnishment </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleIV/Chapter246">MGL c.246</a></td>
+		</tr><tr><td>Gatekeeper provision</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleII/Chapter278/Section33e">MGL c.278, § 33E</a></td>
+		</tr><tr><td>Gelfgatt motion (re. compelling decryption of electronic device)</td>
+			<td><a href="http://masscases.com/cases/sjc/468/468mass512.html">Comm. v. Gelfgatt</a>, 468 Mass. 512 (2014)</td>
+		</tr><tr><td>Genital mutilation</td>
+			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2020/Chapter149">St.2020, c.149</a></td>
+		</tr><tr><td>Gifts to minors (Uniform Transfers to Minors) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartII/TitleII/Chapter201A">MGL c.201A</a></td>
+		</tr><tr><td>Ginsberg formula for alimony </td>
+			<td>Ginsberg, Edward M. Hon. "The Place of Alimony in the Scheme of Things", 14 Massachusetts Family Law Journal 107 (Jan. 1997). [<a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="24cf7cea-2acb-4682-beee-1b58eae6b077" href="/how-to/request-documents-from-the-law-libraries">not currently on the web</a>]</td>
+		</tr><tr><td><strong>Good samaritan laws:</strong> </td>
+			<td> </td>
+		</tr><tr><td>
+			<p>Any non-medical person providing aid</p>
+			</td>
+			<td>
+			<ul><li><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXVI/Chapter112/Section12V">MGL c.112, § 12V</a></li>
+			</ul></td>
+		</tr><tr><td>
+			<p>EMS Personnel</p>
+			</td>
+			<td>
+			<ul><li><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="8c6cc2ca-8c13-4853-8000-c6eddd1cbfc0" href="/info-details/mass-general-laws-c111c-ss-21">MGL c.111C, § 21</a></li>
+			</ul></td>
+		</tr><tr><td>
+			<p>Overdose - seeking assistance for self or others</p>
+			</td>
+			<td>
+			<ul><li><a href="/info-details/mass-general-laws-c94c-ss-34a">MGL c.94C, § 34A</a></li>
+			</ul></td>
+		</tr><tr><td>
+			<p>Physicians</p>
+			</td>
+			<td>
+			<ul><li><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXVI/Chapter112/Section12B">MGL c.112, § 12B</a></li>
+			</ul></td>
+		</tr><tr><td>
+			<p>Treatment of minors</p>
+			</td>
+			<td>
+			<ul><li><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="631c1696-1160-4870-a314-0ee38f3b180f" href="/info-details/mass-general-laws-c112-ss-12f">MGL c.112, § 12F</a></li>
+			</ul></td>
+		</tr><tr><td>Graffiti (Tagging) </td>
+			<td><a href="/info-details/mass-general-laws-c266-ss-126a">MGL c.266, § 126A</a><br /><a href="/info-details/mass-general-laws-c266-ss-126b">MGL c.266, § 126B</a></td>
+		</tr><tr><td>Grandfathered lots </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40A/Section6">MGL c.40A, § 6</a></td>
+		</tr><tr><td>Grandparents' visitation </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="bf53fe88-7f38-44c9-961c-9095dc5aeb1c" href="/info-details/massachusetts-law-about-grandparents-visitation-rights">Law About Grandparent Visitation</a></td>
+		</tr><tr><td>Green Communities Act of 2008 </td>
+			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2008/Chapter169">St.2008, c.169</a></td>
+		</tr><tr><td>Gun control </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="36e9e995-33a2-44af-8673-c46a4d40226f" href="/info-details/massachusetts-law-about-guns-and-other-weapons">Law About Guns</a></td>
+		</tr><tr><td>Habitual criminals, sentencing </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleII/Chapter279/Section25">MGL c.279, § 25</a></td>
+		</tr><tr><td>Habitual traffic offender law </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter90/Section22F">MGL c.90, § 22F</a></td>
+		</tr><tr><td>Hands-free driving</td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="3148175e-c8bd-4d8d-a7ad-0344f281e327" href="/info-details/mass-general-laws-c90-ss-13b">MGL c.90 § 13B</a></td>
+		</tr><tr><td>Harassment </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="2ef4a0e6-c923-407f-8142-f0ef9280d18c" href="/info-details/massachusetts-law-about-harassment-stalking-or-intentional-infliction-of-emotional-distress">Law About Harassment</a></td>
+		</tr><tr><td>Hatch Act (flood plains) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIX/Chapter131/Section40">MGL c.131, § 40</a></td>
+		</tr><tr><td>Hate Crimes </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="38a53bfc-6270-4f9a-a51e-b1e63e5d7ab6" href="/regulations/501-CMR-400-hate-crimes">501 CMR 4</a> </td>
+		</tr><tr><td>Hazing </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="b4b0f450-f99a-4be7-8e1a-3d853e8cd61c" href="/regulations/603-CMR-3300-anti-hazing-reporting">603 CMR 33</a> (High Schools)<br /><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="550b0b17-36bd-4349-9a16-926df4d27d31" href="/regulations/610-CMR-500-hazing-reporting">610 CMR 5</a> (Higher Education)</td>
+		</tr><tr><td>Health care proxy </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="162743d3-5fcb-4fff-8a2d-f38309af091a" href="/info-details/massachusetts-law-about-health-care-proxies-and-living-wills">Law About Health Care Proxies</a></td>
+		</tr><tr><td>Heart Balm Act</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartII/TitleIII/Chapter207/Section47a">MGL c.207, § 47A</a></td>
+		</tr><tr><td>Heart bill </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleIV/Chapter32/Section94">MGL c.32, § 94</a></td>
+		</tr><tr><td>Helmet laws (motorcycle head gear)</td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="5b224e23-bf37-4484-9097-63cb079d8a9e" href="/info-details/mass-general-laws-c90-ss-7">MGL c.90, § 7</a><br /><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="1d64632e-d62c-4e9f-ab32-1927db5160c3" href="/regulations/540-CMR-2200-miscellaneous-motor-vehicle-and-trailer-equipment-and-operations-requirements">540 CMR 22.08</a> </td>
+		</tr><tr><td>Highway defects (potholes) </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="dc9bc6f8-e7a7-4448-82bc-cd305e4289ab" href="/info-details/massachusetts-law-about-potholes-and-road-defects">Law About Potholes and Road Defects</a></td>
+		</tr><tr><td>Hit and run--personal injury </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="e6390904-96f9-4ef9-8c9d-c3726bdfed0f" href="/info-details/mass-general-laws-c90-ss-24">MGL c.90, § 24(2)(a-1/2)(1)</a></td>
+		</tr><tr><td>Hit and run--personal injury and death </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="e6390904-96f9-4ef9-8c9d-c3726bdfed0f" href="/info-details/mass-general-laws-c90-ss-24">MGL c.90, § 24(2)(a-1/2)(2)</a></td>
+		</tr><tr><td>Hit and run--property damage </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="e6390904-96f9-4ef9-8c9d-c3726bdfed0f" href="/info-details/mass-general-laws-c90-ss-24">MGL c.90, § 24(2)(a)</a></td>
+		</tr><tr><td>Hobbs Act</td>
+			<td><a href="https://www.law.cornell.edu/uscode/text/18/1951">18 U.S.C. § 1951</a></td>
+		</tr><tr><td>Home improvement contractors </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="b590329c-305c-4efa-ac44-f33b6346bede" href="/info-details/massachusetts-law-about-home-improvement">Law About Home Improvement</a></td>
+		</tr><tr><td>Home invasion </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter265/Section18C">MGL c.265, § 18C</a></td>
+		</tr><tr><td>Home rule procedures </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter43B">MGL c.43B</a></td>
+		</tr><tr><td>Homestead laws </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="491f0d76-cf47-4765-98d1-f7c89c92b3b7" href="/info-details/massachusetts-law-about-homestead">Law About Homestead</a></td>
+		</tr><tr><td>Honest services fraud</td>
+			<td><a href="https://www.law.cornell.edu/uscode/text/18/1346">18 U.S.C. § 1346</a></td>
+		</tr><tr><td>Human trafficking</td>
+			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2011/Chapter178">St.2011, Ch. 178</a></td>
+		</tr><tr><td>Humane practice (instruction on voluntariness of confession)</td>
+			<td><a href="http://masscases.com/cases/sjc/140/140mass276.html">Comm. v. Preece</a>, 140 Mass. 276 (1885)<br />
+			See also: <a href="http://masscases.com/cases/sjc/481/481mass662.html">Comm. v. Gallett</a>, 481 Mass. 662 at 685 for a history of the practice</td>
+		</tr><tr><td>Idling motor vehicle</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter90/Section16A">MGL c.90, § 16A</a></td>
+		</tr><tr><td>Ignition Interlock Devices</td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="5230cb3c-5371-4a61-85d2-2f2b7543d90a" href="/regulations/540-CMR-2500-certification-installation-use-and-maintenance-of-ignition-interlock-devices">540 CMR 25</a> </td>
+		</tr><tr><td>Insurance, Automobile</td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="662e6379-e3fa-4ced-8def-9d3d5b6d9c8a" href="/info-details/massachusetts-law-about-auto-insurance">Law About Auto Insurance</a></td>
+		</tr><tr><td>Interstate probation</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXVIII/Chapter127/Section151A">MGL c.127, §§ 151A-151L</a></td>
+		</tr><tr><td>Interstate Wildlife Violator Compact</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIX/Chapter131B">MGL c.131B</a></td>
+		</tr><tr><td>Invasion of privacy</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleI/Chapter214/Section1B">MGL c.214, § 1B</a></td>
+		</tr><tr><td>Irretrievable breakdown of marriage ("no fault divorce")</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartII/TitleIII/Chapter208">MGL c.208, §§ 1A-1B </a><br /><a href="https://malegislature.gov/Laws/GeneralLaws/PartII/TitleIII/Chapter208/Section21">MGL c.208, § 21</a></td>
+			</tr><tr><td>Jackie's Law (construction trenches)</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter82A">MGL c.82A </a><br /><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="a1b71a04-94e8-4db1-8570-cd57d8b39f8e" href="/regulations/520-CMR-1400-excavation-and-trench-safety">520 CMR 14</a> </td>
+		</tr><tr><td>Jenkins hearing (probable cause after warrantless arrest)</td>
+			<td><a href="http://masscases.com/cases/sjc/416/416mass221.html">Jenkins v. District Court</a>, 416 Mass. 221 (1993)</td>
+		</tr><tr><td>Jessica's Law</td>
+			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2008/Chapter205">St.2008, c.205</a></td>
+			</tr><tr><td>Kayla's law (AEDs in Health Clubs)</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXV/Chapter93/Section78A">MGL c.93, § 78A</a></td>
+		</tr><tr><td>Killer bar law</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter90/Section24J">MGL c.90, § 24J</a></td>
+		</tr><tr><td>Klinghoffer Rule (Working without pay)</td>
+			<td><a href="https://scholar.google.com/scholar_case?&amp;case=12587108935231588535">US v. Klinghoffer Bros. Realty, 285 F.2d 487</a> (1960)<br /><strong>Rejected by US District Ct (Mass.) in:</strong><br /><a href="https://scholar.google.com/scholar_case?case=3555465053189655579">Norceide v. Cambridge Health, 814 F.Supp. 2d 17</a> (2011)</td>
+		</tr><tr><td>Knockout Rule (interpretation of contracts)</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXV/Chapter106/Article2/Section2-207">MGL c.106, § 2-207</a></td>
+			</tr><tr><td>Labor </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="56025ea5-3ab7-458b-b1a9-cd1dd80c3f18" href="/lists/mass-general-laws-c149">MGL c.149</a></td>
+		</tr><tr><td>
+			<ul><li>Industrial safety</li>
+			</ul></td>
+			<td><a href="/law-library/454-cmr">454 CMR</a></td>
+		</tr><tr><td>Lacey Packer law (drunk driving) </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="e9a694d8-69f4-4c5d-a190-6c6c41327f1e" href="/info-details/mass-general-laws-c90-ss-22">MGL c.90, § 22</a><br /><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter90/Section23">MGL c.90, § 23</a><br /><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter90/Section30">MGL c.90, § 30</a><br /><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="84fb2e31-fb33-43ab-a5b8-a67b77ddb4a0" href="/info-details/mass-general-laws-c90-ss-33">MGL c.90, § 33</a></td>
+		</tr><tr><td>Lamb Warning </td>
+			<td><a href="http://masscases.com/cases/sjc/365/365mass265.html">Com. v. Lamb, 365 Mass. 265 </a>(1974)</td>
+		</tr><tr><td>Landlord tenant laws </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="30f0e479-cba6-477e-a70a-18de27845ca5" href="/info-details/massachusetts-law-about-landlord-and-tenant">Law About Landlord-Tenant</a></td>
+		</tr><tr><td>Larceny by check </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter266/Section37">MGL c.266, § 37</a></td>
+		</tr><tr><td>Laura's law (emergency room access)</td>
+			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2020/Chapter384">St.2020, c.384</a></td>
+		</tr><tr><td>Laura's law (organ &amp; tissue donation) </td>
+			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2010/Chapter190">St.2010, c.190</a></td>
+		</tr><tr><td>Law Enforcement Officers Safety Act (LEOSA)</td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="0c87928d-28fb-4ec8-97e3-31015427e470" href="/regulations/501-CMR-1300-standards-for-identification-cards-for-retired-law-enforcement-officers">501 CMR 13</a> <br /><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="716a8209-6f3b-4586-b075-f694a07b373e" href="/regulations/515-CMR-600-law-enforcement-officers-safety-act-qualification-standards-and-instructor-certification">515 CMR 6</a> </td>
+		</tr><tr><td>Lead paint law </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="292b9e7a-bb52-4660-b22a-04b351a2fca7" href="/info-details/massachusetts-law-about-lead-poisoning-and-control">Law About Lead Paint</a></td>
+		</tr><tr><td>Legal age </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="941d38dd-e9ad-4443-bf72-24cda972bfb3" href="/info-details/mass-general-laws-c4-ss-7">MGL c.4, § 7 (cl.48-51)</a></td>
+		</tr><tr><td>Lemon laws (new &amp; used cars) </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="6c9a90d4-b344-492e-907c-7bdb4190bb8c" href="/info-details/mass-general-laws-c90-ss-7n-14">MGL c.90, § 7N 1/4</a> &amp; <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="b4082e91-586c-456a-ab82-1e495e880599" href="/info-details/mass-general-laws-c90-ss-7n-12">§ 7N 1/2</a></td>
+		</tr><tr><td>
+			<ul><li>Lemon aid law (voiding sale contracts)</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="1bd48ba4-19c9-415d-b8cd-a5a59c7cadb9" href="/info-details/mass-general-laws-c90-ss-7n">MGL c.90, § 7N</a></td>
+		</tr><tr><td>
+			<ul><li>Motor vehicle arbitration regulations</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="123eafc4-e829-4ed0-9da1-9cc8c9a9dbeb" href="/regulations/201-CMR-1100-new-and-used-motor-vehicle-arbitration">201 CMR 11</a> </td>
+		</tr><tr><td>
+			<ul><li>Motor vehicle sales &amp; repair shop regulations</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="3e469012-d83e-4fec-ad93-1e3eb03b96c9" href="/regulations/940-CMR-500-motor-vehicle-regulations">940 CMR 5</a> </td>
+		</tr><tr><td>
+			<ul><li>Private party sales</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="9f34d85c-c9c5-48a4-828e-e72a467ffefd" href="/private-party-car-sales">Office of Consumer Affairs and Business Regulation</a></td>
+		</tr><tr><td>Lemon law (pets) </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="f818da29-5f7d-4ea7-a268-8e0d4938e85e" href="/regulations/330-CMR-1200-licensing-and-operation-of-pet-shops">330 CMR 12.05</a>      </td>
+		</tr><tr><td>
+			<ul><li>Licensing &amp; operation of pet shops</li>
+			</ul></td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIX/Chapter129/Section39A">MGL c.129, § 39A</a></td>
+		</tr><tr><td>Lemon law (wheelchairs) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXV/Chapter93/Section107">MGL c.93, § 107</a><br /><a href="/regulations/201-CMR-19-customized-wheelchair-arbitration">201 CMR 19</a></td>
+		</tr><tr><td>Limited Liability Company Act </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="07389b03-7d2b-41d3-ac9c-e23668e3be40" href="/info-details/massachusetts-law-about-limited-liability-companies-and-limited-liability-partnerships">Law About Limited Liability Companies</a></td>
+		</tr><tr><td>Little Miller Act </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXXI/Chapter149/Section29">MGL c.149 § 29</a></td>
+		</tr><tr><td>Lizzie's law (protection of children) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXVII/Chapter119/Section35">MGL c.119, § 35</a></td>
+		</tr><tr><td>
+			<ul><li>Children born out of wedlock</li>
+			</ul></td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartII/TitleIII/Chapter209C/Section3">MGL c.209C, § 3</a></td>
+		</tr><tr><td>
+			<ul><li>Parents convicted of murder</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="8d063af6-df0e-41ad-b06c-0db1ff1dee72" href="/info-details/mass-general-laws-c209-ss-37">MGL c.209, § 37</a></td>
+		</tr><tr><td>
+			<ul><li>Visitation &amp; custody</li>
+			</ul></td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartII/TitleIII/Chapter209/Section38">MGL c.209, § 38</a></td>
+		</tr><tr><td>Living wills </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="162743d3-5fcb-4fff-8a2d-f38309af091a" href="/info-details/massachusetts-law-about-health-care-proxies-and-living-wills">Law About Health Care Proxies and Living Wills</a></td>
+		</tr><tr><td>Logan's Law (devocalizing dogs and cats) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter272/Section801~2">MGL c. 272 § 80 1/2</a></td>
+		</tr><tr><td>Long arm statute </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="1032fe69-bda9-4766-8f8e-c89d8622e172" href="/lists/mass-general-laws-c223a">MGL c.223A</a></td>
+		</tr><tr><td>
+			<ul><li>Drivers who reside in other states</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="34c46e59-c5eb-49c5-b19c-4bd9c535b615" href="/info-details/mass-general-laws-c90-ss-3a">MGL c.90, § 3A</a></td>
+		</tr><tr><td>Lung law </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleIV/Chapter32/Section94A">MGL c.32, § 94A</a></td>
+		</tr><tr><td>Manslaughter </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleII/Chapter277/Section79">MGL c.277, § 79</a></td>
+		</tr><tr><td>
+			<ul><li>Penalty</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="946e9441-aa56-4025-856b-fd119628c94e" href="/info-details/mass-general-laws-c265-ss-13">MGL c.265, § 13</a></td>
+		</tr><tr><td>Marriage </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="042b3a04-4597-4692-a683-aba5757c9079" href="/info-details/massachusetts-law-about-marriage">Law About Marriage</a></td>
+		</tr><tr><td>
+			<ul><li>Annulment</li>
+			</ul></td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartII/TitleIII/Chapter207/Section14">MGL c.207, § 14</a></td>
+		</tr><tr><td>
+			<ul><li>Common law marriage</li>
+			</ul></td>
+			<td>While Massachusetts recognizes a valid common law marriage from another state, a common law marriage cannot be created in Massachusetts.</td>
+		</tr><tr><td>
+			<ul><li>Same-Sex marriage</li>
+			</ul></td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="26cd7169-40d8-4eaf-9e95-5c4cefb81610" href="/info-details/massachusetts-law-about-same-sex-marriage">Law About Same-Sex Marriage</a></td>
+		</tr><tr><td>
+			<ul><li>Three day wait for marriage</li>
+			</ul></td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartII/TitleIII/Chapter207/Section19">MGL c.207, § 19</a></td>
+		</tr><tr><td>Married person's/women's property </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartII/TitleIII/Chapter209">MGL c.209</a></td>
+		</tr><tr><td>Massachusetts Antitrust Act </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXV/Chapter93">MGL c.93</a></td>
+		</tr><tr><td>Massachusetts Clean Air Act. </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXVI/Chapter111/Section142A">MGL c.111, § 142A</a></td>
+		</tr><tr><td>Massachusetts Endangered Species Act </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIX/Chapter131A">MGL c.131A</a></td>
+		</tr><tr><td>
+			<ul><li>Endangered Species Act Regulations</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="d593aaaf-76dd-4a6d-a9a2-e5ad22372995" href="/regulations/321-CMR-1000-massachusetts-endangered-species-act">321 CMR 10</a> </td>
+		</tr><tr><td>Massachusetts False Claims Act</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleII/Chapter12/Section5A">MGL c.12, §§ 5A-5O</a> </td>
+		</tr><tr><td>Massachusetts Limited Liability Company Act </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="07389b03-7d2b-41d3-ac9c-e23668e3be40" href="/info-details/massachusetts-law-about-limited-liability-companies-and-limited-liability-partnerships">Law About Limited Liability Companies</a></td>
+		</tr><tr><td>Massachusetts tort claims against state and local government </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleIV/Chapter258">MGL c.258</a></td>
+		</tr><tr><td>
+			<ul><li>Settlements and judgments</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="e6712bb8-b713-402d-a491-c534e75cbd00" href="/regulations/815-CMR-500-settlements-and-judgments">815 CMR 5</a> </td>
+		</tr><tr><td>Massachusetts Travel Seller Law</td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="d15eb3b1-8618-49c3-ba97-4dfba9b195a1" href="/regulations/940-CMR-1500-the-sale-of-travel-services">940 CMR 15.06</a></td>
+		</tr><tr><td>Massachusetts White Cane Law </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter90/Section14A">MGL c.90, § 14A</a></td>
+		</tr><tr><td>MassHealth program </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="9d4f6c4c-fc35-41ea-b87e-95cc70413a31" href="/info-details/massachusetts-law-about-medicaid-masshealth">Law About Medicaid (MassHealth)</a></td>
+		</tr><tr><td>Mattresses, resale of used </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXV/Chapter94/Section271A">MGL c.94, § 271A</a></td>
+		</tr><tr><td>Maximum hours (public sector employment) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXXI/Chapter149">MGL c.149, §§ 30-42</a></td>
+		</tr><tr><td>McMansions, zoning </td>
+			<td><a href="http://masscases.com/cases/sjc/450/450mass357.html">Bjorklund v. ZBA of Norwell, 450 Mass. 357 </a>(2008)</td>
+		</tr><tr><td>Meal break at work </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXXI/Chapter149/Section100">MGL c.149, § 100</a></td>
+		</tr><tr><td>Mechanics' lien on buildings &amp; land </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="51c768c2-adf3-4c7c-9578-2e7acfc8c734" href="/info-details/massachusetts-law-about-mechanics-liens">Law About Mechanics' Liens</a></td>
+		</tr><tr><td>Mechanics' lien on motor vehicles </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleIV/Chapter255/Section25">MGL c.255, § 25</a></td>
+		</tr><tr><td>Medical records, inspection </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="df99b39d-fe1c-4938-977e-49b985cdb015" href="/info-details/massachusetts-law-about-medical-privacy">Law About Medical Records Privacy</a></td>
+		</tr><tr><td>Megan's law (registration of sex offenders) </td>
+			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/1999/Chapter74">St.1999, c.74 </a>(text of original law).<br />
+			See Also: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="7fdc6b79-e2d2-42b9-99c4-eee742741c16" href="/info-details/massachusetts-law-about-sex-offenders">Law About Sex Offenders</a></td>
+		</tr><tr><td>Melanie's Law (drunk driving)</td>
+			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2005/Chapter122">St.2005, c.122 </a>(text of original law).<br />
+			See Also: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="ff1239a5-faf9-4f66-8fd5-166f6d8e786c" href="/info-details/massachusetts-law-about-drunk-or-drugged-driving">Law About Drunk Driving</a></td>
+		</tr><tr><td>Melissa's Law (3 Strikes) </td>
+			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2012/Chapter192">St.2012, c.192</a></td>
+		</tr><tr><td>Mental health laws (including civil &amp; criminal commitment) </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="70ba6eb8-b447-4829-b6a0-13a732b29ab7" href="/info-details/massachusetts-law-about-mental-health-issues">Law About Mental Health Care</a></td>
+		</tr><tr><td>Mercy killing </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartII/TitleII/Chapter201D/Section12">MGL c.201D, § 12</a></td>
+		</tr><tr><td>MERIT Plan (tax breaks for vets) </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="4f267233-4744-4359-b1d3-bdf0c943a298" href="/info-details/mass-general-laws-c59-ss-5">MGL c.59 § 5, cl.22-22D</a></td>
+		</tr><tr><td>Michael's Law (medical emergency response in schools) </td>
+			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2012/Chapter77">St.2012, c.77</a></td>
+		</tr><tr><td>Millionaire's tax</td>
+			<td><a href="https://malegislature.gov/Laws/Constitution#amendmentArticleCXXI">Article of Amendment CXXI</a></td>
+		</tr><tr><td>Minimum Fair Wage Law </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="17c2548b-8951-43df-900a-6e86bd817520" href="/info-details/massachusetts-law-about-minimum-wage">Law About Minimum Wage</a></td>
+		</tr><tr><td>Minor in possession of alcohol </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXX/Chapter138/Section34C">MGL c.138, § 34C</a></td>
+		</tr><tr><td>Misdemeanor (definition &amp; penalty) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter274/Section1">MGL c.274, § 1</a></td>
+		</tr><tr><td>Moffett filings </td>
+			<td><a href="http://masscases.com/cases/sjc/383/383mass201.html">Comm. v. Moffett, 383 Mass. 201 </a><br /><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="43a25e8f-21ab-4a5c-95d7-d763b3f6703a" href="/info-details/procedures-governing-appeals-with-moffett-issues-filed-in-the-appeals-court">Guide to Moffett Filings</a>, Appeals Court</td>
+		</tr><tr><td>Mortgage foreclosure </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="df7ed753-9751-44e9-ac77-d6cbebe16035" href="/info-details/massachusetts-law-about-mortgage-foreclosure">Law About Foreclosure</a></td>
+		</tr><tr><td>Motor vehicle insurance </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="662e6379-e3fa-4ced-8def-9d3d5b6d9c8a" href="/info-details/massachusetts-law-about-auto-insurance">Law About Auto Insurance</a></td>
+		</tr><tr><td>Motor vehicle registration </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="be731d4c-c2df-44df-a4ae-6e898d797f17" href="/lists/mass-general-laws-c90">MGL c.90, §§ 1-34R</a></td>
+		</tr><tr><td>Motorcycle headgear (helmet laws) </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="5b224e23-bf37-4484-9097-63cb079d8a9e" href="/info-details/mass-general-laws-c90-ss-7">MGL c.90 § 7</a> <br /><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="1d64632e-d62c-4e9f-ab32-1927db5160c3" href="/regulations/540-CMR-2200-miscellaneous-motor-vehicle-and-trailer-equipment-and-operations-requirements">540 CMR 22.08</a> </td>
+		</tr><tr><td>Move Over law </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter89/Section7C">MGL c.89, § 7C</a></td>
+		</tr><tr><td>Murder (definition) </td>
+			<td>MGL <a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter265/Section1">c.265, § 1</a></td>
+		</tr><tr><td>Mutina instruction (Consequences of not guilty by reason of lack of criminal responsibility)</td>
+			<td><a href="http://masscases.com/cases/sjc/473/473mass191.html">Com. v. Chappell, 473 Mass. 191</a></td>
+		</tr><tr><td>Narcotics and drug laws (controlled substances) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXV/Chapter94C">MGL c.94C</a></td>
+		</tr><tr><td>
+			<ul><li>Penalty for use of date rape drug</li>
+			</ul></td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter272/Section3">MGL c.272, § 3</a></td>
+		</tr><tr><td>NASTY Women Act (repealing archaic abortion laws)</td>
+			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2018/Chapter155">St.2018, c.155</a></td>
+		</tr><tr><td>National Popular Vote Bill </td>
+			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2010/Chapter229">St.2010, c.229</a></td>
+		</tr><tr><td>Needle exchange </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXVI/Chapter111/Section215">MGL c.111, § 215</a><br /><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXV/Chapter94C/Section27">MGL c.94C, § 27</a></td>
+		</tr><tr><td>Nero's Law (allowing ambulance transportation of police dogs)</td>
+			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2022/Chapter23">St.2022, c.23</a></td>
+		</tr><tr><td>Nicky's Law (registry of abuse of intellectually or developmentally disabled)</td>
+			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2020/Chapter19">St.2020, c.19</a></td>
+		</tr><tr><td>Nicole's Law (carbon monoxide detectors)</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXX/Chapter148/Section26F1~2">MGL c.148, § 26F 1/2 </a><br /><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="0ae4253c-71e7-4a7e-bff5-fac1d7cd3610" href="/regulations/527-CMR-100-massachusetts-comprehensive-fire-safety-code">527 CMR 1</a> <br />
+			See Also: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="214da8c0-413d-4d76-999e-becc0d8a2cca" href="/info-details/massachusetts-law-about-carbon-monoxide-detectors">Law About Carbon Monoxide Detectors</a></td>
+		</tr><tr><td>Nine hour work day </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXXI/Chapter149/Section56">MGL c.149, § 56</a></td>
+		</tr><tr><td>No-fault auto insurance </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="662e6379-e3fa-4ced-8def-9d3d5b6d9c8a" href="/info-details/massachusetts-law-about-auto-insurance">Law About Auto Insurance</a></td>
+		</tr><tr><td>No-fault divorce (irretrievable breakdown of marriage) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartII/TitleIII/Chapter208/Section1a">MGL c.208, § 1A</a> &amp; <a href="https://malegislature.gov/Laws/GeneralLaws/PartII/TitleIII/Chapter208/Section1b">§ 1B</a><br /><a href="https://malegislature.gov/Laws/GeneralLaws/PartII/TitleIII/Chapter208/Section21">MGL c.208, § 21</a></td>
+		</tr><tr><td>No-fix law</td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="7e57d30c-038c-405f-a115-feab97f19c51" href="/info-details/mass-general-laws-c90c-ss-2">MGL c.90C, § 2</a><br /><a href="http://masscases.com/cases/app/92/92massappct282.html">Comm. v. O'Leary, 92 Mass. App. Ct. 282</a></td>
+		</tr><tr><td>No-knock warrants</td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="18e277a9-53b6-4764-9ad4-613815ddbb8f" href="/info-details/mass-general-laws-c276-ss-2d">MGL c.276, § 2D</a></td>
+		</tr><tr><td>No surprises act</td>
+			<td><a href="https://www.congress.gov/116/bills/hr133/BILLS-116hr133enr.pdf">PL 116-260, Division BB, Title I</a> (p.1576)</td>
+		</tr><tr><td>Nonresident motorist, operation of motor vehicles </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter90/Section3">MGL c.90, § 3</a> &amp; <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="34c46e59-c5eb-49c5-b19c-4bd9c535b615" href="/info-details/mass-general-laws-c90-ss-3a">§ 3A</a></td>
+		</tr><tr><td>Nursing, Board of Registration </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleII/Chapter13/Section13">MGL c.13, §§ 13-15D</a></td>
+		</tr><tr><td>
+			<ul><li>Registration of nurses</li>
+			</ul></td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXVI/Chapter112/Section74">MGL c.112, §§ 74-81C</a></td>
+		</tr><tr><td>
+			<ul><li>Nursing regulations</li>
+			</ul></td>
+			<td><a href="/law-library/244-cmr">244 CMR</a></td>
+		</tr><tr><td>Open and gross lewdness </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter272/Section16">MGL c.272, § 16</a></td>
+		</tr><tr><td>Open container law </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter90/Section24I">MGL c.90, § 24I</a></td>
+		</tr><tr><td>Overtime pay </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="dc9a379e-90ee-4289-b34f-820fbdba157c" href="/info-details/massachusetts-law-about-overtime">Law About Overtime</a></td>
+		</tr><tr><td>Pacheco law (limiting privatization of state services) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleII/Chapter7/Section52">MGL c.7, §§ 52-55</a></td>
+		</tr><tr><td>Padlocking law (premises which are a nuisance) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXX/Chapter139/Section16A">MGL c.139, § 16A</a></td>
+		</tr><tr><td>PATCH Act</td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="176f9702-52a8-4440-ad2f-e4e9af758f6b" href="/info-details/mass-general-laws-c176o-ss-27">MGL c.176O, § 27</a></td>
+		</tr><tr><td>Patients' Bill of Rights </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="67bcddb6-7784-463f-8aa5-792a8bc56054" href="/info-details/mass-general-laws-c111-ss-70e">MGL c.111, § 70E</a></td>
+		</tr><tr><td>PAWS Act</td>
+			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2014/Chapter293">St.2014, c.293</a></td>
+		</tr><tr><td>PAWS II Act</td>
+			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2018/Chapter219">St.2018, c.219</a></td>
+		</tr><tr><td>Peaceful persuasion (labor disputes) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXXI/Chapter149/Section24">MGL c.149, § 24</a></td>
+		</tr><tr><td>Peeping Tom </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter272/Section105">MGL c.272, § 105(b)</a></td>
+		</tr><tr><td>Perjury </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter268">MGL c.268, §§ 1-6</a></td>
+		</tr><tr><td>Personal property exemption </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleII/Chapter235/Section34">MGL c.235, § 34</a></td>
+		</tr><tr><td>Pet lemon law </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="f818da29-5f7d-4ea7-a268-8e0d4938e85e" href="/regulations/330-CMR-1200-licensing-and-operation-of-pet-shops">330 CMR 12.05</a>      </td>
+		</tr><tr><td>PIP (auto insurance personal injury protection) </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="729c155c-0263-464b-ade4-3c35d4a39776" href="/info-details/mass-general-laws-c90-ss-34m">MGL c.90, § 34M</a></td>
+		</tr><tr><td>Playgrounds </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter45/Section14">MGL c.45, §§ 14-18</a></td>
+		</tr><tr><td>Police reform</td>
+			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2020/Chapter253">St.2020, c.253</a></td>
+		</tr><tr><td>Popular vote for president </td>
+			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2010/Chapter229">St.2010, c.229</a></td>
+		</tr><tr><td>Pothole law (highway defects) </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="dc9bc6f8-e7a7-4448-82bc-cd305e4289ab" href="/info-details/massachusetts-law-about-potholes-and-road-defects">Law About Potholes and Road Defects</a></td>
+		</tr><tr><td>Potty Parity</td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="a4e010c5-6a0d-4cef-99af-c0aaf949234c" href="/regulations/248-CMR-1000-uniform-state-plumbing-code">248 CMR 10.10(18)</a> </td>
+		</tr><tr><td>Prevailing wages in public works </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="16d84ab4-7d29-42c1-8800-2856ad0fd49d" href="/info-details/massachusetts-law-about-prevailing-wage">Law About Prevailing Wage</a></td>
+		</tr><tr><td>Privacy </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="4f2f2595-2be2-431a-a4a0-00977ce1034e" href="/info-details/massachusetts-law-about-privacy">Law About Privacy</a></td>
+		</tr><tr><td>Prompt Payment Act</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXXI/Chapter149/Section29E">MGL c.149, § 29E</a></td>
+		</tr><tr><td>Proposition 2 ½ (limitation on property taxes) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleIX/Chapter59/Section21C">MGL c.59, § 21C</a></td>
+		</tr><tr><td>Public accommodations, penalty for discrimination </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter272/Section98">MGL c.272, § 98</a></td>
+		</tr><tr><td>Public accommodations, refusal to accommodate travelers </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXX/Chapter140/Section7">MGL c.140, § 7</a></td>
+		</tr><tr><td>Public records</td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="99ef411e-ce3c-4608-95ee-57c08a51ba94" href="/info-details/massachusetts-law-about-freedom-of-information-and-public-records">Law About Freedom of Information</a></td>
+		</tr><tr><td>Puppy Doe Law</td>
+			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2014/Chapter293">St.2014, c.293</a></td>
+			</tr><tr><td>"Quick take" law (eminent domain)</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIII/Chapter79">MGL c.79</a></td>
+		</tr><tr><td>Quinn bill (police career incentive pay program) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter41/Section108L">MGL c.41, § 108L</a></td>
+		</tr><tr><td>Racial balance, promotion in schools </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXII/Chapter71/Section37C">MGL c.71, § 37C </a>&amp; <a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXII/Chapter71/Section37D">§ 37D</a></td>
+		</tr><tr><td>Racial imbalance, elimination in schools </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleII/Chapter15/Section1I">MGL c.15, § 1I</a> &amp; <a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleII/Chapter15/Section1j">§ 1J</a></td>
+		</tr><tr><td>Racial imbalance &amp; magnet schools </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="3af131c1-2d5e-418c-b05c-d35e6e44d517" href="/regulations/603-CMR-1700-racial-imbalance-and-magnet-school-programs">603 CMR 17</a></td>
+		</tr><tr><td>Raffle permits </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter271/Section7a">MGL c.271, § 7A</a></td>
+		</tr><tr><td>
+			<ul><li>Regulations governing raffles (Attorney General) </li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="812adcf5-a049-4fd5-a5d1-7579daf5bf0a" href="/regulations/940-CMR-1200-regulations-governing-raffles">940 CMR 12</a> </td>
+		</tr><tr><td>
+			<ul><li>Regulations controlling certain raffles &amp; bazaar</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="4e7e530b-269b-4c21-9e34-a813029466b2" href="/regulations/961-CMR-400-regulations-concerning-certain-raffle-and-bazaar-permits">961 CMR 4</a> </td>
+		</tr><tr><td>Rape </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="6aa8a224-5aaa-47d7-8d44-fa585dce6429" href="/info-details/massachusetts-law-about-rape-and-sex-crimes">Law About Rape and Sex Crimes</a></td>
+		</tr><tr><td>Rape shield law </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleII/Chapter233/Section21B">MGL c.233, § 21B</a></td>
+		</tr><tr><td>REAL ID Law</td>
+			<td><a href="https://www.gpo.gov/fdsys/pkg/PLAW-109publ13/pdf/PLAW-109publ13.pdf">PL 109-13, Division B, Title II</a> (p.72)<br /><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="962f4596-53bd-4838-8fbf-d58300d1eb44" href="/info-details/mass-general-laws-c90-ss-8">MGL c.90, § 8</a><br /><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2016/Chapter172">St.2016, c.172</a></td>
+		</tr><tr><td>Red flag law (weapons), also known as ERPO</td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="6b0bbe21-5f67-4b86-aa44-4f67c6c64f23" href="/law-library/mass-general-laws-c140-ssss-131r-131y">MGL c.140, §§ 131R-131Y</a></td>
+		</tr><tr><td>Red Flags Rule (identity theft) </td>
+			<td><a href="https://www.ftc.gov/sites/default/files/documents/federal_register_notices/identity-theft-red-flags-and-address-discrepancies-under-fair-and-accurate-credit-transactions-act/071109redflags.pdf">11/9/07 Federal Register </a></td>
+		</tr><tr><td>Rent control, prohibition </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40P">MGL c.40P</a></td>
+		</tr><tr><td>Representative town meetings </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter43A">MGL c.43A</a></td>
+		</tr><tr><td>Resale of tickets ("scalping") </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="ca4297f7-5608-478e-9b32-0d5b4c6cfadd" href="/info-details/massachusetts-law-about-ticket-reselling">Law About Ticket Reselling</a></td>
+		</tr><tr><td>Restraining order, domestic relations </td>
+			<td><a href="/lists/mass-general-laws-c209a">MGL c.209A</a></td>
+		</tr><tr><td>Restroom access (for those with certain eligible medical conditions) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter270/Section26">MGL c.270, § 26</a></td>
+		</tr><tr><td>Revise and revoke (sentence)</td>
+			<td><a href="/rules-of-criminal-procedure/criminal-procedure-rule-29-revision-or-revocation-of-sentence">Mass. R. Crim. P. 29(a)(2)</a></td>
+		</tr><tr><td>Ride sharing companies (Uber, Lyft, etc.)</td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="289f1d40-ad5f-41f2-a89e-d0cc9c334548" href="/lists/mass-general-laws-c159a-12">MGL c.159A-1/2</a><br /><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="86d9bad6-3572-4beb-b7d8-97fbd9d59a48" href="/regulations/220-CMR-27400-transportation-network-companies">220 CMR 274</a><br /><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="46b2a1ba-6d01-4e38-9e39-77588c944762" href="/regulations/540-CMR-200-motor-vehicle-regulations">540 CMR 2</a></td>
+		</tr><tr><td>Right to bargain (labor) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXXI/Chapter150A/Section3">MGL c.150A, § 3</a></td>
+		</tr><tr><td>Right to cure (foreclosure) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleIII/Chapter244/Section35A">MGL c.244, § 35A(b)</a></td>
+		</tr><tr><td>Right to die (health care proxy) </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="162743d3-5fcb-4fff-8a2d-f38309af091a" href="/info-details/massachusetts-law-about-health-care-proxies-and-living-wills">Law About Health Care Proxies and Living Wills</a></td>
+		</tr><tr><td>Right to know law (hazardous substances) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXVI/Chapter111F">MGL c.111F, §§ 1-21</a></td>
+		</tr><tr><td>
+			<ul><li>Employee and community right to know regulations (Dept. of Environmental. Protection.) </li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="8039db3b-8af6-4df1-896e-af276bb86f96" href="/regulations/310-CMR-3300-implementation-of-mgl-c111f-employee-and-community-right-to-know">310 CMR 33</a></td>
+		</tr><tr><td>
+			<ul><li>Right to Know (Div. Industrial Safety) </li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="508b04d8-7707-4ada-afd8-8ff3398159d3" href="/regulations/454-CMR-2100-right-to-know-law-mgl-c111f">454 CMR 21</a> </td>
+		</tr><tr><td>
+			<ul><li>Right to know (Dept. of Public. Health) </li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="b40418e4-9026-4d3a-b33f-2f7f7527ea22" href="/regulations/105-CMR-67000-right-to-know">105 CMR 670</a> </td>
+		</tr><tr><td>Right to organize </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXXI/Chapter150A">MGL c.150A</a></td>
+		</tr><tr><td>
+			<ul><li>Administration of Labor Relations law</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="dad390af-5a07-4e15-9682-b4433f6cba50" href="/regulations/456-CMR-200-administration-of-the-labor-relations-law">456 CMR 2</a> </td>
+		</tr><tr><td>Right to repair law </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="ec7fe8f4-4402-4d24-b47d-c780032abfbb" href="/lists/mass-general-laws-c93k">MGL c.93K</a></td>
+		</tr><tr><td>Right to shelter law</td>
+			<td><a href="https://archives.lib.state.ma.us/handle/2452/39556">St.1983, c.450</a></td>
+		</tr><tr><td>Riverfront area (wetlands protection) </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="c881fae9-2f88-4549-96c7-0f6c03c2c342" href="/regulations/310-CMR-1000-wetlands-protection">310 CMR 10.58</a> </td>
+		</tr><tr><td>Rivers protection law </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIX/Chapter131/Section40">MGL c.131, § 40</a></td>
+		</tr><tr><td>
+			<ul><li>Rivers Protection Act (original text)</li>
+			</ul></td>
+			<td><a href="https://archives.lib.state.ma.us/handle/2452/30374">St.1996, c.258</a> </td>
+		</tr><tr><td>ROE act</td>
+			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2020/Chapter263">St.2020, c.263</a></td>
+			</tr><tr><td>Safe driver insurance plan </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="98a319df-e1f2-4934-aa3c-e218f1d4a6a5" href="/regulations/211-CMR-13400-safe-driver-insurance-and-merit-rating-plans">211 CMR 134</a> <br />
+			See Also: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="662e6379-e3fa-4ced-8def-9d3d5b6d9c8a" href="/info-details/massachusetts-law-about-auto-insurance">Law About Auto Insurance</a></td>
+		</tr><tr><td>Safe harbors (liability of limited partners) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXV/Chapter109/Section19">MGL c.109, § 19</a></td>
+		</tr><tr><td>Safe haven law </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXVII/Chapter119/Section39%201~2">MGL c.119, § 39 1/2</a></td>
+		</tr><tr><td>Sandy's law (criminal harassment) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter265/Section43A">MGL c.265, § 43A</a></td>
+		</tr><tr><td>Sanitary Code, adoption </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXVI/Chapter111">MGL c.111, §§ 127A-127O</a></td>
+		</tr><tr><td>
+			<ul><li>Sanitary Code, Ch.II, Standards of Fitness for Human Habitation</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="d31e73cb-6c73-454e-b07c-4ebef4cc42c4" href="/regulations/105-CMR-41000-minimum-standards-of-fitness-for-human-habitation-state-sanitary-code-chapter-ii">105 CMR 410</a> </td>
+		</tr><tr><td>Saving statute (limitations of actions) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleV/Chapter260/Section32">MGL c. 260 § 32</a></td>
+		</tr><tr><td>Scalping (resale of tickets) </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="ca4297f7-5608-478e-9b32-0d5b4c6cfadd" href="/info-details/massachusetts-law-about-ticket-reselling">Law About Ticket Reselling</a></td>
+		</tr><tr><td>School attendance </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXII/Chapter76">MGL c.76</a></td>
+		</tr><tr><td>School choice law </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXII/Chapter76/Section12">MGL c.76, §§ 12-12C</a></td>
+		</tr><tr><td>Sean's Law (minimum age to ride ATV is 14) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter90B/Section26">MGL c.90B, § 26</a></td>
+		</tr><tr><td>Seat belt laws </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="f2cb8edf-01ca-4a45-a9f3-03d1c69c7836" href="/info-details/mass-general-laws-c90-ss-1">MGL c.90, § 1</a><br /><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter90/Section7A">MGL c.90, § 7A </a><br /><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter90/Section7AA">MGL c.90, § 7AA</a><br /><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter90/Section13A">MGL c.90, § 13A</a></td>
+		</tr><tr><td>Section 12, Section 16, and Section 35 commitment (mental health laws) </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="2d298d20-ca9e-4ebd-a687-41aa53a6626e" href="/info-details/mass-general-laws-c123-ss-12">MGL c.123, § 12</a><br /><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXVII/Chapter123/Section16">MGL c.123, § 16</a><br /><a href="/info-details/mass-general-laws-c123-ss-35">MGL c.123, § 35</a></td>
+		</tr><tr><td>Security deposit </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="e9d88821-1531-427f-9879-e62695e05224" href="/info-details/massachusetts-law-about-tenants-security-deposits">Law About Security Deposits</a></td>
+		</tr><tr><td>Seizure of bank accounts </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleIV/Chapter246/Section28A">MGL c.246, § 28A</a></td>
+		</tr><tr><td>Septic systems (Title 5) </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="a47a557b-3e14-4c5c-96eb-f2fb2e543b74" href="/info-details/massachusetts-law-about-title-5">Law About Title 5</a></td>
+		</tr><tr><td>Sex Offenders and Sex Offender Registry </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="7fdc6b79-e2d2-42b9-99c4-eee742741c16" href="/info-details/massachusetts-law-about-sex-offenders">Law About Sex Offenders</a></td>
+		</tr><tr><td>"Sham affidavit" rule</td>
+			<td><a href="http://masscases.com/cases/app/97/97massappct140.html">Benvenuto v. 204 Hanover, LLC</a>, 97 Mass. App. Ct. 140, 144 (2020) </td>
+		</tr><tr><td>Silver Alert </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleII/Chapter6A/Section18L">MGL c.6A, § 18L</a></td>
+		</tr><tr><td>Simultaneous death law </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="c2399230-8ba7-42f2-8158-18e17e68b277" href="/info-details/mass-general-laws-c190b-ss-2-702">MGL c.190B, § 2-702</a></td>
+		</tr><tr><td>Slamming (unauthorized switching of service providers) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXV/Chapter93/Section108">MGL c.93, §§ 108-113</a></td>
+		</tr><tr><td>SLAPP suits (Strategic Lawsuits Against Public Participation) </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="a5a3e744-904e-49d2-860b-8096d9ecdf2c" href="/info-details/massachusetts-law-about-anti-slapp">Law About Anti-SLAPP</a></td>
+		</tr><tr><td>Slayer Statute </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter265/Section46">MGL c.265, § 46</a></td>
+		</tr><tr><td>Slow Down, Move Over Law </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter89/Section7C">MGL c.89, § 7C</a></td>
+		</tr><tr><td>Smoke-Free workplace </td>
+			<td><a href="/info-details/mass-general-laws-c270-ss-22">MGL c.270, § 22</a></td>
+		</tr><tr><td>Smoking bar permit </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="03443f5e-ce93-4f03-8257-635076207e4a" href="/regulations/830-CMR-27000-provisions-concerning-the-issuance-of-a-smoking-bar-permit">830 CMR 270.1.1</a></td>
+		</tr><tr><td>Snob zoning law </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40B/Section20">MGL c.40B, § 20</a>, <a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40B/Section21">§ 21</a>, <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="b2b375a0-09ca-453e-be48-f51463e090ed" href="/info-details/mass-general-laws-c40b-ss-22">§ 22</a>, <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="37003396-b457-4aed-9e54-2ef0716bcad2" href="/info-details/mass-general-laws-c40b-ss-23">§ 23</a><br /><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="c79f2664-b8da-4b4f-935e-2daab44b6a69" href="/regulations/760-CMR-5600-comprehensive-permit-low-or-moderate-income-housing">760 CMR 56</a> </td>
+		</tr><tr><td>Social host-providing alcohol to minors </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXX/Chapter138/Section34">MGL c.138, § 34</a></td>
+		</tr><tr><td>Son of Sam law (profits from crimes, struck down in Mass.) </td>
+			<td><a href="http://masscases.com/cases/sjc/436/436mass1201.html">Opinion of the Justices to the Senate</a>, 436 Mass. 1201 (2002)</td>
+		</tr><tr><td>Special education law ("Chapter 766") </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="d840668b-f8b9-4e78-8eb3-41fa58a6c582" href="/info-details/massachusetts-law-about-special-education">Law About Special Education</a></td>
+		</tr><tr><td>SPEED Act (easing relocation requirements for military families)</td>
+			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2022/Chapter154">St.2022, c.154</a></td>
+		</tr><tr><td>Speedy trial </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleI/Chapter212/Section24">MGL c.212, § 24</a></td>
+		</tr><tr><td>
+			<ul><li>Case management</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="01440738-e8a3-4720-ae0a-f09ad696e73c" href="/rules-of-criminal-procedure/criminal-procedure-rule-36-case-management">Mass. Rules Crim. Proc., R.36</a></td>
+		</tr><tr><td>
+			<ul><li>Contempt cases</li>
+			</ul></td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleI/Chapter220/Section13A">MGL c.220, § 13A</a></td>
+		</tr><tr><td>
+			<ul><li>Speedy trial for certain cases</li>
+			</ul></td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleII/Chapter231/Section59A">MGL c.231, §§ 59A - 59G</a></td>
+		</tr><tr><td>Spite fence </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter49/Section21">MGL c.49, § 21</a></td>
+		</tr><tr><td>Sports betting (wagering)</td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="eae33567-bca7-4e7b-a1ed-a6cca1cfb641" href="/lists/mass-general-laws-c23n">MGL c.23N</a> | <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="93972468-4326-438e-80ba-7b0cea166172" href="/law-library/205-cmr">205 CMR 202 et seq.</a></td>
+		</tr><tr><td>Squatters' rights (adverse possession) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleV/Chapter260/Section21">MGL c.260, §§ 21-31</a></td>
+		</tr><tr><td>Stalking law </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter265/Section43">MGL c.265, § 43</a></td>
+		</tr><tr><td>State Building Code </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXX/Chapter143/Section1">MGL c.143, § 1</a><br /><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXX/Chapter143/Section3A">MGL c.143, § 3A</a><br /><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="d6b588f1-15e6-447c-89b5-84de3372fbb4" href="/lists/mass-general-laws-c143">MGL c.143, §§ 92-100</a><br /><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="495bac47-5187-4003-8000-8f546d72315c" href="/massachusetts-state-building-code-780-cmr">780 CMR</a></td>
+		</tr><tr><td>State Sanitary Code, adoption </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXVI/Chapter111">MGL c.111, §§ 127A-127O</a></td>
+		</tr><tr><td>
+			<ul><li>Sanitary Code, Ch.II, Standards of Fitness for Human Habitation</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="d31e73cb-6c73-454e-b07c-4ebef4cc42c4" href="/regulations/105-CMR-41000-minimum-standards-of-fitness-for-human-habitation-state-sanitary-code-chapter-ii">105 CMR 410</a> </td>
+		</tr><tr><td>Statute of frauds </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleV/Chapter259">MGL c.259</a></td>
+		</tr><tr><td>Statute of limitations -Civil </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleV/Chapter260">MGL c.260</a></td>
+		</tr><tr><td>Statute of limitations-Criminal </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleII/Chapter277/Section63">MGL c.277, § 63 </a> &amp; <a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleII/Chapter277/Section64">§ 64</a></td>
+		</tr><tr><td>Statute of limitations-Probate </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="9128a93d-c896-45e4-92ec-e7d938d0a5dc" href="/info-details/mass-general-laws-c190b-ss-3-802">MGL c.190B, §§ 3-802 </a>, <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="e6304ceb-0ff6-4ada-973f-e2c0fb8295ce" href="/info-details/mass-general-laws-c190b-ss-3-803">3-803 </a>, <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="67f99563-2e04-4905-b464-feea011e2b92" href="/info-details/mass-general-laws-c190b-ss-3-804">3-804</a></td>
+		</tr><tr><td>Statutory rape (Rape of child) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter265/Section23">MGL c.265, §§ 23-23B</a></td>
+		</tr><tr><td>
+			<ul><li>Rape of child (Use of force)</li>
+			</ul></td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter265/Section22A">MGL c.265, §§ 22A-22C</a></td>
+		</tr><tr><td>
+			<ul><li>Inducing person under 18 to have intercourse </li>
+			</ul></td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter272/Section4">MGL c.272, § 4</a></td>
+		</tr><tr><td>Stem Cell Research </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="86340eec-a40c-475e-a7c5-414ef86bf057" href="/info-details/massachusetts-law-about-stem-cell-research">Law About Stem Cell Research</a></td>
+		</tr><tr><td>STEP act (Substance Use, Treatment, Education, &amp; Prevention)</td>
+			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2016/Chapter52">St.2016, c.52</a></td>
+		</tr><tr><td>Stolen Valor Act</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter272/Section106">MGL c.272, § 106</a></td>
+		</tr><tr><td>Stop and frisk </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter41/Section98">MGL c.41, § 98</a></td>
+		</tr><tr><td>Storage facilities, Self-service </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXV/Chapter105A">MGL c.105A</a></td>
+		</tr><tr><td>Subdivision control </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter41/Section81K">MGL c.41, §§ 81K - 81GG</a></td>
+		</tr><tr><td>Sunday laws (Blue Laws) </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="2a19da3c-9c8a-409e-8f07-a107750c09e8" href="/guides/massachusetts-blue-laws-and-working-on-sundays-and-holidays">Mass. Blue Laws</a>  </td>
+		</tr><tr><td>Tagging law (graffiti) </td>
+			<td>
+			<p><a href="/info-details/mass-general-laws-c266-ss-126a">MGL c.266, § 126A</a><br /><a href="/info-details/mass-general-laws-c266-ss-126b">MGL c.266, § 126B</a></p>
+			</td>
+		</tr><tr><td>Tape recording private conversations (eavesdropping/wiretapping) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter272/Section99">MGL c.272, § 99</a></td>
+		</tr><tr><td>Target lien bond</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleIV/Chapter254/Section14">MGL c.254, § 14</a></td>
+		</tr><tr><td>Tasers </td>
+			<td><a href="/info-details/mass-general-laws-c140-ss-131j">MGL c.140, § 131J</a></td>
+		</tr><tr><td>Teachers' equal pay </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXII/Chapter71/Section40">MGL c.71, § 40</a></td>
+		</tr><tr><td>Telehealth</td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="e846cac7-76d3-49af-a800-ceba975237f9" href="/info-details/mass-general-laws-c112-ss-5o">MGL c.112, § 5O</a></td>
+		</tr><tr><td>Telemarketing solicitation ("Do Not Call") </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="62f364ea-a9f3-49c4-aabe-11c32eff9a2b" href="/info-details/massachusetts-law-about-telemarketing">Law About Telemarketing</a></td>
+		</tr><tr><td>Term papers, selling </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter271/Section50">MGL c.271, § 50</a></td>
+		</tr><tr><td>Three day wait for marriage </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartII/TitleIII/Chapter207/Section19">MGL c.207, § 19</a></td>
+		</tr><tr><td>Time share law </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartII/TitleI/Chapter183B">MGL c.183B</a></td>
+		</tr><tr><td>Tips Act</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXXI/Chapter149/Section152A">MGL c.149, § 152A</a></td>
+		</tr><tr><td>Title 5 (septic systems) </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="a47a557b-3e14-4c5c-96eb-f2fb2e543b74" href="/info-details/massachusetts-law-about-title-5">Law About Title 5</a></td>
+		</tr><tr><td>Tort claims against state and local government </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleIV/Chapter258">MGL c.258</a></td>
+		</tr><tr><td>
+			<ul><li>Settlements and judgments</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="e6712bb8-b713-402d-a491-c534e75cbd00" href="/regulations/815-CMR-500-settlements-and-judgments">815 CMR 5</a> </td>
+		</tr><tr><td>Towing </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter40/Section22D">MGL c.40, § 22D</a></td>
+		</tr><tr><td>
+			<ul><li>Maximum charges for towing &amp; storage</li>
+			</ul></td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXXII/Chapter159B/Section6B">MGL c.159B, § 6B</a></td>
+		</tr><tr><td>
+			<ul><li>Rates for towing motor vehicles</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="d8e81277-f28b-448a-9a23-77d3a72a2f52" href="/regulations/220-CMR-27200-rates-for-the-towing-of-motor-vehicles">220 CMR 272</a> </td>
+		</tr><tr><td>
+			<ul><li>Removal of vehicles from private property</li>
+			</ul></td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter266/Section120D">MGL c.266, § 120D</a></td>
+		</tr><tr><td>Trade secrets, stealing </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXV/Chapter93/Section42">MGL c.93, §§ 42-43</a>,<br /><a href="/info-details/mass-general-laws-c266-ss-30">MGL c.266, § 30(4)</a></td>
+		</tr><tr><td>Traffic signals </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter85/Section2">MGL c.85, § 2</a><br /><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="69dfb099-71a4-4702-93a8-dc873b390f78" href="/regulations/720-CMR-900-driving-on-state-highways">720 CMR 9</a> </td>
+		</tr><tr><td>Travel seller law</td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="d15eb3b1-8618-49c3-ba97-4dfba9b195a1" href="/regulations/940-CMR-1500-the-sale-of-travel-services">940 CMR 15.06</a></td>
+		</tr><tr><td>Trespass </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter266/Section120">MGL c.266, § 120</a></td>
+		</tr><tr><td>Trigger cranks</td>
+			<td><a href="/info-details/mass-general-laws-c140-ss-121">MGL c.140, § 121</a></td>
+		</tr><tr><td>Truth in lending (Mass. only) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXX/Chapter140D">MGL c.140D, §§ 1-35</a></td>
+		</tr><tr><td>
+			<ul><li>Disclosure of consumer credit costs &amp; terms</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="79981109-0252-4326-b1f8-3921c96d04ff" href="/regulations/209-CMR-3200-truth-in-lending">209 CMR 32</a> </td>
+		</tr><tr><td>
+			<ul><li>Licensing of mortgage lenders &amp; brokers</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="3d92ee24-e445-46a1-88f1-fdcef08b623c" href="/regulations/209-CMR-4200-licensing-of-mortgage-lenders-and-mortgage-brokers">209 CMR 42</a> </td>
+		</tr><tr><td>
+			<ul><li>Unfair &amp; deceptive practices in consumer transactions</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="f7a05bf0-417a-47b8-9e8d-4bcda532c742" href="/regulations/209-CMR-4000-unfair-and-deceptive-acts-and-practices-in-consumer-transactions">209 CMR 40</a> </td>
+		</tr><tr><td>Turning 22 law</td>
+			<td><a href="/lists/chapter-688-the-turning-22-law">St.1984, c.688</a></td>
+			</tr><tr><td>Unemployment compensation </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="144fac21-50af-4785-962f-6332aac17325" href="/info-details/massachusetts-law-about-unemployment">Law About Unemployment</a></td>
+		</tr><tr><td>Unfair competition (Mass. Antitrust Act) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXV/Chapter93">MGL c.93</a></td>
+		</tr><tr><td>Unfair &amp; deceptive practices in consumer transactions </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="f7a05bf0-417a-47b8-9e8d-4bcda532c742" href="/regulations/209-CMR-4000-unfair-and-deceptive-acts-and-practices-in-consumer-transactions">209 CMR 40</a> </td>
+		</tr><tr><td>Unfair debt collection </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="f1c1aa9d-cc07-4f8b-a588-f69e662cb5a1" href="/info-details/massachusetts-law-about-debt-collection">Law About Debt Collection</a></td>
+		</tr><tr><td>Unfair Sales Act </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXV/Chapter93/Section14E">MGL c.93, §§ 14E-14K</a></td>
+		</tr><tr><td>Uniform Adult Guardianship and Protective Proceedings Jurisdiction Act</td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="29178a81-3e79-4a2b-a6cd-3bd81451b344" href="/law-library/mass-general-laws-c190b">MGL c.190B, Art. 5A</a></td>
+		</tr><tr><td>Uniform Child Custody Jurisdiction Act </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartII/TitleIII/Chapter209B">MGL c.209B</a></td>
+		</tr><tr><td>Uniform Commercial Code </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXV/Chapter106">MGL c.106</a></td>
+		</tr><tr><td>
+			<ul><li>Practice &amp; procedure relative to revised Article 9 of UCC </li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="3bd140e7-d8df-4658-817c-6a7b67fcfe86" href="/regulations/950-CMR-14000-practices-and-procedures-relative-to-mgl-c106-article-9-of-the-uniform-commercial-code">950 CMR 140</a> </td>
+		</tr><tr><td>Uniform Durable Power of Attorney </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="29178a81-3e79-4a2b-a6cd-3bd81451b344" href="/law-library/mass-general-laws-c190b">MGL c.190B, Art. V, Pt. 5</a></td>
+		</tr><tr><td>Uniform Electronic Transactions Act</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXV/Chapter110G">MGL c.110G</a></td>
+		</tr><tr><td>Uniform Fraudulent Transfer Act </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXV/Chapter109A">MGL c.109A</a></td>
+		</tr><tr><td>Uniform Interstate Family Support Act </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartII/TitleIII/Chapter209D">MGL c.209D</a></td>
+		</tr><tr><td>Uniform Probate Code </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="29178a81-3e79-4a2b-a6cd-3bd81451b344" href="/law-library/mass-general-laws-c190b">MGL c.190B</a></td>
+		</tr><tr><td>Uniform State Plumbing Code </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="a4e010c5-6a0d-4cef-99af-c0aaf949234c" href="/regulations/248-CMR-1000-uniform-state-plumbing-code">248 CMR 10</a> </td>
+		</tr><tr><td>Uniform Transfers to Minors (gifts to minors) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartII/TitleII/Chapter201A">MGL c.201A</a></td>
+		</tr><tr><td>Upskirting</td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter272/Section105">MGL c.272, § 105</a></td>
+		</tr><tr><td>Used &amp; new car lemon laws </td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="6c9a90d4-b344-492e-907c-7bdb4190bb8c" href="/info-details/mass-general-laws-c90-ss-7n-14">MGL c.90, § 7N 1/4</a><br /><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="b4082e91-586c-456a-ab82-1e495e880599" href="/info-details/mass-general-laws-c90-ss-7n-12">MGL c.90, § 7N 1/2</a></td>
+		</tr><tr><td>
+			<ul><li>Lemon aid law (voiding sale contracts)</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="1bd48ba4-19c9-415d-b8cd-a5a59c7cadb9" href="/info-details/mass-general-laws-c90-ss-7n">MGL c.90, § 7N</a></td>
+		</tr><tr><td>
+			<ul><li>Motor vehicle arbitration</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="123eafc4-e829-4ed0-9da1-9cc8c9a9dbeb" href="/regulations/201-CMR-1100-new-and-used-motor-vehicle-arbitration">201 CMR 11</a> </td>
+		</tr><tr><td>
+			<ul><li>Motor vehicle sales &amp; repair shop regulations</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="3e469012-d83e-4fec-ad93-1e3eb03b96c9" href="/regulations/940-CMR-500-motor-vehicle-regulations">940 CMR 5</a> </td>
+		</tr><tr><td>
+			<ul><li>Private party sales</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="9f34d85c-c9c5-48a4-828e-e72a467ffefd" href="/private-party-car-sales">Office of Consumer Affairs and Business Regulation</a></td>
+		</tr><tr><td>Veterans' preference in civil service </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleIV/Chapter31/Section26">MGL c.31, § 26</a><br /><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleIV/Chapter31/Section28">MGL c.31, §§ 28-48</a><br /><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleIV/Chapter31/Section58A">MGL c.31, § 58A</a><br /><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleIV/Chapter31/Section59">MGL c.31, § 59</a></td>
+		</tr><tr><td>Veterans' preference in public employment </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleVII/Chapter41/Section112">MGL c.41, § 112</a></td>
+		</tr><tr><td>
+			<ul><li>Regulations</li>
+			</ul></td>
+			<td><a href="/files/documents/2016/07/rt/pars.pdf">Personnel Administration Rules</a> </td>
+		</tr><tr><td>Victims and witnesses rights and compensation </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="321b6f88-6849-4d34-9624-80c0ff48bfe2" href="/info-details/massachusetts-law-about-victims-and-witnesses-of-crimes">Law About Victims and Witnesses</a></td>
+		</tr><tr><td>Video voyeurism </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter272/Section105">MGL c.272, § 105</a></td>
+		</tr><tr><td>VOTES act</td>
+			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2022/Chapter92">St.2022, c.92</a></td>
+		</tr><tr><td>Vulnerable Road Users Laws</td>
+			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2022/Chapter358">St.2022, c.358</a></td>
+		</tr><tr><td>Wages </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="2acf6d6a-12c7-4565-bd12-58908535adb8" href="/info-details/massachusetts-law-about-wages">Law About Wages</a></td>
+		</tr><tr><td>Wages, garnishment </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleIV/Chapter246/Section28">MGL c.246, §§ 28-28A</a></td>
+		</tr><tr><td>Wages, minimum </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="17c2548b-8951-43df-900a-6e86bd817520" href="/info-details/massachusetts-law-about-minimum-wage">Law About Minimum Wage</a></td>
+		</tr><tr><td>Weekly wage payment </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXXI/Chapter149">MGL c.149, §§ 148-159C</a></td>
+		</tr><tr><td>Weingarten rights </td>
+			<td><a href="http://supreme.justia.com/us/420/251/case.html">NLRB v. Weingarten</a>, 420 US 251 (1975)</td>
+		</tr><tr><td>Welcome Home law (tuition and benefits for vets) </td>
+			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2005/Chapter130">St.2005, c.130</a></td>
+		</tr><tr><td>Wetlands protection </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIX/Chapter131/Section40">MGL c.131, § 40</a> &amp; <a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIX/Chapter131/Section40a">§ 40A</a></td>
+		</tr><tr><td>
+			<ul><li>Densely developed areas</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="b6240337-292c-451a-9a1b-c8dfbef78db2" href="/regulations/301-CMR-1000-densely-developed-areas-0">301 CMR 10</a> </td>
+		</tr><tr><td>
+			<ul><li>Improvement of lowlands and swamps</li>
+			</ul></td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleIV/Chapter252">MGL c.252</a></td>
+		</tr><tr><td>
+			<ul><li>Wetlands regulations</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="c881fae9-2f88-4549-96c7-0f6c03c2c342" href="/regulations/310-CMR-1000-wetlands-protection">310 CMR 10</a> </td>
+		</tr><tr><td>
+			<ul><li>Wildlife habitat</li>
+			</ul></td>
+			<td><a href="/files/documents/2016/08/ri/310cmr10b.pdf">310 CMR 10 Appendix </a></td>
+		</tr><tr><td>Wheelchair lemon law </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXV/Chapter93/Section107">MGL c.93, § 107</a><br /><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="33244307-a860-433f-9ae4-cd93e980a9fa" href="/regulations/201-CMR-1900-customized-wheelchair-arbitration">201 CMR 19</a></td>
+		</tr><tr><td>Whistleblowers' law </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXXI/Chapter149/Section148A">MGL c.149, § 148A</a><br /><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="486d0fcc-f01e-49c1-b86e-fc7e0679f59c" href="/info-details/mass-general-laws-c149-ss-185">MGL c.149, § 185</a><br /><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="d8517fde-dafd-491c-ab2f-5ceb7bbd8379" href="/info-details/mass-general-laws-c149-ss-187">MGL c.149, § 187</a></td>
+		</tr><tr><td>
+			<ul><li>Patient &amp; resident abuse prevention, reporting regulations</li>
+			</ul></td>
+			<td><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="5b0c7d48-5d75-4fa6-a8f1-1b378303a258" href="/regulations/105-CMR-15500-patient-and-resident-abuse-prevention-reporting-investigation-penalties-and-registry">105 CMR 155</a> </td>
+		</tr><tr><td>
+			<ul><li>Reporting abuse of patients in long term care facilities</li>
+			</ul></td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXVI/Chapter111/Section72G">MGL c.111, § 72G</a></td>
+		</tr><tr><td>Wine re-corking </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXX/Chapter138/Section12">MGL c.138, § 12</a><br /><a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="3006b9e1-141f-4dd4-a715-9ebcbff64015" href="/regulations/204-CMR-200-regulations-of-the-alcoholic-beverages-control-commission">204 CMR 2.18</a> </td>
+		</tr><tr><td>Wiretapping/Eavesdropping (including tape recording private conversations) </td>
+			<td><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter272/Section99">MGL c.272, § 99</a></td>
+		</tr><tr><td>Work and Family Mobility Act (WFMA)</td>
+			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2022/Chapter81">St.2022, c.81</a></td>
+		</tr><tr><td>Workers' compensation </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="67f38b3f-da82-4898-9b43-ae267917f49c" href="/info-details/massachusetts-law-about-workers-compensation">Law About Workers' Compensation</a></td>
+		</tr><tr><td>Yolanda's Law (children's mental health) </td>
+			<td><a href="https://malegislature.gov/Laws/SessionLaws/Acts/2008/Chapter321">St.2008, c.321</a></td>
+		</tr><tr><td>Zoning </td>
+			<td>See: <a data-entity-substitution="canonical" data-entity-type="node" data-entity-uuid="b9dde41a-ff43-4fd9-9a0a-a97809b68289" href="/info-details/massachusetts-law-about-zoning">Law About Zoning</a></td>
+		</tr>
+		</tbody>
+		</table>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const table = document.getElementById('myTable');
+            const searchInput = document.getElementById('searchInput');
+
+            // Extract data from the table rows
+const rows = Array.from(table.querySelectorAll('tbody tr'));
+const data = rows.map(row => {
+    const cells = Array.from(row.querySelectorAll('td'));
+    return {
+        Subject: cells[0]?.innerHTML?.trim() || '',
+        Citations: cells[1]?.innerHTML?.trim() || '',
+    };
+});
+            // Set up Fuse.js
+            const options = {
+                keys: ['Subject', 'Citations'],
+                threshold: 0.4, // Adjust the threshold as needed
+            };
+            const fuse = new Fuse(data, options);
+
+            if (table && searchInput) {
+                searchInput.addEventListener('input', function () {
+                    const searchQuery = searchInput.value;
+                    const results = fuse.search(searchQuery);
+                    updateTable(results);
+                });
+            }
+
+            function updateTable(results) {
+                const tbody = table.querySelector('tbody');
+
+                // Clear the table body
+                tbody.innerHTML = '';
+
+                // Populate the table with the search results
+                results.forEach(result => {
+                    const row = document.createElement('tr');
+                    const subjectCell = document.createElement('td');
+                    const citationsCell = document.createElement('td');
+
+                    subjectCell.textContent = result.item.Subject;
+                    citationsCell.innerHTML = result.item.Citations;
+
+                    row.appendChild(subjectCell);
+                    row.appendChild(citationsCell);
+
+                    tbody.appendChild(row);
+                });
+            }
+        });
+    </script>
+
+<script>
+// Function to redirect to Welcome.html
+    function redirectToWelcome() {
+        window.location.href = 'https://hhachem001.github.io/Legal_Tech/redirect.html';
+    }
+	
+	// Add an event listener to the exit button
+    document.getElementById('exitButton').addEventListener('click', redirectToWelcome);
+</script>
+
+</body>
+</html>
