@@ -1355,24 +1355,31 @@
 		</table>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function () {
             const table = document.getElementById('myTable');
             const searchInput = document.getElementById('searchInput');
 
             // Extract data from the table rows
-const rows = Array.from(table.querySelectorAll('tbody tr'));
-const data = rows.map(row => {
-    const cells = Array.from(row.querySelectorAll('td'));
-    return {
-        Subject: cells[0]?.innerHTML?.trim() || '',
-        Citations: cells[1]?.innerHTML?.trim() || '',
-    };
-});
+			const rows = Array.from(table.querySelectorAll('tbody tr'));
+			const data = rows.map(row => {
+				const cells = Array.from(row.querySelectorAll('td'));
+				return {
+					Subject: cells[0]?.innerHTML?.trim() || '',
+					Citations: cells[1]?.innerHTML?.trim() || '',
+				};
+			});
             // Set up Fuse.js
-            const options = {
-                keys: ['Subject', 'Citations'],
-                threshold: 0.4, // Adjust the threshold as needed
-            };
+          const options = {
+				keys: [
+					{ name: 'Subject', weight: 0.8 },
+					{ name: 'Citations', weight: 0.2 },
+				],
+				threshold: 0.6,
+				distance: 200,
+				tokenize: true,
+			};
+
+			
             const fuse = new Fuse(data, options);
 
             if (table && searchInput) {
