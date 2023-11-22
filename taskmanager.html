@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Task Management System</title>
+     <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        button.exit {
+            background-color: #d9534f;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Intern Task Management System</h1>
+
+    <script>
+        // JavaScript code here
+        function addTask() {
+            // Get form values
+            const task = document.getElementById('task').value;
+            const date = document.getElementById('date').value;
+            const deadline = document.getElementById('deadline').value;
+
+            // Create task object
+            const taskObject = {
+                task: task,
+                date: date,
+                deadline: deadline
+            };
+
+            // Get existing tasks from local storage or initialize an empty array
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+            // Add the new task to the array
+            tasks.push(taskObject);
+
+            // Save the updated array back to local storage
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+
+            // Refresh the task list
+            displayTasks();
+        }
+
+        function editTask(index) {
+            // Get tasks from local storage
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+            // Prompt user for new values
+            const newTask = prompt('Edit task:', tasks[index].task);
+            const newDate = prompt('Edit date:', tasks[index].date);
+            const newDeadline = prompt('Edit deadline:', tasks[index].deadline);
+
+            // Update task values
+            tasks[index].task = newTask;
+            tasks[index].date = newDate;
+            tasks[index].deadline = newDeadline;
+
+            // Save the updated array back to local storage
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+
+            // Refresh the task list
+            displayTasks();
+        }
+
+        function deleteTask(index) {
+            // Get tasks from local storage
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+            // Remove the task at the specified index
+            tasks.splice(index, 1);
+
+            // Save the updated array back to local storage
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+
+            // Refresh the task list
+            displayTasks();
+        }
+
+        function clearTasks() {
+            // Clear all tasks from local storage
+            localStorage.removeItem('tasks');
+
+            // Refresh the task list
+            displayTasks();
+        }
+
+        function displayTasks() {
+            // Get the task list element
+            const taskList = document.getElementById('taskList');
+
+            // Clear existing tasks
+            taskList.innerHTML = '';
+
+            // Get tasks from local storage
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+            // Loop through tasks and display them
+            tasks.forEach((task, index) => {
+                const li = document.createElement('li');
+                li.textContent = `${task.task} - Due: ${task.deadline} - Created on: ${task.date}`;
+
+                // Add checkbox for task completion
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.checked = false; // Adjust based on the completion status
+                checkbox.addEventListener('change', function() {
+                    // Handle task completion status change
+                    // You may want to update the task completion status in local storage here
+                });
+
+                // Add edit and delete buttons
+                const editButton = document.createElement('button');
+                editButton.textContent = 'Edit';
+                editButton.addEventListener('click', function() {
+                    editTask(index);
+                });
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.addEventListener('click', function() {
+                    deleteTask(index);
+                });
+
+                li.appendChild(checkbox);
+                li.appendChild(editButton);
+                li.appendChild(deleteButton);
+
+                taskList.appendChild(li);
+            });
+        }
+		
+		function exit() {
+            // Redirect to "redirect.html"
+            window.location.href = "https://hhachem001.github.io/Legal_Tech/redirect.html";
+        }
+    </script>
+
+     <form id="taskForm">
+        <label for="task">Task:</label>
+        <input type="text" id="task" required>
+
+        <label for="date">Date Assigned:</label>
+        <input type="date" id="date" required>
+
+        <label for="deadline">Deadline:</label>
+        <input type="date" id="deadline" required>
+
+        <button type="button" onclick="addTask()">Add Task</button>
+    </form>
+
+    <ul id="taskList"></ul>
+
+    <button type="button" onclick="clearTasks()">Clear All Tasks</button>
+
+    <button class="exit" onclick="exit()">Exit</button>
+</body>
+</html>
