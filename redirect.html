@@ -483,6 +483,10 @@
                     <i class="fas fa-file-contract"></i>
                     <span>Draft Document</span>
                 </button>
+		<button class="department-button" onclick="redirectTaskManager()">
+		     <i class="fas fa-calendar"></i>
+		     <span>Task Manager</span>
+		</button>
 				<button class="department-button" onclick="redirectFeedback()">
 					<i class="fas fa-comments"></i>
 					<span>Feedback</span>
@@ -608,6 +612,13 @@ function closePopup(department) {
         window.location.href = 'https://hhachem001.github.io/Legal_Tech/feedback.html';
     }
 </script>
+
+	<script>
+    function redirectTaskManager() {
+        window.location.href = 'https://hhachem001.github.io/Legal_Tech/taskmanager.html';
+    }
+</script>
+	
 
 <script type="module">
     import { pipeline } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.8.0';
@@ -737,6 +748,7 @@ function closePopup(department) {
                 "https://hhachem001.github.io/Legal_Tech/contractsummary.html",
                 "https://hhachem001.github.io/Legal_Tech/public_notice.html",
 		"https://hhachem001.github.io/Legal_Tech/MAdatabase.html",
+		"https://hhachem001.github.io/Legal_Tech/feedback.html",
                 // Add more authorized page URLs as needed
             ];
 
