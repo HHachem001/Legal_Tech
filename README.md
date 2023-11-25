@@ -30,15 +30,15 @@ Legal Draft is a prototype toolbox designed for law school interns who secure in
   
 - **PDF Processing:** Legal Draft utilizes Mozillas PDF.js library for uploading and extracting text from PDF documents and contracts. It is currently utilized in the Contract Toolbox.
 
-## Upcoming features in Legal Draft Beta v11.023C
+## New features in Legal Draft Beta v11.023C
 
-- Functionality will be added to document generation where users can seamlessly enhance their sentences by replacing uncertain or unknown words with the [MASK] tag, enabling the AI to intelligently fill in the blanks for a more polished and coherent expression.
+- Mask AI. Functionality added to document generation where users can seamlessly enhance their sentences by replacing uncertain or unknown words with the [MASK] tag, enabling the AI to intelligently fill in the blanks for a more polished and coherent expression.
 - Database search functionality
 - New Intern Task Management System
-- Better Regular Expression logic will be added to the Contract Judge tool
+- Better Regular Expression logic will added to the Contract Judge tool
   
   
-## New Features in Legal Draft Beta v11.023B
+## Features added in Legal Draft Beta v11.023B
 
 - Added loading indicator to the Legal Draft A.I. Chatbot
 - Added error messages to indicate whether the A.I. model has been loaded into the browser cache
@@ -49,7 +49,7 @@ Legal Draft is a prototype toolbox designed for law school interns who secure in
 - Added "Thinking..." status to the chatbot
 - Added disclaimer on Login Page that user must agree to in order to access Legal Draft
 
-## Current Known Issues in Legal Draft Beta v11.023B
+## Current Known Issues in Legal Draft Beta v11.023C
 
 - PDF Upload function in the contract summarizer does not display extracted contents properly in the text input field
 - ChatBot does not give answers related to legal document drafting and legal questions (Currently it answers any question, although current tests show progress with context awareness)
