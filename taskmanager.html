@@ -1,35 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Task Management System</title>
-     <style>
+    <title>Task Management System</title>
+    <style>
         body {
             font-family: 'Arial', sans-serif;
-            margin: 20px;
-            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 800px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            overflow: hidden;
         }
 
         h1 {
             color: #333;
             text-align: center;
+			font-style: italic;
         }
 
         form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
             margin-bottom: 20px;
         }
 
         label {
-            display: block;
-            margin-bottom: 5px;
+            width: 100%;
+            margin-bottom: 8px;
             color: #555;
         }
 
-        input {
-            width: 100%;
+        input,
+        select {
+            width: calc(50% - 8px);
             padding: 8px;
-            margin-bottom: 10px;
             box-sizing: border-box;
         }
 
@@ -40,6 +61,9 @@
             border: none;
             cursor: pointer;
             font-size: 16px;
+            width: calc(50% - 8px);
+            box-sizing: border-box;
+            margin-top: 10px;
         }
 
         ul {
@@ -49,126 +73,415 @@
 
         li {
             background-color: #fff;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        button.exit {
-            background-color: #d9534f;
-            margin-top: 20px;
+        li span {
+            flex-grow: 1;
         }
+
+        li button {
+            background-color: #d9534f;
+            color: #fff;
+            padding: 8px 12px;
+            border: none;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            z-index: 2;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+		#addProfilePopup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    z-index: 2;
+    text-align: left; /* Align text to the left */
+}
+
+#addProfilePopup h2 {
+    color: #333;
+    text-align: center;
+}
+
+#addProfilePopup form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+#addProfilePopup label {
+    width: 100%; /* Adjusted width to ensure the label takes the full width */
+    margin-bottom: 8px;
+    color: #555;
+}
+
+#addProfilePopup .work-schedule {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+#addProfilePopup input {
+    width: 100%; /* Adjusted width to ensure the input takes the full width */
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+button.exit,
+button.close,
+#clearTasksPopup button,
+#addProfilePopup button {
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    width: calc(50% - 8px);
+    box-sizing: border-box;
+    margin-top: 10px;
+}
+
+button.exit,
+button.close,
+#clearTasksPopup button {
+    background-color: #d9534f;
+    color: #fff;
+}
+
+button.exit:hover,
+button.close:hover,
+#clearTasksPopup button:hover {
+    background-color: #c9302c;
+}
+
+#addProfilePopup button {
+    background-color: #001f3f;
+    color: #fff;
+}
+
+#addProfilePopup button:hover {
+    background-color: #001a35;
+}
+/* Add Profile Button */
+button#addProfileButton {
+    background-color: #001f3f;
+    color: #fff;
+}
+
+button#addProfileButton:hover {
+    background-color: #001a35;
+}
+button#clearAllTasks {
+    background-color: #FF3E00;
+    color: #fff;
+}
+
+button#clearAllTasks:hover {
+    background-color: #FF1C00;
+}
+#taskList {
+    list-style-type: none;
+    padding: 0;
+    max-height: 300px; /* Adjust the height as needed */
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
     </style>
 </head>
-<body>
-    <h1>Intern Task Management System</h1>
 
+<body>
+    <div class="container">
+        <h1>Intern Task Management System</h1>
+
+        <!-- Task Form -->
+        <form id="taskForm">
+            <label for="task">Task:</label>
+            <input type="text" id="task" required>
+
+            <label for="date">Date Assigned:</label>
+            <input type="date" id="date" required>
+
+            <label for="deadline">Deadline:</label>
+            <input type="date" id="deadline" required>
+
+            <label for="priority">Priority:</label>
+            <select id="priority" required>
+                <option value="high">High</option>
+                <option value="low">Low</option>
+            </select>
+
+           
+        </form>
+
+        <!-- Task List -->
+        <ul id="taskList">
+            <!-- Tasks will be displayed here -->
+        </ul>
+
+		<button type="button" onclick="addTask()">Add Task</button>
+
+        <!-- Add Profile Button -->
+		<button type="button" id="addProfileButton" onclick="togglePopup('addProfilePopup')">Add / Update Profile</button>
+
+
+		<!-- Clear All Tasks Button -->
+        <button type="button" id="clearAllTasks" onclick="confirmClearTasks()">Clear All Tasks</button>
+		
+        <!-- Exit Button -->
+        <button class="exit" onclick="exit()">Exit</button>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="popup">
+        <!-- Edit task form will be displayed here -->
+    </div>
+
+    <!-- Clear Tasks Confirmation Popup -->
+    <div id="clearTasksPopup" class="popup">
+        <p>Are you sure you want to clear all tasks?</p>
+        <button type="button" onclick="clearTasks()">Yes</button>
+        <button class="close" onclick="closePopup('clearTasksPopup')">No</button>
+    </div>
+
+    <!-- Add Profile Popup -->
+   <div id="addProfilePopup" class="popup">
+    <h2>Add Profile</h2>
+    <form id="profileForm">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" required>
+
+        <label for="department">Your Department:</label>
+        <input type="text" id="department" required>
+
+        <label for="supervisingAttorneys">Your Supervising Attorney(s):</label>
+        <input type="text" id="supervisingAttorneys" required>
+
+        <button type="button" onclick="addProfile()">Add Profile</button>
+        <button class="close" onclick="closePopup('addProfilePopup')">Close</button>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" onclick="closeAllPopups()"></div>
+
+	<div id="welcomePopup" class="popup">
+        <p id="welcomeMessage"></p>
+        <button class="close" onclick="closePopup('welcomePopup')">Close</button>
+    </div>
+	
     <script>
-        // JavaScript code here
+        // Initialize tasks and profiles from local storage
+        displayTasks();
+        displayProfiles();
+        displayWelcomeMessage();
+
+		 function deleteTask(index) {
+					const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+					tasks.splice(index, 1);
+					localStorage.setItem('tasks', JSON.stringify(tasks));
+					displayTasks();
+				}
+		
+		  function editTask(index) {
+					const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+					const newTask = prompt('Edit task:', tasks[index].task);
+					const newDate = prompt('Edit date:', tasks[index].date);
+					const newDeadline = prompt('Edit deadline:', tasks[index].deadline);
+					const newPriority = prompt('Edit priority:', tasks[index].priority);
+
+					tasks[index].task = newTask;
+					tasks[index].date = newDate;
+					tasks[index].deadline = newDeadline;
+					tasks[index].priority = newPriority;
+
+					localStorage.setItem('tasks', JSON.stringify(tasks));
+
+					displayTasks();
+				}
+				
+        function togglePopup(popupId) {
+            const popup = document.getElementById(popupId);
+            const overlay = document.querySelector('.overlay');
+            
+            if (popup && overlay) {
+                popup.style.display = 'block';
+                overlay.style.display = 'block';
+            } else {
+                console.error('Popup or overlay element not found.');
+            }
+        }
+
+        function closePopup(popupId) {
+            const popup = document.getElementById(popupId);
+            const overlay = document.querySelector('.overlay');
+            
+            if (popup && overlay) {
+                popup.style.display = 'none';
+                overlay.style.display = 'none';
+            } else {
+                console.error('Popup or overlay element not found.');
+            }
+        }
+
+        function closeAllPopups() {
+            const popups = document.querySelectorAll('.popup');
+            const overlay = document.querySelector('.overlay');
+            
+            if (popups && overlay) {
+                popups.forEach(popup => (popup.style.display = 'none'));
+                overlay.style.display = 'none';
+            } else {
+                console.error('Popup or overlay element not found.');
+            }
+        }
+
+        function addProfile() {
+            const name = document.getElementById('name').value;
+            const department = document.getElementById('department').value;
+            const supervisingAttorneys = document.getElementById('supervisingAttorneys').value;
+
+            const profileObject = {
+                name: name,
+                department: department,
+                supervisingAttorneys: supervisingAttorneys
+            };
+
+            const profiles = JSON.parse(localStorage.getItem('profiles')) || [];
+            profiles.push(profileObject);
+            localStorage.setItem('profiles', JSON.stringify(profiles));
+
+            // Clear the form
+            document.getElementById('name').value = '';
+            document.getElementById('department').value = '';
+            document.getElementById('supervisingAttorneys').value = '';
+
+            // Hide the profile form and overlay
+            closePopup('addProfilePopup');
+
+            // Display updated profiles
+            displayProfiles();
+        }
+
+        function displayProfiles() {
+            const profiles = JSON.parse(localStorage.getItem('profiles')) || [];
+
+            // You can customize how you want to display profiles here
+            // For now, we'll just log them to the console
+            console.log('User Profiles:');
+            profiles.forEach(profile => {
+                console.log(profile);
+            });
+        }
+
+        function displayWelcomeMessage() {
+            const welcomeMessage = document.getElementById('welcomeMessage');
+            const profiles = JSON.parse(localStorage.getItem('profiles')) || [];
+
+            if (welcomeMessage && profiles.length > 0) {
+                const lastProfile = profiles[profiles.length - 1];
+                welcomeMessage.textContent = `Welcome back, ${lastProfile.name}!`;
+            }
+        }
+
         function addTask() {
-            // Get form values
             const task = document.getElementById('task').value;
             const date = document.getElementById('date').value;
             const deadline = document.getElementById('deadline').value;
+            const priority = document.getElementById('priority').value;
 
-            // Create task object
             const taskObject = {
                 task: task,
                 date: date,
-                deadline: deadline
+                deadline: deadline,
+                priority: priority
             };
 
-            // Get existing tasks from local storage or initialize an empty array
             const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-
-            // Add the new task to the array
             tasks.push(taskObject);
-
-            // Save the updated array back to local storage
             localStorage.setItem('tasks', JSON.stringify(tasks));
 
-            // Refresh the task list
             displayTasks();
         }
 
-        function editTask(index) {
-            // Get tasks from local storage
-            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-
-            // Prompt user for new values
-            const newTask = prompt('Edit task:', tasks[index].task);
-            const newDate = prompt('Edit date:', tasks[index].date);
-            const newDeadline = prompt('Edit deadline:', tasks[index].deadline);
-
-            // Update task values
-            tasks[index].task = newTask;
-            tasks[index].date = newDate;
-            tasks[index].deadline = newDeadline;
-
-            // Save the updated array back to local storage
-            localStorage.setItem('tasks', JSON.stringify(tasks));
-
-            // Refresh the task list
-            displayTasks();
-        }
-
-        function deleteTask(index) {
-            // Get tasks from local storage
-            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-
-            // Remove the task at the specified index
-            tasks.splice(index, 1);
-
-            // Save the updated array back to local storage
-            localStorage.setItem('tasks', JSON.stringify(tasks));
-
-            // Refresh the task list
-            displayTasks();
+        function confirmClearTasks() {
+            const isConfirmed = confirm("Are you sure you want to clear all tasks?");
+            if (isConfirmed) {
+                clearTasks();
+            } else {
+                closePopup('clearTasksPopup');
+            }
         }
 
         function clearTasks() {
-            // Clear all tasks from local storage
             localStorage.removeItem('tasks');
-
-            // Refresh the task list
             displayTasks();
         }
 
-        function displayTasks() {
-            // Get the task list element
+         function displayTasks() {
             const taskList = document.getElementById('taskList');
-
-            // Clear existing tasks
             taskList.innerHTML = '';
 
-            // Get tasks from local storage
             const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            const userProfile = getUserProfile(); // New function to get user profile
 
-            // Loop through tasks and display them
             tasks.forEach((task, index) => {
                 const li = document.createElement('li');
-                li.textContent = `${task.task} - Due: ${task.deadline} - Created on: ${task.date}`;
+                li.textContent = `${task.task} - Due: ${task.deadline} - Priority: ${task.priority} - Submit to: ${userProfile.supervisingAttorneys}`;
 
-                // Add checkbox for task completion
                 const checkbox = document.createElement('input');
                 checkbox.type = 'checkbox';
-                checkbox.checked = false; // Adjust based on the completion status
-                checkbox.addEventListener('change', function() {
+                checkbox.checked = false;
+                checkbox.addEventListener('change', function () {
                     // Handle task completion status change
                     // You may want to update the task completion status in local storage here
                 });
 
-                // Add edit and delete buttons
                 const editButton = document.createElement('button');
                 editButton.textContent = 'Edit';
-                editButton.addEventListener('click', function() {
+                editButton.addEventListener('click', function () {
                     editTask(index);
                 });
 
                 const deleteButton = document.createElement('button');
                 deleteButton.textContent = 'Delete';
-                deleteButton.addEventListener('click', function() {
+                deleteButton.addEventListener('click', function () {
                     deleteTask(index);
                 });
 
@@ -179,30 +492,33 @@
                 taskList.appendChild(li);
             });
         }
-		
-		function exit() {
-            // Redirect to "redirect.html"
+
+        function getUserProfile() {
+            const profiles = JSON.parse(localStorage.getItem('profiles')) || [];
+            const lastProfile = profiles[profiles.length - 1];
+            return lastProfile || {}; // Return an empty object if no profile is found
+        }
+
+         function displayWelcomeMessage() {
+        const welcomeMessage = document.getElementById('welcomeMessage');
+        const userProfile = getUserProfile();
+
+        if (welcomeMessage && Object.keys(userProfile).length > 0) {
+            welcomeMessage.textContent = `Welcome back, ${userProfile.name} from ${userProfile.department}!`;
+            togglePopup('welcomePopup');
+        }
+    }
+
+    // Call displayWelcomeMessage function on page load
+    displayWelcomeMessage();
+
+        function exit() {
             window.location.href = "https://hhachem001.github.io/Legal_Tech/redirect.html";
         }
     </script>
-
-     <form id="taskForm">
-        <label for="task">Task:</label>
-        <input type="text" id="task" required>
-
-        <label for="date">Date Assigned:</label>
-        <input type="date" id="date" required>
-
-        <label for="deadline">Deadline:</label>
-        <input type="date" id="deadline" required>
-
-        <button type="button" onclick="addTask()">Add Task</button>
-    </form>
-
-    <ul id="taskList"></ul>
-
-    <button type="button" onclick="clearTasks()">Clear All Tasks</button>
-
-    <button class="exit" onclick="exit()">Exit</button>
+	
+	
+	
 </body>
+
 </html>
