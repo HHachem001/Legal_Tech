@@ -222,7 +222,18 @@ button#clearAllTasks:hover {
     overflow-y: auto;
     overflow-x: hidden;
 }
-
+ #timer-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-bottom-right-radius: 8px;
+        }
+		#timer-stopped {
+            color: red;
+            margin-left: 10px;
+        }
     </style>
 </head>
 
@@ -305,6 +316,12 @@ button#clearAllTasks:hover {
         <button class="close" onclick="closePopup('welcomePopup')">Close</button>
     </div>
 	
+    <div id="timer-container">
+    <span id="timer">00:00:00</span>
+    <span id="timer-stopped"></span>
+    <button onclick="toggleTimer()">Start/Stop</button>
+</div>
+
     <script>
         // Initialize tasks and profiles from local storage
         displayTasks();
@@ -517,7 +534,56 @@ button#clearAllTasks:hover {
         }
     </script>
 	
-	
+	<script>
+    // Function to format time as HH:MM:SS
+    function formatTime(seconds) {
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        const remainingSeconds = seconds % 60;
+        return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+    }
+
+    let isTimerRunning = false;
+    let elapsedTime = 0;
+
+    // Function to update the timer
+    function updateTimer() {
+        document.getElementById('timer').innerText = formatTime(elapsedTime);
+     // Update the "Timer Stopped" message
+        const timerStoppedElement = document.getElementById('timer-stopped');
+        timerStoppedElement.innerText = isTimerRunning ? '' : 'Task Timer Stopped';
+    }
+
+    // Function to toggle the timer
+    function toggleTimer() {
+        isTimerRunning = !isTimerRunning;
+
+        if (isTimerRunning) {
+            // Start the timer
+            timerInterval = setInterval(function () {
+                elapsedTime++;
+                updateTimer();
+            }, 1000);
+        } else {
+            // Stop the timer
+            clearInterval(timerInterval);
+        }
+    }
+
+    // Load previous elapsed time from local storage
+    window.onload = function () {
+        const storedTime = localStorage.getItem('elapsedTime');
+        if (storedTime) {
+            elapsedTime = parseInt(storedTime, 10);
+            updateTimer();
+        }
+    };
+
+    // Save elapsed time to local storage before leaving the page
+    window.onbeforeunload = function () {
+        localStorage.setItem('elapsedTime', elapsedTime);
+    };
+</script>
 	
 </body>
 
