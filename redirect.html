@@ -677,7 +677,7 @@ function closePopup(department) {
         appendMessage('Bot', '<span class="thinking-message">Thinking...</span>');
 
         try {
-            const output = await generator(message, { max_new_tokens: 100 });
+            const output = await generator(message, { max_new_tokens: 200 });
 
             // Remove the "Thinking" message and display the actual generated response
             const thinkingMessage = document.querySelector('.thinking-message');
