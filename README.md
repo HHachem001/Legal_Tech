@@ -34,8 +34,7 @@ Legal Draft is a prototype toolbox designed for law school interns who secure in
 
 - Functionality will be added to document generation where users can seamlessly enhance their sentences by replacing uncertain or unknown words with the [MASK] tag, enabling the AI to intelligently fill in the blanks for a more polished and coherent expression.
 - Database search functionality
-- More letter templates 
-- Contract Summarizer will give the user the option to select a header or section from their contract to summarize (as opposed to summarizing the entire document)
+- New Intern Task Management System
 - Better Regular Expression logic will be added to the Contract Judge tool
   
   
