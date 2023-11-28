@@ -52,6 +52,7 @@ Legal Draft is a prototype toolbox designed for law school interns who secure in
 
 ## Current Known Issues in Legal Draft Beta v11.023C
 
+- A.I. Responses across the site may be cutoff, not giving the user the entire response.
 - PDF Upload function in the contract summarizer does not display extracted contents properly in the text input field
 - ChatBot does not give answers related to legal document drafting and legal questions (Currently it answers any question, although current tests show progress with context awareness)
 - "Thinking..." status in the chatbot may not always appear on the page if the LLM was already loaded into browser cache upon first visit
