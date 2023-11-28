@@ -211,6 +211,13 @@
     </div>
 
     <script type="module">
+
+	    const kernel = gpu.createKernel(function (arr) {
+  return 1;
+}, {
+  dynamicArguments: true
+}).setOutput([1]);
+	    
         // A.I. script code
         import { pipeline } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.9.0';
 
