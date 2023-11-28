@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Generator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #email-form {
+            max-width: 400px;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Popup styles */
+        #popup-container {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 50px;
+            background-color: #fff;
+            border: 9px outset #e5e5e5;
+            box-shadow: 0 4px 20px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #popup-content {
+            margin-bottom: 20px;
+        }
+
+        .popup-close-btn {
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #e10000;
+        }
+
+        /* Exit button styles */
+        #exit-button {
+            background-color: #dc3545;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        #exit-button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Email Form -->
+    <div id="email-form">
+        <label for="recipient">To:</label>
+        <input type="text" id="recipient" placeholder="Recipient">
+
+        <label for="sender">From:</label>
+        <input type="text" id="sender" placeholder="Your Name">
+
+        <label for="subject">Subject/Question:</label>
+        <input type="text" id="subject" placeholder="Subject/Question">
+
+        <button id="generate-button">Generate Email</button>
+        <button id="exit-button">Exit</button>
+    </div>
+
+    <!-- Hidden popup container -->
+    <div id="popup-container">
+        <div id="popup-content"></div>
+        <div class="popup-close-btn" id="close-popup-btn">Close</div>
+    </div>
+
+    <script type="module">
+        // A.I. script code
+        import { pipeline } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.9.0';
+
+        let generator;
+
+        async function loadModel() {
+            try {
+                generator = await pipeline('text2text-generation', 'Xenova/LaMini-Flan-T5-783M');
+                alert('The A.I. model is ready. You can now generate emails!');
+            } catch (error) {
+                console.error('Error loading the A.I. model:', error);
+                alert('Oops! There was an error loading the A.I. model. Please try again later.');
+            }
+        }
+
+        // Function to handle email generation
+        async function generateEmail() {
+            const recipient = document.getElementById('recipient').value.trim();
+            const sender = document.getElementById('sender').value.trim();
+            const subject = document.getElementById('subject').value.trim();
+
+            if (recipient !== '' && sender !== '' && subject !== '') {
+                const emailSentence = `My name is ${sender}, and I am sending an email to ${recipient}. Help me write an email that addresses ${subject}.`;
+                const generatedEmail = await generateResponse(emailSentence);
+                displayPopup(generatedEmail);
+            } else {
+                // Handle empty fields if needed
+                alert('Please fill in all fields.');
+            }
+        }
+
+        // Function to generate response using A.I.
+        async function generateResponse(message) {
+            try {
+                const output = await generator(message, { max_new_tokens: 100 });
+                return output[0].generated_text;
+            } catch (error) {
+                console.error('Error generating response:', error);
+                return 'Oops! Something went wrong while generating the response.';
+            }
+        }
+
+        // Function to display the popup
+        function displayPopup(content) {
+            const popupContainer = document.getElementById('popup-container');
+            const popupContent = document.getElementById('popup-content');
+
+            // Update the content of the popup
+            popupContent.innerHTML = content;
+
+            // Display the popup
+            popupContainer.style.display = 'block';
+        }
+
+        // Function to close the popup
+        function closePopup() {
+            const popupContainer = document.getElementById('popup-container');
+            // Hide the popup
+            popupContainer.style.display = 'none';
+        }
+
+        // Function to handle exit button click
+        function exitButtonClicked() {
+            // Redirect to redirect.html
+            window.location.href = 'redirect.html';
+        }
+
+        // Wait for the DOM content to fully load
+        document.addEventListener('DOMContentLoaded', function () {
+            // Call the loadModel function to load the AI model.
+            loadModel();
+
+            // Attach event listener to the button
+            const generateButton = document.getElementById('generate-button');
+            if (generateButton) {
+                generateButton.addEventListener('click', generateEmail);
+            }
+
+            // Attach event listener to the close button
+            const closePopupButton = document.getElementById('close-popup-btn');
+            if (closePopupButton) {
+                closePopupButton.addEventListener('click', closePopup);
+            }
+
+            // Attach event listener to the exit button
+            const exitButton = document.getElementById('exit-button');
+            if (exitButton) {
+                exitButton.addEventListener('click', exitButtonClicked);
+            }
+        });
+    </script>
+
+</body>
+
+</html>
