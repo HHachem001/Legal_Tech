@@ -35,6 +35,7 @@ Legal Draft is a prototype toolbox designed for law school interns who secure in
 - Mask AI. Functionality added to document generation where users can seamlessly enhance their sentences by replacing uncertain or unknown words with the [MASK] tag, enabling the AI to intelligently fill in the blanks for a more polished and coherent expression. Plain language is key!
 - Database search functionality
 - New Intern Task Management System
+- New A.I. Email Generator
 - Better Regular Expression logic will added to the Contract Judge tool
   
   
