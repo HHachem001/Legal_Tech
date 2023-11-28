@@ -184,8 +184,7 @@
     <div id="loading-popup">
         <div class="loading-container">
             <div class="loader"></div>
-            <p>Loading Legal Draft Email A.I. ...</p>
-		<p> Please wait. This may take ~ 1 minute. </p>
+            <p>Loading A.I. Model...</p>
         </div>
     </div>
 
@@ -211,7 +210,6 @@
     </div>
 
     <script type="module">
-	    
         // A.I. script code
         import { pipeline } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.9.0';
 
@@ -233,7 +231,7 @@
                     loadingPopup.style.display = 'none';
                 }
 
-                alert('Legal Draft A.I. is ready. You can now generate emails!');
+                alert('The A.I. model is ready. You can now generate emails!');
             } catch (error) {
                 console.error('Error loading the A.I. model:', error);
                 // Handle the error as needed
@@ -271,7 +269,7 @@
                 return output[0].generated_text;
             } catch (error) {
                 console.error('Error generating response:', error);
-                return 'Oops! Something went wrong while generating the response. Check status of LLM Content Delivery Network';
+                return 'Oops! Something went wrong while generating the response.';
             }
         }
 
