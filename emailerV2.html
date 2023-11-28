@@ -211,12 +211,6 @@
     </div>
 
     <script type="module">
-
-	    const kernel = gpu.createKernel(function (arr) {
-  return 1;
-}, {
-  dynamicArguments: true
-}).setOutput([1]);
 	    
         // A.I. script code
         import { pipeline } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.9.0';
@@ -261,7 +255,7 @@
             const subject = document.getElementById('subject').value.trim();
 
             if (recipient !== '' && sender !== '' && subject !== '') {
-                const emailSentence = `My name is ${sender}, I am a student in law school, and I am sending an email to ${recipient}. Help me write an email that addresses ${subject}.`;
+                const emailSentence = `My name is ${sender}, and I am sending an email to ${recipient}. Help me write an email that addresses ${subject}.`;
                 const generatedEmail = await generateResponse(emailSentence);
                 displayPopup(generatedEmail);
             } else {
