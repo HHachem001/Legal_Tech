@@ -25,6 +25,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 20px;
             box-sizing: border-box;
+			border-style: groove;
         }
 
         label {
@@ -97,15 +98,100 @@
         #exit-button:hover {
             background-color: #c82333;
         }
+
+        /* Loading popup styles */
+			  #loading-popup {
+			display: none;
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			background-color: rgba(255, 255, 255, 0.9);
+			padding: 20px;
+			border-radius: 8px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			z-index: 1000;
+			border-style: outset;
+		}
+
+		.loading-container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.loader {
+			transform: rotateZ(45deg);
+			perspective: 1000px;
+			border-radius: 50%;
+			width: 48px;
+			height: 48px;
+			color: #002855;
+			position: relative;
+		}
+
+		.loader:before,
+		.loader:after {
+			content: '';
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: inherit;
+			height: inherit;
+			border-radius: 50%;
+			transform: rotateX(70deg);
+			animation: 1s spin linear infinite;
+		}
+
+		.loader:after {
+			color: #FF3D00;
+			transform: rotateY(70deg);
+			animation-delay: 0.4s;
+		}
+
+		@keyframes spin {
+			0%, 100% {
+				box-shadow: 0.2em 0px 0 0px currentcolor;
+			}
+			12% {
+				box-shadow: 0.2em 0.2em 0 0 currentcolor;
+			}
+			25% {
+				box-shadow: 0 0.2em 0 0px currentcolor;
+			}
+			37% {
+				box-shadow: -0.2em 0.2em 0 0 currentcolor;
+			}
+			50% {
+				box-shadow: -0.2em 0 0 0 currentcolor;
+			}
+			62% {
+				box-shadow: -0.2em -0.2em 0 0 currentcolor;
+			}
+			75% {
+				box-shadow: 0px -0.2em 0 0 currentcolor;
+			}
+			87% {
+				box-shadow: 0.2em -0.2em 0 0 currentcolor;
+			}
+		}
     </style>
 </head>
 
 <body>
+    <!-- Loading Popup -->
+    <div id="loading-popup">
+        <div class="loading-container">
+            <div class="loader"></div>
+            <p>Loading A.I. Model...</p>
+        </div>
+    </div>
 
     <!-- Email Form -->
     <div id="email-form">
         <label for="recipient">To:</label>
-        <input type="text" id="recipient" placeholder="Recipient">
+        <input type="text" id="recipient" placeholder="e.g. Senior Attorney">
 
         <label for="sender">From:</label>
         <input type="text" id="sender" placeholder="Your Name">
@@ -130,14 +216,35 @@
         let generator;
 
         async function loadModel() {
+            const loadingPopup = document.getElementById('loading-popup');
+
             try {
+                // Show loading popup
+                if (loadingPopup) {
+                    loadingPopup.style.display = 'flex';
+                }
+
                 generator = await pipeline('text2text-generation', 'Xenova/LaMini-Flan-T5-783M');
+
+                // Hide loading popup on successful model loading
+                if (loadingPopup) {
+                    loadingPopup.style.display = 'none';
+                }
+
                 alert('The A.I. model is ready. You can now generate emails!');
             } catch (error) {
                 console.error('Error loading the A.I. model:', error);
+                // Handle the error as needed
+                if (loadingPopup) {
+                    loadingPopup.style.display = 'none';
+                }
                 alert('Oops! There was an error loading the A.I. model. Please try again later.');
             }
         }
+
+        // Call the loadModel function to load the AI model.
+        loadModel();
+
 
         // Function to handle email generation
         async function generateEmail() {
