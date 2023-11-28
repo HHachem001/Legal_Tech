@@ -224,7 +224,7 @@
                     loadingPopup.style.display = 'flex';
                 }
 
-                generator = await pipeline('text2text-generation', 'google/flan-t5-base'); //Xenova/LaMini-Flan-T5-783M
+                generator = await pipeline('text2text-generation', 'Xenova/t5-base'); //Xenova/LaMini-Flan-T5-783M
 
                 // Hide loading popup on successful model loading
                 if (loadingPopup) {
