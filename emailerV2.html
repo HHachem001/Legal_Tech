@@ -213,7 +213,7 @@
     <script type="module">
 	    
         // A.I. script code
-        import { pipeline } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.8.0';
+        import { pipeline } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.9.0';
 
         let generator;
 
@@ -271,7 +271,7 @@
                 return output[0].generated_text;
             } catch (error) {
                 console.error('Error generating response:', error);
-                return 'Oops! Something went wrong while generating the response.';
+                return 'Oops! Something went wrong while generating the response. Check status of LLM Content Delivery Network';
             }
         }
 
