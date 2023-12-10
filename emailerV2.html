@@ -68,7 +68,7 @@
             padding: 50px;
             background-color: #fff;
             border: 9px outset #e5e5e5;
-            box-shadow: 0 4px 20px 20px rgba(0, 0, 0, 0.1);
+                box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
             z-index: 1000;
         }
 
@@ -78,10 +78,13 @@
 
         .popup-close-btn {
             cursor: pointer;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            color: #e10000;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #e10000;
+    font-size: 20px;
+    padding-right: 10px;
+    cursor: pointer;
         }
 
         /* Exit button styles */
@@ -127,7 +130,7 @@
     <!-- Hidden popup container -->
     <div id="popup-container">
         <div id="popup-content"></div>
-        <div class="popup-close-btn" id="close-popup-btn">Close</div>
+        <div class="popup-close-btn" id="close-popup-btn">✖</div>
     </div>
 
     <script type="module">
