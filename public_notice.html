@@ -38,7 +38,7 @@
             margin: auto;
             background-color: #fff;
             padding: 20px;
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+            box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -343,6 +343,31 @@
           box-shadow: .2em -.2em 0 0 currentcolor;
         }
       }
+	        .popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+       box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    z-index: 1000;
+	border-style: double;
+}
+
+.popup-content {
+    max-width: 400px;
+    text-align: center;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
     </style>
 </head>
 
@@ -450,6 +475,14 @@
         </div>
     </div>
 
+	<div id="popup" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closePopup()">❌</span>
+        <h2>Generated Successfully!</h2>
+        <p>Please review the generated document for any errors, remove the watermark, double-check the notice details, and make any necessary adjustments before finalizing.</p>
+    </div>
+</div>
+	
 <script type="module">
     import { pipeline } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.10.1';
 	
@@ -564,12 +597,26 @@ function openAIMaskPopup(suggestions) {
                 const formattedDate = currentDate.toLocaleDateString('en-US', options).replace(/\//g, '-');
 
                 saveAs(blob, `public_notice_${formattedDate}.docx`);
-            });
+		    
+          // Show the popup after the document is generated
+        const popup = document.getElementById('popup');
+        if (popup) {
+            popup.style.display = 'block';
         }
+    });
+}
 
-        function loadFile(url, callback) {
-            PizZipUtils.getBinaryContent(url, callback);
-        }
+function closePopup() {
+    const popup = document.getElementById('popup');
+    if (popup) {
+        popup.style.display = 'none';
+    }
+}
+
+function loadFile(url, callback) {
+    PizZipUtils.getBinaryContent(url, callback);
+}
+
 		
     </script>
 	
