@@ -344,7 +344,32 @@
           box-shadow: .2em -.2em 0 0 currentcolor;
         }
       }
-	    
+	    .popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+       box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    z-index: 1000;
+	border-style: double;
+}
+
+.popup-content {
+    max-width: 400px;
+    text-align: center;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
     </style>
 </head>
 
@@ -457,6 +482,14 @@
         </div>
     </div>
 
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closePopup()">❌</span>
+        <h2>Generated Successfully!</h2>
+        <p>Please review the generated document for any errors, remove the watermark, double-check the name and date, and make any necessary adjustments before finalizing.</p>
+    </div>
+</div>
+
 <script type="module">
     import { pipeline } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.10.1';
 	
@@ -517,68 +550,79 @@ function openAIMaskPopup(suggestions) {
     <script>
         let currentSection = 1;
 
-        function showSection(section) {
-            const currentSectionElement = document.getElementById(`section${currentSection}`);
-            currentSectionElement.classList.remove("active");
-            currentSection = section;
-            const nextSectionElement = document.getElementById(`section${currentSection}`);
-            nextSectionElement.classList.add("active");
+function showSection(section) {
+    const currentSectionElement = document.getElementById(`section${currentSection}`);
+    currentSectionElement.classList.remove("active");
+    currentSection = section;
+    const nextSectionElement = document.getElementById(`section${currentSection}`);
+    nextSectionElement.classList.add("active");
 
-            // Highlight current section in navigation
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => link.classList.remove('active'));
-            navLinks[currentSection - 1].classList.add('active');
+    // Highlight current section in navigation
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => link.classList.remove('active'));
+    navLinks[currentSection - 1].classList.add('active');
+}
+
+function nextSection() {
+    showSection(currentSection + 1);
+}
+
+function generateDocument() {
+    const data = {
+        to: document.getElementById("toInput").value,
+        from: document.getElementById("fromInput").value,
+        date: document.getElementById("dateInput").value,
+        subject: document.getElementById("subjectInput").value,
+        question: document.getElementById("questionInput").value,
+        answer: document.getElementById("answerInput").value,
+        facts: document.getElementById("factsInput").value,
+        discussion: document.getElementById("discussionInput").value,
+        conclusion: document.getElementById("conclusionInput").value,
+    };
+
+    loadFile("https://hhachem001.github.io/Legal_Tech/templates/legal_memo.docx", function (error, content) {
+        if (error) {
+            throw error;
         }
 
-        function nextSection() {
-            showSection(currentSection + 1);
+        const zip = new PizZip(content);
+        const doc = new window.docxtemplater(zip, {
+            paragraphLoop: true,
+            linebreaks: true,
+        });
+
+        doc.render(data);
+
+        const blob = doc.getZip().generate({
+            type: "blob",
+            mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            compression: "DEFLATE",
+        });
+
+        const currentDate = new Date();
+        const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+        const formattedDate = currentDate.toLocaleDateString('en-US', options).replace(/\//g, '-');
+
+        saveAs(blob, `legal_memo_${formattedDate}.docx`);
+
+       // Show the popup after the document is generated
+        const popup = document.getElementById('popup');
+        if (popup) {
+            popup.style.display = 'block';
         }
-        function generateDocument() {
-            const data = {
-                to: document.getElementById("toInput").value,
-                from: document.getElementById("fromInput").value,
-                date: document.getElementById("dateInput").value,
-                subject: document.getElementById("subjectInput").value,
-                question: document.getElementById("questionInput").value,
-                answer: document.getElementById("answerInput").value,
-                facts: document.getElementById("factsInput").value,
-                discussion: document.getElementById("discussionInput").value,
-                conclusion: document.getElementById("conclusionInput").value,
-            };
+    });
+}
 
-            loadFile("https://hhachem001.github.io/Legal_Tech/templates/legal_memo.docx", function (error, content) {
-                if (error) {
-                    throw error;
-                }
+function closePopup() {
+    const popup = document.getElementById('popup');
+    if (popup) {
+        popup.style.display = 'none';
+    }
+}
 
-                const zip = new PizZip(content);
-                const doc = new window.docxtemplater(zip, {
-                    paragraphLoop: true,
-                    linebreaks: true,
-                });
-
-                doc.render(data);
-
-                const blob = doc.getZip().generate({
-                    type: "blob",
-                    mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                    compression: "DEFLATE",
-                });
-
-                const currentDate = new Date();
-                const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-                const formattedDate = currentDate.toLocaleDateString('en-US', options).replace(/\//g, '-');
-
-                saveAs(blob, `legal_memo_${formattedDate}.docx`);
-            });
-        }
-
-        function loadFile(url, callback) {
-            PizZipUtils.getBinaryContent(url, callback);
-        }
-		
-		
-
+function loadFile(url, callback) {
+    PizZipUtils.getBinaryContent(url, callback);
+}
 
     </script>
 
