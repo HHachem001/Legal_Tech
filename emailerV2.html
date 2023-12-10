@@ -150,50 +150,66 @@
         }
 
         // Function to handle email generation
-        async function generateEmail() {
-            const recipient = document.getElementById('recipient').value.trim();
-            const sender = document.getElementById('sender').value.trim();
-            const subject = document.getElementById('subject').value.trim();
+async function generateEmail() {
+    const recipient = document.getElementById('recipient').value.trim();
+    const sender = document.getElementById('sender').value.trim();
+    const subject = document.getElementById('subject').value.trim();
 
-            if (recipient !== '' && sender !== '' && subject !== '') {
-                const emailSentence = `My name is ${sender}, and I am sending an email to ${recipient}. Help me write an email that addresses ${subject}.`;
-                const generatedEmail = await generateResponse(emailSentence);
-                displayPopup(generatedEmail);
-            } else {
-                // Handle empty fields if needed
-                alert('Please fill in all fields.');
-            }
-        }
+    if (recipient !== '' && sender !== '' && subject !== '') {
+        const emailSentence = `My name is ${sender}, and I am sending an email to ${recipient}. Help me write an email that addresses ${subject}.`;
+
+        // Display loading message in the popup after a delay
+        displayPopup('Generating email. Page may become temporarily unresponsive. Please wait...');
+        
+        // Introduce a delay (e.g., 1 second) before calling the AI model
+        setTimeout(async () => {
+            const generatedEmail = await generateResponse(emailSentence);
+            
+            // Display the generated email in the popup
+            displayPopup(generatedEmail);
+        }, 1000); // Adjust the delay time (in milliseconds) as needed
+    } else {
+        // Handle empty fields if needed
+        alert('Please fill in all fields.');
+    }
+}
+
 
         // Function to generate response using A.I.
-        async function generateResponse(message) {
-            try {
-                const output = await generator(message, { max_new_tokens: 100 });
-                return output[0].generated_text;
-            } catch (error) {
-                console.error('Error generating response:', error);
-                return 'Oops! Something went wrong while generating the response.';
-            }
-        }
+async function generateResponse(message) {
+    try {
+        const output = await generator(message, {
+            max_length: 1000,  // Adjust as needed
+            max_new_tokens: 500,  // Adjust as needed
+            length_penalty: 0.8  // Adjust as needed
+        });
+        return output[0].generated_text;
+    } catch (error) {
+        console.error('Error generating response:', error);
+        return 'Oops! Something went wrong while generating the response.';
+    }
+}
+
 
         // Function to display the popup
-        function displayPopup(content) {
-            const popupContainer = document.getElementById('popup-container');
-            const popupContent = document.getElementById('popup-content');
+function displayPopup(content) {
+    const popupContainer = document.getElementById('popup-container');
+    const popupContent = document.getElementById('popup-content');
 
-            // Update the content of the popup
-            popupContent.innerHTML = content;
+    // Update the content of the popup
+    popupContent.innerHTML = content;
 
-            // Display the popup
-            popupContainer.style.display = 'block';
-        }
+    // Display the popup
+    popupContainer.style.display = 'block';
+}
 
-        // Function to close the popup
-        function closePopup() {
-            const popupContainer = document.getElementById('popup-container');
-            // Hide the popup
-            popupContainer.style.display = 'none';
-        }
+// Function to close the popup
+function closePopup() {
+    const popupContainer = document.getElementById('popup-container');
+    // Hide the popup
+    popupContainer.style.display = 'none';
+}
+
 
         // Function to handle exit button click
         function exitButtonClicked() {
