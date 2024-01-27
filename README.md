@@ -32,17 +32,12 @@ Legal Draft is a prototype toolbox designed for law school interns who secure in
   
 - **PDF Processing:** Legal Draft utilizes Mozillas PDF.js library for uploading and extracting text from PDF documents and contracts. It is currently utilized in the Contract Toolbox.
 
-## New features in Legal Draft Beta v12.023A
+## New features in Legal Draft Beta v1.024A
 
-- Mask AI. Functionality added to document generation where users can seamlessly enhance their sentences by replacing uncertain or unknown words with the [MASK] tag, enabling the AI to intelligently fill in the blanks for a more polished and coherent expression. Plain language is key!
-- Database search functionality
-- New Intern Task Management System
-- New A.I. Email Generator
-- Added "thinking status" to A.I. tools across the site to better inform the end user.
-- Added error messages to indicate whether the A.I. model has been loaded into the browser cache
-- Updated Transformer A.I. Pipeline on the feedback page from version 2.8.0 to version 2.10.1
+- Happy new year. New year, new features.
+- Added memo upload feature to memos generator. It extracts text from a DOCX memo and places them automatically in the correct boxes (currently only for supervising attorney memos).
  
-## Current Known Issues in Legal Draft Beta v12.023A
+## Current Known Issues in Legal Draft Beta v1.024A
 
 - A.I. Responses across the site may be cutoff, not giving the user the entire response. Increasing the Max Token count to 1000 has partially fixed the issue.
 - PDF Upload function in the contract summarizer does not display extracted contents properly in the text input field
