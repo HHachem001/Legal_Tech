@@ -35,7 +35,8 @@ Legal Draft is a prototype toolbox designed for law school interns who secure in
 ## New features in Legal Draft Beta v1.024A
 
 - Happy new year. New year, new features.
-- Added memo upload feature to memos generator. It extracts text from a DOCX memo and places them automatically in the correct boxes (currently only for supervising attorney memos).
+- Added memo upload feature to memos generator. It extracts text from a DOCX memo and places them automatically in the correct boxes. (currently only for supervising attorney memos).
+- Added new A.I. feedback feature that reads the text for grammar and cohesiveness and provides the user with feedback. (currently only for supervising attorney memos).
  
 ## Current Known Issues in Legal Draft Beta v1.024A
 
