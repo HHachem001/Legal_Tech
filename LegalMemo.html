@@ -399,6 +399,32 @@
             align-items: center;
             color: #002855; /* Adjust the color to match your design */
         }
+		.custom-upload-button input {
+    display: none;
+}
+
+.custom-upload-button::before {
+    content: 'Upload Memo';
+    display: inline-block;
+    padding: 8px 18px;
+    margin-bottom: 10px; /* Adjust this margin as needed */
+	    margin-top: 10px; /* Adjust this margin as needed */
+	    margin-left: 9px; /* Adjust this margin as needed */
+    font-size: 15px;
+    font-weight: 700;
+    background: #5E5DF0;
+    border-radius: 999px;
+    box-shadow: #5E5DF0 0 10px 20px -10px;
+    color: #FFFFFF;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.custom-upload-button:hover::before {
+    background: #84C615; /* Change the color for hover state (green in this case) */
+}
     </style>
 </head>
 
@@ -415,6 +441,9 @@
                 <a href="#" onclick="showSection(4)" class="nav-link">Statement of Facts</a>
                 <a href="#" onclick="showSection(5)" class="nav-link">Discussion</a>
                 <a href="#" onclick="showSection(6)" class="nav-link">Conclusion</a>
+				<label for="memoUpload" class="custom-upload-button">
+					<input type="file" id="memoUpload" accept=".txt, .doc, .docx" onchange="handleFileUpload()">
+				</label>
 				<button onclick="showAIMaskPopup()" class="button-A1">A.I. Mask Fill</button>
 
 				<button onclick="toggleChatContainer()" class="button-A1">
@@ -423,6 +452,7 @@
 				<button onclick="confirmExit()" style="background-color: #e74c3c; color: #fff; border: none; padding: 8px; cursor: pointer; border-radius: 4px; margin-top: 10px;">
     Exit
 </button>
+
             </div>
 
             <!-- To, From, Date, Subject Section -->
@@ -486,7 +516,7 @@
             </div>
         </div>
 		<p class="disclaimer"> Use A.I. to substitute uncertain words or propose synonyms by using the [MASK] tag. Only one [MASK] tag allowed at a time; if at the end of a sentence, add a period after the [MASK] tag for proper functionality.</p>
-	    <p class="disclaimer">Created by Hashim Hachem 2023. This is an educational demo and should not be relied on as a source of legal authority.</p>
+	    <p class="disclaimer">Created by Hashim Hachem 2024. This is an educational demo and should not be relied on as a source of legal authority.</p>
     </div>
 
    <!-- Chatbot Container -->
@@ -826,8 +856,76 @@ async function sendMessage() {
     }
 </script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js" integrity="sha512-sG5Q7boJL+ft/weuz6Mmi9XBD+bEzE9AI2FMP4YMFxp3FpTFUQSQQm5K5cSgJCyed6bWs3W8f8h0lp36lHXhQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+        function handleFileUpload() {
+            const fileInput = document.getElementById('memoUpload');
+            const file = fileInput.files[0];
 
+            if (file) {
+                const reader = new FileReader();
 
+                reader.onload = function (e) {
+                    const memoText = e.target.result;
+                    processMemoText(memoText);
+                };
+
+                reader.readAsArrayBuffer(file);
+            } else {
+                alert('Please select a valid file.');
+            }
+        }
+
+        function processMemoText(memoText) {
+            mammoth.extractRawText({ arrayBuffer: memoText })
+                .then(function (result) {
+                    console.log(result);  // Log the result
+                    const text = result.value;
+                    updateFields(text);
+                })
+                .catch(function (err) {
+                    console.error('Error extracting text from DOCX:', err);
+                });
+        }
+
+        function updateFields(text) {
+            // Implement your logic to extract relevant information
+            // Here, I'm assuming a simple structure where each line corresponds to a field
+            const lines = text.split('\n');
+
+            // Update fields based on the presence of specific keywords
+            lines.forEach(function (line) {
+                if (line.startsWith('To:')) {
+                    document.getElementById('toInput').value = getValueAfterColon(line);
+                } else if (line.startsWith('From:')) {
+                    document.getElementById('fromInput').value = getValueAfterColon(line);
+                } else if (line.startsWith('Date:')) {
+                    document.getElementById('dateInput').value = getValueAfterColon(line);
+                } else if (line.startsWith('Subject:')) {
+                    document.getElementById('subjectInput').value = getValueAfterColon(line);
+                } else if (line.startsWith('Question:')) {
+                    document.getElementById('questionInput').value = getValueAfterColon(line);
+                } else if (line.startsWith('Brief Answer:')) {
+                    document.getElementById('answerInput').value = getValueAfterColon(line);
+                } else if (line.startsWith('Statement of Facts:')) {
+                    document.getElementById('factsInput').value = getValueAfterColon(line);
+                } else if (line.startsWith('Discussion:')) {
+                    document.getElementById('discussionInput').value = getValueAfterColon(line);
+                } else if (line.startsWith('Conclusion:')) {
+                    document.getElementById('conclusionInput').value = getValueAfterColon(line);
+                }
+            });
+        }
+
+        // Helper function to get text after the colon
+        function getValueAfterColon(line) {
+            const colonIndex = line.indexOf(':');
+            if (colonIndex !== -1) {
+                return line.substring(colonIndex + 1).trim();
+            }
+            return line.trim();
+        }
+    </script>
 
 </body>
 </html>
