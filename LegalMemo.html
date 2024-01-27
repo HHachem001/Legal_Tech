@@ -404,12 +404,12 @@
 }
 
 .custom-upload-button::before {
-    content: 'Upload Memo';
+    content: 'Upload  ‎Memo';
     display: inline-block;
     padding: 8px 18px;
     margin-bottom: 10px; /* Adjust this margin as needed */
-	    margin-top: 10px; /* Adjust this margin as needed */
-	    margin-left: 9px; /* Adjust this margin as needed */
+	    margin-top: 50px; /* Adjust this margin as needed */
+	    margin-left: 12px; /* Adjust this margin as needed */
     font-size: 15px;
     font-weight: 700;
     background: #5E5DF0;
@@ -431,7 +431,7 @@
 <body>
 
     <div id="documentContainer">
-        <h1>Legal Memo Assembler</h1>
+        <h1>Legal Memo Generator</h1>
 
         <div id="contentContainer">
             <div id="navigationPanel">
@@ -444,11 +444,16 @@
 				<label for="memoUpload" class="custom-upload-button">
 					<input type="file" id="memoUpload" accept=".txt, .doc, .docx" onchange="handleFileUpload()">
 				</label>
-				<button onclick="showAIMaskPopup()" class="button-A1">A.I. Mask Fill</button>
+				
+				</button>
+<button id="generateButton" class="button-A1" >A.I. Feedback</button>
+
+				<button onclick="showAIMaskPopup()" class="button-A1">A.I.  ‎ Mask Fill</button>
 
 				<button onclick="toggleChatContainer()" class="button-A1">
     A.I. Assistant
-</button>
+
+
 				<button onclick="confirmExit()" style="background-color: #e74c3c; color: #fff; border: none; padding: 8px; cursor: pointer; border-radius: 4px; margin-top: 10px;">
     Exit
 </button>
@@ -512,7 +517,7 @@
                 <p>Provide a summary conclusion based on the presented information.</p>
                 <textarea id="conclusionInput" placeholder="Conclusion"></textarea>
                 <br>
-                <button onclick="generateDocument()">Generate Document</button>
+                <button onclick="generateDocument()">Generate Memo</button>
             </div>
         </div>
 		<p class="disclaimer"> Use A.I. to substitute uncertain words or propose synonyms by using the [MASK] tag. Only one [MASK] tag allowed at a time; if at the end of a sentence, add a period after the [MASK] tag for proper functionality.</p>
@@ -926,6 +931,141 @@ async function sendMessage() {
             return line.trim();
         }
     </script>
+	
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.js"></script>
+    <script type="module">
+        import { pipeline } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.14.1';
+
+        let generator;
+        let messageDiv;  // Declare messageDiv at a higher scope
+
+        async function loadModel() {
+            try {
+                generator = await pipeline('text2text-generation', 'Xenova/LaMini-Flan-T5-783M', { dynamicArguments: true });
+                messageDiv = document.getElementById('messageDiv');  // Assign messageDiv after loading the model
+            } catch (error) {
+                console.error('Error loading the A.I. model:', error);
+            }
+        }
+
+        // Call the loadModel function to load the AI model.
+        loadModel();
+
+        // Attach event listener using JavaScript
+        document.addEventListener('DOMContentLoaded', function () {
+            const generateButton = document.getElementById('generateButton');
+            if (generateButton) {
+                generateButton.addEventListener('click', generateReport);
+            }
+        });
+		
+    let toText, fromText, dateText, subjectText, questionText, answerText, factsText, discussionText, conclusionText;
+let htmlContent;  // Define htmlContent at a higher scope
+
+// Wrap the pdf generation in a function declaration to ensure it's available
+        async function generatePdf() {
+            const pdfOptions = { margin: 10, filename: 'generated_report.pdf', image: { type: 'jpeg', quality: 0.98 } };
+            const pdf = await html2pdf().from(messageDiv).set(pdfOptions).outputPdf();
+            return pdf;
+        }
+
+  // Function to write a message to the message div
+        function writeMessage(msg) {
+            // Clear existing content before appending new content
+            messageDiv.innerHTML = '';
+            
+            // Create a text node with the provided message
+            const textNode = document.createTextNode(msg);
+
+            // Append the text node to the message div
+            messageDiv.appendChild(textNode);
+
+            // Show the messageDiv with inline styles
+            messageDiv.style.display = 'block';
+            messageDiv.style.position = 'fixed';
+            messageDiv.style.top = '50%';
+            messageDiv.style.left = '50%';
+            messageDiv.style.transform = 'translate(-50%, -50%)';
+            messageDiv.style.padding = '20px';
+            messageDiv.style.border = '2px solid #ccc';
+            messageDiv.style.backgroundColor = 'white';
+            messageDiv.style.zIndex = '1000';
+
+            // Add a close button inside the message div
+            const closeButton = document.createElement('button');
+            closeButton.textContent = 'Close';          
+            closeButton.style.bottom = '1px';
+            closeButton.style.right = '10px';
+            closeButton.style.cursor = 'pointer';
+            closeButton.addEventListener('click', closeMessageDiv);
+            messageDiv.appendChild(closeButton);
+        }
+
+        // Function to close the messageDiv
+        function closeMessageDiv() {
+            // Hide the messageDiv
+            messageDiv.style.display = 'none';
+        }
+
+    async function generateReport() {
+        // Assign values inside the function
+        toText = document.getElementById('toInput').value.trim();
+        fromText = document.getElementById('fromInput').value.trim();
+        dateText = document.getElementById('dateInput').value.trim();
+        subjectText = document.getElementById('subjectInput').value.trim();
+        questionText = document.getElementById('questionInput').value.trim();
+        answerText = document.getElementById('answerInput').value.trim();
+        factsText = document.getElementById('factsInput').value.trim();
+        discussionText = document.getElementById('discussionInput').value.trim();
+        conclusionText = document.getElementById('conclusionInput').value.trim();
+
+        console.log('Input Texts:', toText, fromText, dateText, subjectText, questionText, answerText, factsText, discussionText, conclusionText);
+
+        try {
+            // Adjust max_new_tokens parameter to avoid offset error
+            const maxTokens = 100;
+            
+            const toOutput = await generator(`Briefly rate the grammar and cohesiveness of the text from ${toText}`, { max_new_tokens: maxTokens });
+            const fromOutput = await generator(`Briefly rate the grammar and cohesiveness of the text from ${fromText}`, { max_new_tokens: maxTokens });
+            const dateOutput = await generator(`Briefly rate the grammar and cohesiveness of the text from ${dateText}`, { max_new_tokens: maxTokens });
+            const subjectOutput = await generator(`Briefly rate the grammar and cohesiveness of the text from ${subjectText}`, { max_new_tokens: maxTokens });
+            const questionOutput = await generator(`Briefly rate the grammar and cohesiveness of the text from ${questionText}`, { max_new_tokens: maxTokens });
+            const answerOutput = await generator(`Briefly rate the grammar and cohesiveness of the text from ${answerText}`, { max_new_tokens: maxTokens });
+            const factsOutput = await generator(`Briefly rate the grammar and cohesiveness of the text from ${factsText}`, { max_new_tokens: maxTokens });
+            const discussionOutput = await generator(`Briefly rate the grammar and cohesiveness of the text from ${discussionText}`, { max_new_tokens: maxTokens });
+            const conclusionOutput = await generator(`Briefly rate the grammar and cohesiveness of the text from ${conclusionText}`, { max_new_tokens: maxTokens });
+// Convert outputs to HTML for pdf conversion
+        const htmlContent = `
+   
+        TO SECTION: ${toOutput[0].generated_text}
+        FROM SECTION: ${fromOutput[0].generated_text}
+        DATE SECTION: ${dateOutput[0].generated_text}
+        SUBJECT SECTION: ${subjectOutput[0].generated_text}
+        QUESTION SECTION: ${questionOutput[0].generated_text}
+        ANSWER SECTION: ${answerOutput[0].generated_text}
+        FACTS SECTION: ${factsOutput[0].generated_text}
+        DISCUSSION SECTION: ${discussionOutput[0].generated_text}
+        CONCLUSION SECTION: ${conclusionOutput[0].generated_text}
+   `;
+
+       // Log the content to the message div for inspection
+                writeMessage(htmlContent);
+
+                // Convert HTML to PDF
+                const pdf = await generatePdf();
+
+                // Open PDF in a new tab for inspection
+                const blob = new Blob([pdf], { type: 'application/pdf' });
+                const pdfUrl = URL.createObjectURL(blob);
+                window.open(pdfUrl, '_blank');
+            } catch (error) {
+                console.error('Error generating report:', error);
+            }
+        }
+</script>
+<div id="messageDiv" style="display: none;"></div>
+
+
 
 </body>
 </html>
