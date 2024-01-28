@@ -200,7 +200,7 @@
     <!-- Hidden popup container -->
     <div id="popup-container">
         <div id="popup-content"></div>
-        <div class="popup-close-btn" id="close-popup-btn">✖</div>
+        <div class="popup-close-btn" id="close-popup-btn">❌</div>
     </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 
@@ -271,7 +271,7 @@ function displayPopup(content) {
     popupContent.innerHTML = content;
 
     // Check if the content is not the loading message before adding the button
-    if (content !== 'Generating letter. Page may become temporarily unresponsive. Please wait...') {
+    if (content !== 'Generating e-mail. Page may become temporarily unresponsive. Please wait...') {
         // Add a button to download PDF
         const downloadButton = document.createElement('button');
         downloadButton.textContent = 'Download PDF';
@@ -291,7 +291,7 @@ function generatePDF(content) {
     // Use html2pdf to generate the PDF
     html2pdf(element, {
         margin: 10,
-        filename: 'generated_letter.pdf',
+        filename: 'generated_email.pdf',
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { scale: 2 },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
