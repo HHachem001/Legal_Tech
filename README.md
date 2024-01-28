@@ -1,5 +1,11 @@
 # [Vist the Legal Draft Website](https://hhachem001.github.io/Legal_Tech/LandingPage.html)
 
+## New features in Legal Draft Beta v1.024A
+
+- Happy new year. New year, new features.
+- Added memo upload feature to memos generator. It extracts text from a DOCX memo and places them automatically in the correct boxes. (currently only for supervising attorney memos).
+- Added new A.I. feedback feature that reads the text for grammar and cohesiveness and provides the user with feedback. (currently only for supervising attorney memos).
+  
 # Legal Draft
 
 Legal Draft is a prototype toolbox designed for law school interns who secure internships in the public/government sector. The project aims to assist interns with basic tasks such as drafting memos in the proper format for their supervising attorneys or composing emails to be sent to supervisors and the public. The goal is to streamline these tasks and reduce the likelihood of errors, especially in fundamental aspects like memo formatting. You only get one chance to make a first impression. 
@@ -31,12 +37,6 @@ Legal Draft is a prototype toolbox designed for law school interns who secure in
 - **Document Generation:** Legal Draft utilizes the [DOCXTemplater library](https://github.com/open-xml-templating/docxtemplater) for document generation, ensuring efficient and accurate document creation.
   
 - **PDF Processing:** Legal Draft utilizes Mozillas PDF.js library for uploading and extracting text from PDF documents and contracts. It is currently utilized in the Contract Toolbox.
-
-## New features in Legal Draft Beta v1.024A
-
-- Happy new year. New year, new features.
-- Added memo upload feature to memos generator. It extracts text from a DOCX memo and places them automatically in the correct boxes. (currently only for supervising attorney memos).
-- Added new A.I. feedback feature that reads the text for grammar and cohesiveness and provides the user with feedback. (currently only for supervising attorney memos).
  
 ## Current Known Issues in Legal Draft Beta v1.024A
 
