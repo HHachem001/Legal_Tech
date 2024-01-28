@@ -230,7 +230,7 @@ async function generateEmail() {
         const emailSentence = `My name is ${sender}, and I am sending an email to ${recipient}. Help me write an email that addresses ${subject}.`;
 
         // Display loading message in the popup after a delay
-        displayPopup('Generating letter. Page may become temporarily unresponsive. Please wait...');
+        displayPopup('Generating e-mail. Page may become temporarily unresponsive. Please wait...');
         
         // Introduce a delay (e.g., 1 second) before calling the AI model
         setTimeout(async () => {
@@ -271,7 +271,7 @@ function displayPopup(content) {
     popupContent.innerHTML = content;
 
     // Check if the content is not the loading message before adding the button
-    if (content !== 'Generating e-mail. Page may become temporarily unresponsive. Please wait...') {
+    if (content !== 'Generating letter. Page may become temporarily unresponsive. Please wait...') {
         // Add a button to download PDF
         const downloadButton = document.createElement('button');
         downloadButton.textContent = 'Download PDF';
