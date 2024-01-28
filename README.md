@@ -6,6 +6,7 @@
 - Added memo upload feature to memos generator. It extracts text from a DOCX memo and places them automatically in the correct boxes. (currently only for supervising attorney memos).
 - Added new A.I. feedback feature that reads the text for grammar and cohesiveness and provides the user with feedback. (currently only for supervising attorney memos).
 - Added new A.I. citizen letter generator (replaced old system of selecting letter type).
+- Minor UI enhancements. 
   
 # Legal Draft
 
