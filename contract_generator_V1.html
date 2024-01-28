@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contract Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.js"></script>
+    <script type="module">
+        import { pipeline } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.14.1';
+
+        let generator;
+        let messageDiv;
+        let loadingDiv;
+
+        async function loadModel() {
+            try {
+                generator = await pipeline('text2text-generation', 'Xenova/LaMini-Flan-T5-783M', { dynamicArguments: true });
+                messageDiv = document.getElementById('messageDiv');
+                loadingDiv = document.getElementById('loadingDiv');
+            } catch (error) {
+                console.error('Error loading the A.I. model:', error);
+            }
+        }
+
+        loadModel();
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const generateButton = document.getElementById('generateButton');
+            if (generateButton) {
+                generateButton.addEventListener('click', generateContract);
+            }
+        });
+
+        let buyerText, sellerText, effectiveDateText, contractType, obligationsText, paymentTermsText, disputeResolutionText, terminationText, governingLawText;
+
+        async function generatePdf() {
+            const pdfOptions = { margin: 10, filename: 'generated_contract.pdf', image: { type: 'jpeg', quality: 0.98 } };
+            const pdf = await html2pdf().from(messageDiv).set(pdfOptions).outputPdf();
+            return pdf;
+        }
+
+        function showLoadingModal() {
+    const modalOverlay = document.getElementById('modalOverlay');
+    modalOverlay.style.display = 'flex';
+}
+
+// Add this function to hide the modal with spinner
+function hideLoadingModal() {
+    const modalOverlay = document.getElementById('modalOverlay');
+    modalOverlay.style.display = 'none';
+}
+
+        function writeMessage(msg) {
+            messageDiv.innerHTML = '';
+            const textNode = document.createTextNode(msg);
+            messageDiv.appendChild(textNode);
+            messageDiv.style.display = 'block';
+            messageDiv.style.position = 'fixed';
+            messageDiv.style.top = '50%';
+            messageDiv.style.left = '50%';
+            messageDiv.style.transform = 'translate(-50%, -50%)';
+            messageDiv.style.padding = '20px';
+            messageDiv.style.border = '2px solid #ccc';
+            messageDiv.style.backgroundColor = 'white';
+            messageDiv.style.zIndex = '1000';
+
+            const closeButton = document.createElement('button');
+            closeButton.textContent = 'Close';
+            closeButton.style.bottom = '1px';
+            closeButton.style.right = '10px';
+            closeButton.style.cursor = 'pointer';
+            closeButton.addEventListener('click', closeMessageDiv);
+            messageDiv.appendChild(closeButton);
+        }
+
+        function closeMessageDiv() {
+            messageDiv.style.display = 'none';
+        }
+
+        async function generateContract() {
+            showLoadingModal();
+            setTimeout(async () => {
+                buyerText = document.getElementById('buyerInput').value.trim();
+                sellerText = document.getElementById('sellerInput').value.trim();
+                effectiveDateText = document.getElementById('effectiveDateInput').value.trim();
+                contractType = document.getElementById('contractTypeInput').value;
+                obligationsText = document.getElementById('obligationsInput').value.trim();
+                paymentTermsText = document.getElementById('paymentTermsInput').value.trim();
+                disputeResolutionText = document.getElementById('disputeResolutionInput').value.trim();
+                terminationText = document.getElementById('terminationInput').value.trim();
+                governingLawText = document.getElementById('governingLawInput').value;
+
+                try {
+                    const maxTokens = 900;
+
+                    const buyerOutput = await generator(`Draft the rights and obligations of ${buyerText} as the buyer in the context of a ${contractType}.`, { max_new_tokens: maxTokens });
+                    const sellerOutput = await generator(`Draft the rights and obligations of ${sellerText} as the seller in the context of a ${contractType}.`, { max_new_tokens: maxTokens });
+                    const effectiveDateOutput = await generator(`Specify the effective date of the ${contractType}: ${effectiveDateText}.`, { max_new_tokens: maxTokens });
+                    const contractTypeOutput = await generator(`Draft a ${contractType}.`, { max_new_tokens: maxTokens });
+                    const obligationsOutput = await generator(`Define the obligations related to the ${contractType}: ${obligationsText}.`, { max_new_tokens: maxTokens });
+                    const paymentTermsOutput = await generator(`Outline the payment terms for the ${contractType}, including accepted payment methods: ${paymentTermsText}.`, { max_new_tokens: maxTokens });
+                    const disputeResolutionOutput = await generator(`Specify the dispute resolution mechanism for the ${contractType}: ${disputeResolutionText}.`, { max_new_tokens: maxTokens });
+                    const terminationOutput = await generator(`Define conditions under which the ${contractType} can be terminated: ${terminationText}.`, { max_new_tokens: maxTokens });
+                    const governingLawOutput = await generator(`Designate the governing law for the ${contractType}: ${governingLawText}.`, { max_new_tokens: maxTokens });
+
+                   const htmlContent = `
+    <div class="contract-section">
+        <h2>BUYER</h2>
+        <p>${buyerOutput[0].generated_text}</p>
+    </div>
+
+    <div class="contract-section">
+        <h2>SELLER</h2>
+        <p>${sellerOutput[0].generated_text}</p>
+    </div>
+
+    <div class="contract-section">
+        <h2>EFFECTIVE DATE</h2>
+        <p>${effectiveDateOutput[0].generated_text}</p>
+    </div>
+
+    <div class="contract-section">
+        <h2>CONTRACT TYPE</h2>
+        <p>${contractTypeOutput[0].generated_text}</p>
+    </div>
+
+    <div class="contract-section">
+        <h2>OBLIGATIONS</h2>
+        <p>${obligationsOutput[0].generated_text}</p>
+    </div>
+
+    <div class="contract-section">
+        <h2>PAYMENT TERMS</h2>
+        <p>${paymentTermsOutput[0].generated_text}</p>
+    </div>
+
+    <div class="contract-section">
+        <h2>DISPUTE RESOLUTION</h2>
+        <p>${disputeResolutionOutput[0].generated_text}</p>
+    </div>
+
+    <div class="contract-section">
+        <h2>TERMINATION</h2>
+        <p>${terminationOutput[0].generated_text}</p>
+    </div>
+
+    <div class="contract-section">
+        <h2>GOVERNING LAW</h2>
+        <p>${governingLawOutput[0].generated_text}</p>
+    </div>
+`;
+
+
+
+                     hideLoadingModal();
+                    writeMessage(htmlContent);
+
+                    const pdf = await generatePdf();
+                    const blob = new Blob([pdf], { type: 'application/pdf' });
+                    const pdfUrl = URL.createObjectURL(blob);
+                    window.open(pdfUrl, '_blank');
+                } catch (error) {
+                    hideLoadingSpinner();
+                    console.error('Error generating contract:', error);
+                }
+            }, 1000);
+        }
+    </script>
+
+ <style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 20px;
+        background-color: #e5e5e5;
+    }
+
+    h1 {
+        color: #333;
+		margin: auto;
+		text-align: center;
+		    font-size: larger;
+			    font-style: italic;
+
+    }
+
+    label {
+        display: block;
+        margin-bottom: auto;
+        font-weight: bold;
+        color: #555;
+    }
+
+    input,
+select,
+textarea {
+    display: block; /* Ensure each input element is on its own line */
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+    button {
+      background: #5E5DF0;
+    border-radius: 10px;
+    box-shadow: #5E5DF0 0 10px 20px -10px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: Inter,Helvetica,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Noto Color Emoji","Segoe UI Symbol","Android Emoji",EmojiSymbols,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans",sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    opacity: 1;
+    outline: 0 solid transparent;
+    padding: 8px 18px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: fit-content;
+    word-break: break-word;
+    border: 0;
+    margin-right: 10px;
+    border-style: outset;
+    border-width: medium;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+	
+ #exitButton {
+      background: #eb1f1f;
+    border-radius: 10px;
+    box-shadow: #5E5DF0 0 10px 20px -10px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: Inter,Helvetica,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Noto Color Emoji","Segoe UI Symbol","Android Emoji",EmojiSymbols,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans",sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    opacity: 1;
+    outline: 0 solid transparent;
+    padding: 8px 18px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: fit-content;
+    word-break: break-word;
+    border: 0;
+    margin-right: 10px;
+    border-style: outset;
+    border-width: medium;
+    }
+	
+    #loadingDiv {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1001;
+    }
+
+    #loadingSpinner {
+        border: 8px solid #f3f3f3;
+        border-top: 8px solid #3498db;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    #messageDiv {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        border: 2px solid #ccc;
+        background-color: white;
+        z-index: 1000;
+    }
+
+    .contract-section {
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        color: #333; /* Optional: Customize header color */
+    }
+
+    p {
+        margin-top: 0;
+    }
+
+    .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .modal-content {
+        background: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    .spinner {
+        border: 4px solid rgba(0, 0, 0, 0.1);
+        border-radius: 50%;
+        border-top: 4px solid #3498db;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+		
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+	#contractContainer {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+        box-shadow: 0px 13px 10px 3px rgb(0 0 0 / 62%);
+    height: auto;
+    font-family: 'Arial', sans-serif;
+    width: 500px;
+        border-style: outset;
+    border-width: thick;
+    margin: auto;
+    
+}
+</style>
+</head>
+
+<body>
+    <div id="contractContainer">
+        <h1>Legal Draft Contract Generator</h1>
+
+        <div class="contract-section">
+            <label for="buyerInput">Buyer:</label>
+            <input type="text" id="buyerInput" placeholder="Enter buyer's name">
+        </div>
+
+        <div class="contract-section">
+            <label for="sellerInput">Seller:</label>
+            <input type="text" id="sellerInput" placeholder="Enter seller's name">
+        </div>
+
+        <div class="contract-section">
+            <label for="effectiveDateInput">Effective Date:</label>
+            <input type="date" id="effectiveDateInput">
+        </div>
+
+        <div class="contract-section">
+            <label for="contractTypeInput">Contract Type:</label>
+            <select id="contractTypeInput">
+                <option value="Purchase Agreement">Purchase Agreement</option>
+                <option value="Service Contract">Service Contract</option>
+                <option value="Lease Agreement">Lease Agreement</option>
+                <option value="Employment Contract">Employment Contract</option>
+                <option value="Consulting Agreement">Consulting Agreement</option>
+                <option value="Non-Disclosure Agreement">Non-Disclosure Agreement</option>
+                <option value="Government Grant Agreement">Government Grant Agreement</option>
+                <option value="Vendor Agreement">Vendor Agreement</option>
+                <option value="Public-Private Partnership Agreement">Public-Private Partnership Agreement</option>
+                <option value="Interagency Agreement">Interagency Agreement</option>
+                <option value="Memorandum of Understanding (MOU)">Memorandum of Understanding (MOU)</option>
+                <option value="License Agreement">License Agreement</option>
+                <option value="Public Works Contract">Public Works Contract</option>
+                <option value="Cooperative Agreement">Cooperative Agreement</option>
+                <option value="Intergovernmental Agreement">Intergovernmental Agreement</option>
+                <option value="Grant Agreement">Grant Agreement</option>
+                <option value="Utility Service Agreement">Utility Service Agreement</option>
+                <option value="Concession Agreement">Concession Agreement</option>
+                <option value="Affiliation Agreement">Affiliation Agreement</option>
+                <option value="Research Agreement">Research Agreement</option>
+            </select>
+        </div>
+
+        <div class="contract-section">
+            <label for="obligationsInput">Obligations:</label>
+            <textarea id="obligationsInput" placeholder="Enter contract obligations"></textarea>
+        </div>
+
+        <div class="contract-section">
+            <label for="paymentTermsInput">Payment Terms:</label>
+            <textarea id="paymentTermsInput" placeholder="Enter payment terms"></textarea>
+        </div>
+
+        <div class="contract-section">
+            <label for="disputeResolutionInput">Dispute Resolution:</label>
+            <textarea id="disputeResolutionInput" placeholder="Enter dispute resolution details"></textarea>
+        </div>
+
+        <div class="contract-section">
+            <label for="terminationInput">Termination Conditions:</label>
+            <textarea id="terminationInput" placeholder="Enter termination conditions"></textarea>
+        </div>
+
+        <div class="contract-section">
+            <label for="governingLawInput">Governing Law:</label>
+            <select id="governingLawInput">
+                <option value="Alabama">Alabama</option>
+                <option value="Alaska">Alaska</option>
+                <option value="Arizona">Arizona</option>
+                <option value="Arkansas">Arkansas</option>
+                <option value="California">California</option>
+                <option value="Colorado">Colorado</option>
+                <option value="Connecticut">Connecticut</option>
+                <option value="Delaware">Delaware</option>
+                <option value="Florida">Florida</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Hawaii">Hawaii</option>
+                <option value="Idaho">Idaho</option>
+                <option value="Illinois">Illinois</option>
+                <option value="Indiana">Indiana</option>
+                <option value="Iowa">Iowa</option>
+                <option value="Kansas">Kansas</option>
+                <option value="Kentucky">Kentucky</option>
+                <option value="Louisiana">Louisiana</option>
+                <option value="Maine">Maine</option>
+                <option value="Maryland">Maryland</option>
+                <option value="Massachusetts">Massachusetts</option>
+                <option value="Michigan">Michigan</option>
+                <option value="Minnesota">Minnesota</option>
+                <option value="Mississippi">Mississippi</option>
+                <option value="Missouri">Missouri</option>
+                <option value="Montana">Montana</option>
+                <option value="Nebraska">Nebraska</option>
+                <option value="Nevada">Nevada</option>
+                <option value="New Hampshire">New Hampshire</option>
+                <option value="New Jersey">New Jersey</option>
+                <option value="New Mexico">New Mexico</option>
+                <option value="New York">New York</option>
+                <option value="North Carolina">North Carolina</option>
+                <option value="North Dakota">North Dakota</option>
+                <option value="Ohio">Ohio</option>
+                <option value="Oklahoma">Oklahoma</option>
+                <option value="Oregon">Oregon</option>
+                <option value="Pennsylvania">Pennsylvania</option>
+                <option value="Rhode Island">Rhode Island</option>
+                <option value="South Carolina">South Carolina</option>
+                <option value="South Dakota">South Dakota</option>
+                <option value="Tennessee">Tennessee</option>
+                <option value="Texas">Texas</option>
+                <option value="Utah">Utah</option>
+                <option value="Vermont">Vermont</option>
+                <option value="Virginia">Virginia</option>
+                <option value="Washington">Washington</option>
+                <option value="West Virginia">West Virginia</option>
+                <option value="Wisconsin">Wisconsin</option>
+                <option value="Wyoming">Wyoming</option>
+            </select>
+        </div>
+
+        <div class="contract-section">
+            <button id="generateButton">Generate Contract</button>
+			 <button id="exitButton" class="exitButton">Exit</button>
+        </div>
+
+
+
+		
+        <div class="contract-section" id="loadingDiv" style="display: none;">
+            <div id="loadingSpinner" style="border: 4px solid rgba(0, 0, 0, 0.1); border-radius: 50%; border-top: 4px solid #3498db; width: 40px; height: 40px; animation: spin 1s linear infinite;"></div>
+        </div>
+
+        <div class="contract-section" id="messageDiv"></div>
+    </div>
+
+    <div id="modalOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; z-index: 1000;">
+    <div style="background: #fff; padding: 20px; border-radius: 5px; text-align: center;" class="modal-content">
+        <div style="border: 4px solid rgba(0, 0, 0, 0.1); border-radius: 50%; border-top: 4px solid #3498db; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto;"></div>
+        <p>Loading...</p>
+            <p>This may take a minute or two. If the page freezes, please click on wait.</p>
+        </div>
+    </div>
+</body>
+
+<script>
+    document.getElementById("exitButton").addEventListener("click", function() {
+        window.location.href = "https://hhachem001.github.io/Legal_Tech/redirect.html";
+    });
+</script>
+
+
+</html>
