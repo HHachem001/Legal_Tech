@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letter Generator</title>
+    <style>
+	
+	header {
+        background-color: #203f61; /* Header background color */
+        color: #fff; /* Text color */
+        padding: 15px; /* Padding around content */
+        text-align: center; /* Center-align text */
+		margin-bottom: 40px;
+		border-radius: 6px;
+		    border-style: ridge;
+    border-width: thick;
+    }
+
+    h1 {
+        margin: 0; /* Remove default margin for h1 */
+        font-size: 24px; /* Adjust font size */
+    }
+
+    p {
+        font-style: italic;
+        margin: 10px 0 0; /* Add margin to the bottom */
+    }
+	
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #email-form {
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #3671b1;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 10px;
+            border-style: outset;
+			
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Popup styles */
+        #popup-container {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 50px;
+            background-color: #fff;
+            border: 9px outset #e5e5e5;
+                box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+            z-index: 1000;
+        }
+
+        #popup-content {
+            margin-bottom: 20px;
+        }
+
+        .popup-close-btn {
+            cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #e10000;
+    font-size: 20px;
+    padding-right: 10px;
+    cursor: pointer;
+        }
+
+        
+		
+		.button-A1 {
+  background: #5E5DF0;
+  border-radius: 10px;
+  box-shadow: #5E5DF0 0 10px 20px -10px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-family: Inter,Helvetica,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Noto Color Emoji","Segoe UI Symbol","Android Emoji",EmojiSymbols,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans",sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  opacity: 1;
+  outline: 0 solid transparent;
+  padding: 8px 18px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: fit-content;
+  word-break: break-word;
+  border: 0;
+  width: 100%;
+}
+
+.button-A1:hover {
+  background: #3e40b8; /* Change the color for hover state (green in this case) */
+}
+.button-A2 {
+  background: #f05d5d;
+  border-radius: 10px;
+  box-shadow: #dd0000 0 10px 20px -10px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-family: Inter,Helvetica,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Noto Color Emoji","Segoe UI Symbol","Android Emoji",EmojiSymbols,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans",sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  opacity: 1;
+  outline: 0 solid transparent;
+  padding: 8px 18px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: fit-content;
+  word-break: break-word;
+  border: 0;
+  width: 100%;
+}
+
+.button-A2:hover {
+  background: #c92525; /* Change the color for hover state (green in this case) */
+}
+    </style>
+</head>
+
+<body>
+    <!-- Email Form -->
+    <div id="email-form">
+	
+	<header>
+        <h1>Legal Draft: Letter Generator</h1>
+        <p>This tool helps you generate personalized letters to citizens.</p>
+    </header>
+
+        <label for="recipient">To (citizen name):</label>
+        <input type="text" id="recipient" placeholder="Recipient Name">
+
+        <label for="sender">From:</label>
+        <input type="text" id="sender" placeholder="Your Name and your Title / Position">
+
+        <label for="subject">Subject / Inquiry:</label>
+        <input type="text" id="subject" placeholder="Subject/Question">
+
+        <button class="button-A1" id="generate-button">Generate Letter</button>
+        <button class="button-A2" id="exit-button">Exit</button>
+
+         <p style="font-style: italic; margin-top: 10px;">
+        NOTE: This feature only works in Google Chrome, and it requires you to load the Legal Draft A.I.
+        first on the home page before you can use this tool. Page will freeze while generating response.
+    </p>
+    </div>
+
+    <!-- Hidden popup container -->
+    <div id="popup-container">
+        <div id="popup-content"></div>
+        <div class="popup-close-btn" id="close-popup-btn">✖</div>
+    </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
+    <script type="module">
+        // A.I. script code
+        import { pipeline } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.14.1';
+
+        let generator;
+
+        async function loadModel() {
+            try {
+                generator = await pipeline('text2text-generation', 'Xenova/LaMini-Flan-T5-783M');
+                alert('The A.I. model is ready. You can now generate letters!');
+            } catch (error) {
+                console.error('Error loading the A.I. model:', error);
+                alert('Oops! There was an error loading the A.I. model. Please try again later.');
+            }
+        }
+
+        // Function to handle email generation
+async function generateEmail() {
+    const recipient = document.getElementById('recipient').value.trim();
+    const sender = document.getElementById('sender').value.trim();
+    const subject = document.getElementById('subject').value.trim();
+
+    if (recipient !== '' && sender !== '' && subject !== '') {
+        const emailSentence = `My name is ${sender}, and I am sending a letter to ${recipient}. Help me write a letter to recipient that addresses ${subject}.`;
+
+        // Display loading message in the popup after a delay
+        displayPopup('Generating letter. Page may become temporarily unresponsive. Please wait...');
+        
+        // Introduce a delay (e.g., 1 second) before calling the AI model
+        setTimeout(async () => {
+            const generatedEmail = await generateResponse(emailSentence);
+            
+            // Display the generated email in the popup
+            displayPopup(generatedEmail);
+        }, 1000); // Adjust the delay time (in milliseconds) as needed
+    } else {
+        // Handle empty fields if needed
+        alert('Please fill in all fields.');
+    }
+}
+
+
+        // Function to generate response using A.I.
+async function generateResponse(message) {
+    try {
+        const output = await generator(message, {
+            max_length: 1000,  // Adjust as needed
+            max_new_tokens: 500,  // Adjust as needed
+            length_penalty: 0.8  // Adjust as needed
+        });
+        return output[0].generated_text;
+    } catch (error) {
+        console.error('Error generating response:', error);
+        return 'Oops! Something went wrong while generating the response.';
+    }
+}
+
+
+// Function to display the popup and generate PDF
+function displayPopup(content) {
+    const popupContainer = document.getElementById('popup-container');
+    const popupContent = document.getElementById('popup-content');
+
+    // Update the content of the popup
+    popupContent.innerHTML = content;
+
+    // Check if the content is not the loading message before adding the button
+    if (content !== 'Generating letter. Page may become temporarily unresponsive. Please wait...') {
+        // Add a button to download PDF
+        const downloadButton = document.createElement('button');
+        downloadButton.textContent = 'Download PDF';
+        downloadButton.addEventListener('click', () => generatePDF(content));
+
+        // Append the download button to the popup content
+        popupContent.appendChild(downloadButton);
+    }
+
+    // Display the popup
+    popupContainer.style.display = 'block';
+}
+// Function to generate PDF from content
+function generatePDF(content) {
+    const element = document.getElementById('popup-content'); // Use the container ID where the content is displayed
+
+    // Use html2pdf to generate the PDF
+    html2pdf(element, {
+        margin: 10,
+        filename: 'generated_letter.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    });
+}
+// Function to close the popup
+function closePopup() {
+    const popupContainer = document.getElementById('popup-container');
+    // Hide the popup
+    popupContainer.style.display = 'none';
+}
+
+
+        // Function to handle exit button click
+        function exitButtonClicked() {
+            // Redirect to redirect.html
+            window.location.href = 'redirect.html';
+        }
+
+        // Wait for the DOM content to fully load
+        document.addEventListener('DOMContentLoaded', function () {
+            // Call the loadModel function to load the AI model.
+            loadModel();
+
+            // Attach event listener to the button
+            const generateButton = document.getElementById('generate-button');
+            if (generateButton) {
+                generateButton.addEventListener('click', generateEmail);
+            }
+
+            // Attach event listener to the close button
+            const closePopupButton = document.getElementById('close-popup-btn');
+            if (closePopupButton) {
+                closePopupButton.addEventListener('click', closePopup);
+            }
+
+            // Attach event listener to the exit button
+            const exitButton = document.getElementById('exit-button');
+            if (exitButton) {
+                exitButton.addEventListener('click', exitButtonClicked);
+            }
+        });
+    </script>
+
+</body>
+
+</html>
