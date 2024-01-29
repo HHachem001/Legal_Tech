@@ -462,7 +462,7 @@
 				</button>
 <button id="generateButton" class="button-A1" >A.I. Feedback</button>
 
-				<button onclick="showAIMaskPopup()" class="button-A1">A.I.  ‎ Mask Fill</button>
+				<button onclick="showAIMaskPopup()" class="button-A1">A.I. [WORD] Fill</button>
 
 				<button onclick="toggleChatContainer()" class="button-A1">
     A.I. Assistant
@@ -534,7 +534,7 @@
                 <button onclick="generateDocument()">Generate Memo</button>
             </div>
         </div>
-		<p class="disclaimer"> Use A.I. to substitute uncertain words or propose synonyms by using the [MASK] tag. Only one [MASK] tag allowed at a time; if at the end of a sentence, add a period after the [MASK] tag for proper functionality.</p>
+		<p class="disclaimer"> Use A.I. to substitute uncertain words or propose synonyms by using the [WORD] tag. Only one [WORD] tag allowed at a time; if at the end of a sentence, add a period after the [WORD] tag for proper functionality.</p>
 	    <p class="disclaimer">Created by Hashim Hachem 2024. This is an educational demo and should not be relied on as a source of legal authority.</p>
     </div>
 
@@ -572,52 +572,66 @@
 </div>
 
 <script type="module">
-    import { pipeline } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.10.1';
-	
-async function showAIMaskPopup() {
-    // Get the currently active textarea
-    const activeTextarea = document.querySelector('.document-section.active textarea');
+    import { pipeline } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.14.1';
 
-    if (activeTextarea) {
-        // Get text from the active textarea
-        const text = activeTextarea.value;
+    async function showAIMaskPopup() {
+        // Get the currently active textarea
+        const activeTextarea = document.querySelector('.document-section.active textarea');
 
-        // Identify [MASK] placeholders
-        const maskedSentences = [];
-        if (text.includes('[MASK]')) {
-            maskedSentences.push(text);
+        if (activeTextarea) {
+            // Get text from the active textarea
+            const text = activeTextarea.value.trim(); // Trim whitespace
+
+            // Log the textarea content for debugging
+            console.log('Textarea Content:', text);
+
+            // Identify [WORD] placeholders using a regular expression
+            if (/\[WORD\]/.test(text)) {
+                // Replace [WORD] with [MASK]
+                const replacedText = text.replace(/\[WORD\]/g, '[MASK]');
+
+                // Log the replaced text
+                console.log('Replaced Text:', replacedText);
+
+                // Use A.I. model to suggest options
+                const suggestions = await getSuggestions([replacedText]);
+
+                // Open a popup window or modal to display suggestions
+                openAIMaskPopup(suggestions);
+            } else {
+                console.log('No [WORD] placeholders found in the text.');
+            }
+        } else {
+            console.error('No active textarea found.');
         }
-
-        // Use A.I. model to suggest options
-        const suggestions = await getSuggestions(maskedSentences);
-
-        // Open a popup window or modal to display suggestions
-        openAIMaskPopup(suggestions);
-    } else {
-        console.error('No active textarea found.');
-    }
-}
-
-async function getSuggestions(sentences) {
-    const unmasker = await pipeline('fill-mask', 'Xenova/bert-base-cased');
-    const suggestions = [];
-
-    for (const sentence of sentences) {
-        const output = await unmasker(sentence);
-        suggestions.push({ original: sentence, suggestions: output.map(item => item.token_str) });
     }
 
-    return suggestions;
-}
-function openAIMaskPopup(suggestions) {
-    // Create and display a popup with suggestions
-    // You can customize the HTML structure and styling as needed
-    // For simplicity, alert is used here
-    const formattedSuggestions = suggestions.map(item => `${item.original}: ${item.suggestions.join(', ')}`).join('\n');
-    alert(`A.I. Suggestions:\n\n${formattedSuggestions}`);
-}
+    async function getSuggestions(sentences) {
+        try {
+            const unmasker = await pipeline('fill-mask', 'Xenova/bert-base-cased');
+            const suggestions = [];
 
- // Explicitly define showAIMaskPopup in the global scope
+            for (const sentence of sentences) {
+                const output = await unmasker(sentence);
+                suggestions.push({ original: sentence, suggestions: output.map(item => item.token_str) });
+            }
+
+            return suggestions;
+        } catch (error) {
+            console.error('Error in getSuggestions:', error);
+            return [];
+        }
+    }
+
+    function openAIMaskPopup(suggestions) {
+        // Create and display a popup with suggestions
+        // You can customize the HTML structure and styling as needed
+        // For simplicity, alert is used here
+        const formattedSuggestions = suggestions.map(item => `${item.original}: ${item.suggestions.join(', ')}`).join('\n');
+        alert(`A.I. Suggestions:\n\n${formattedSuggestions}`);
+    }
+
+    // Explicitly define showAIMaskPopup in the global scope
     window.showAIMaskPopup = showAIMaskPopup;
 </script>
 
@@ -708,7 +722,7 @@ function loadFile(url, callback) {
     </script>
 
 <script type="module">
-     import { pipeline } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.10.1';
+     import { pipeline } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.14.1';
 
     let generator;
 
