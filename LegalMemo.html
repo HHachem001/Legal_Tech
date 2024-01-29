@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document Generator with Chatbot</title>
+    <title>Memo Assembler</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -428,7 +428,17 @@
 
 .custom-upload-button:hover::before {
     background: #84C615; /* Change the color for hover state (green in this case) */
-}
+} #loadingPopup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border: 2px solid #ccc;
+    background-color: white;
+    z-index: 1000;
+  }
     </style>
 </head>
 
@@ -936,82 +946,95 @@ async function sendMessage() {
         }
     </script>
 	
- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.js"></script>
-    <script type="module">
-        import { pipeline } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.14.1';
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.js"></script>
+<script type="module">
+  import { pipeline } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.14.1';
 
-        let generator;
-        let messageDiv;  // Declare messageDiv at a higher scope
+  let generator;
+  let messageDiv;
 
-        async function loadModel() {
-            try {
-                generator = await pipeline('text2text-generation', 'Xenova/LaMini-Flan-T5-783M', { dynamicArguments: true });
-                messageDiv = document.getElementById('messageDiv');  // Assign messageDiv after loading the model
-            } catch (error) {
-                console.error('Error loading the A.I. model:', error);
-            }
-        }
+  // Add a loading popup
+  const loadingPopup = document.getElementById('loadingPopup');
 
-        // Call the loadModel function to load the AI model.
-        loadModel();
+  // Function to show the loading popup
+  function showLoadingPopup() {
+    loadingPopup.style.display = 'block';
+  }
 
-        // Attach event listener using JavaScript
-        document.addEventListener('DOMContentLoaded', function () {
-            const generateButton = document.getElementById('generateButton');
-            if (generateButton) {
-                generateButton.addEventListener('click', generateReport);
-            }
-        });
-		
-    let toText, fromText, dateText, subjectText, questionText, answerText, factsText, discussionText, conclusionText;
-let htmlContent;  // Define htmlContent at a higher scope
+  // Function to hide the loading popup
+  function hideLoadingPopup() {
+    loadingPopup.style.display = 'none';
+  }
 
-// Wrap the pdf generation in a function declaration to ensure it's available
+  async function loadModel() {
+    try {
+      generator = await pipeline('text2text-generation', 'Xenova/LaMini-Flan-T5-783M', { dynamicArguments: true });
+      messageDiv = document.getElementById('messageDiv');
+    } catch (error) {
+      console.error('Error loading the A.I. model:', error);
+    }
+  }
+
+  loadModel();
+
+  const generateButton = document.getElementById('generateButton');
+  if (generateButton) {
+    generateButton.addEventListener('click', async function () {
+      // Show loading popup
+      showLoadingPopup();
+
+      try {
+        // Delay for 1 second
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
+        let toText, fromText, dateText, subjectText, questionText, answerText, factsText, discussionText, conclusionText;
+        let htmlContent;
+
+        // Wrap the pdf generation in a function declaration to ensure it's available
         async function generatePdf() {
-            const pdfOptions = { margin: 10, filename: 'generated_report.pdf', image: { type: 'jpeg', quality: 0.98 } };
-            const pdf = await html2pdf().from(messageDiv).set(pdfOptions).outputPdf();
-            return pdf;
+          const pdfOptions = { margin: 10, filename: 'generated_report.pdf', image: { type: 'jpeg', quality: 0.98 } };
+          const pdf = await html2pdf().from(messageDiv).set(pdfOptions).outputPdf();
+          return pdf;
         }
 
-  // Function to write a message to the message div
+        // Function to write a message to the message div
         function writeMessage(msg) {
-            // Clear existing content before appending new content
-            messageDiv.innerHTML = '';
-            
-            // Create a text node with the provided message
-            const textNode = document.createTextNode(msg);
+          // Clear existing content before appending new content
+          messageDiv.innerHTML = '';
 
-            // Append the text node to the message div
-            messageDiv.appendChild(textNode);
+          // Create a text node with the provided message
+          const textNode = document.createTextNode(msg);
 
-            // Show the messageDiv with inline styles
-            messageDiv.style.display = 'block';
-            messageDiv.style.position = 'fixed';
-            messageDiv.style.top = '50%';
-            messageDiv.style.left = '50%';
-            messageDiv.style.transform = 'translate(-50%, -50%)';
-            messageDiv.style.padding = '20px';
-            messageDiv.style.border = '2px solid #ccc';
-            messageDiv.style.backgroundColor = 'white';
-            messageDiv.style.zIndex = '1000';
+          // Append the text node to the message div
+          messageDiv.appendChild(textNode);
 
-            // Add a close button inside the message div
-            const closeButton = document.createElement('button');
-            closeButton.textContent = 'Close';          
-            closeButton.style.bottom = '1px';
-            closeButton.style.right = '10px';
-            closeButton.style.cursor = 'pointer';
-            closeButton.addEventListener('click', closeMessageDiv);
-            messageDiv.appendChild(closeButton);
+          // Show the messageDiv with inline styles
+          messageDiv.style.display = 'block';
+          messageDiv.style.position = 'fixed';
+          messageDiv.style.top = '50%';
+          messageDiv.style.left = '50%';
+          messageDiv.style.transform = 'translate(-50%, -50%)';
+          messageDiv.style.padding = '20px';
+          messageDiv.style.border = '2px solid #ccc';
+          messageDiv.style.backgroundColor = 'white';
+          messageDiv.style.zIndex = '1000';
+
+          // Add a close button inside the message div
+          const closeButton = document.createElement('button');
+          closeButton.textContent = 'Close';
+          closeButton.style.bottom = '1px';
+          closeButton.style.right = '10px';
+          closeButton.style.cursor = 'pointer';
+          closeButton.addEventListener('click', closeMessageDiv);
+          messageDiv.appendChild(closeButton);
         }
 
         // Function to close the messageDiv
         function closeMessageDiv() {
-            // Hide the messageDiv
-            messageDiv.style.display = 'none';
+          // Hide the messageDiv
+          messageDiv.style.display = 'none';
         }
 
-    async function generateReport() {
         // Assign values inside the function
         toText = document.getElementById('toInput').value.trim();
         fromText = document.getElementById('fromInput').value.trim();
@@ -1025,21 +1048,21 @@ let htmlContent;  // Define htmlContent at a higher scope
 
         console.log('Input Texts:', toText, fromText, dateText, subjectText, questionText, answerText, factsText, discussionText, conclusionText);
 
-        try {
-            // Adjust max_new_tokens parameter to avoid offset error
-            const maxTokens = 100;
-            
-            const toOutput = await generator(`Briefly rate the grammar and cohesiveness of the text from ${toText}`, { max_new_tokens: maxTokens });
-            const fromOutput = await generator(`Briefly rate the grammar and cohesiveness of the text from ${fromText}`, { max_new_tokens: maxTokens });
-            const dateOutput = await generator(`Briefly rate the grammar and cohesiveness of the text from ${dateText}`, { max_new_tokens: maxTokens });
-            const subjectOutput = await generator(`Briefly rate the grammar and cohesiveness of the text from ${subjectText}`, { max_new_tokens: maxTokens });
-            const questionOutput = await generator(`Briefly rate the grammar and cohesiveness of the text from ${questionText}`, { max_new_tokens: maxTokens });
-            const answerOutput = await generator(`Briefly rate the grammar and cohesiveness of the text from ${answerText}`, { max_new_tokens: maxTokens });
-            const factsOutput = await generator(`Briefly rate the grammar and cohesiveness of the text from ${factsText}`, { max_new_tokens: maxTokens });
-            const discussionOutput = await generator(`Briefly rate the grammar and cohesiveness of the text from ${discussionText}`, { max_new_tokens: maxTokens });
-            const conclusionOutput = await generator(`Briefly rate the grammar and cohesiveness of the text from ${conclusionText}`, { max_new_tokens: maxTokens });
-// Convert outputs to HTML for pdf conversion
-        const htmlContent = `
+        // Adjust max_new_tokens parameter to avoid offset error
+        const maxTokens = 100;
+
+        const toOutput = await generator(`Briefly rate the grammar and cohesiveness of the text from ${toText}`, { max_new_tokens: maxTokens });
+        const fromOutput = await generator(`Briefly rate the grammar and cohesiveness of the text from ${fromText}`, { max_new_tokens: maxTokens });
+        const dateOutput = await generator(`Briefly rate the grammar and cohesiveness of the text from ${dateText}`, { max_new_tokens: maxTokens });
+        const subjectOutput = await generator(`Briefly rate the grammar and cohesiveness of the text from ${subjectText}`, { max_new_tokens: maxTokens });
+        const questionOutput = await generator(`Briefly rate the grammar and cohesiveness of the text from ${questionText}`, { max_new_tokens: maxTokens });
+        const answerOutput = await generator(`Briefly rate the grammar and cohesiveness of the text from ${answerText}`, { max_new_tokens: maxTokens });
+        const factsOutput = await generator(`Briefly rate the grammar and cohesiveness of the text from ${factsText}`, { max_new_tokens: maxTokens });
+        const discussionOutput = await generator(`Briefly rate the grammar and cohesiveness of the text from ${discussionText}`, { max_new_tokens: maxTokens });
+        const conclusionOutput = await generator(`Briefly rate the grammar and cohesiveness of the text from ${conclusionText}`, { max_new_tokens: maxTokens });
+
+        // Convert outputs to HTML for pdf conversion
+        htmlContent = `
    
         TO SECTION: ${toOutput[0].generated_text}
         FROM SECTION: ${fromOutput[0].generated_text}
@@ -1052,23 +1075,38 @@ let htmlContent;  // Define htmlContent at a higher scope
         CONCLUSION SECTION: ${conclusionOutput[0].generated_text}
    `;
 
-       // Log the content to the message div for inspection
-                writeMessage(htmlContent);
+        // Log the content to the message div for inspection
+        writeMessage(htmlContent);
 
-                // Convert HTML to PDF
-                const pdf = await generatePdf();
+        // Convert HTML to PDF
+        const pdf = await generatePdf();
 
-                // Open PDF in a new tab for inspection
-                const blob = new Blob([pdf], { type: 'application/pdf' });
-                const pdfUrl = URL.createObjectURL(blob);
-                window.open(pdfUrl, '_blank');
-            } catch (error) {
-                console.error('Error generating report:', error);
-            }
-        }
+        // Open PDF in a new tab for inspection
+        const blob = new Blob([pdf], { type: 'application/pdf' });
+        const pdfUrl = URL.createObjectURL(blob);
+        window.open(pdfUrl, '_blank');
+      } catch (error) {
+        console.error('Error generating report:', error);
+      } finally {
+        // Hide loading popup regardless of success or failure
+        hideLoadingPopup();
+      }
+    });
+  }
 </script>
 <div id="messageDiv" style="display: none;"></div>
-
+<div id="loadingPopup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 20px; border: 2px solid #ccc; background-color: white; z-index: 1000; text-align: center;">
+  <div style="border: 4px solid rgba(0, 0, 0, 0.1); border-radius: 50%; border-top: 4px solid #3498db; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto;"></div>
+  <p>Loading...</p>
+  <p>This may take a minute or two.</p>
+  <p>If page freezes, please click on Wait.</p>
+</div>
+<style>
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+</style>
 
 
 </body>
