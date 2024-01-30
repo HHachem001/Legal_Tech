@@ -550,6 +550,10 @@
 		     <i class="fa-regular fa-envelope"></i>
 		     <span>Email Generator</span>
 		</button>
+		<button class="department-button" onclick="redirectAdvisor()">
+		     <i class="fa-solid fa-building-shield"></i>
+		     <span>Citizen Complaints</span>
+		</button>
 		<button class="department-button" onclick="redirectHelp()">
 		      <i class="fa-regular fa-circle-question"></i>
 		     <span>User Guide</span>
@@ -701,7 +705,12 @@ function closePopup(department) {
     }
 </script>
 	
-
+<script>
+    function redirectAdvisor() {
+        window.location.href = 'https://hhachem001.github.io/Legal_Tech/advisor.html';
+    }
+</script>
+	
 <script type="module">
     import { pipeline } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.14.1';
 
@@ -879,6 +888,7 @@ async function sendMessage() {
 		"https://hhachem001.github.io/Legal_Tech/taskmanager.html",
 		"https://hhachem001.github.io/Legal_Tech/help.html",
 		"https://hhachem001.github.io/Legal_Tech/emailerV3.html",
+		    "https://hhachem001.github.io/Legal_Tech/advisor.html",
                 // Add more authorized page URLs as needed
             ];
 
