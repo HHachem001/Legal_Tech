@@ -12,7 +12,7 @@
   
 # Legal Draft
 
-Legal Draft is a prototype toolbox designed for law school interns who secure internships in the public/government sector. The project aims to assist interns with basic tasks such as drafting memos in the proper format for their supervising attorneys or composing emails to be sent to supervisors and the public. The goal is to streamline these tasks and reduce the likelihood of errors, especially in fundamental aspects like memo formatting. You only get one chance to make a first impression. 
+Legal Draft is a prototype toolbox designed for law school interns who secure internships in the government sector. The project aims to assist interns with basic tasks such as drafting memos in the proper format for their supervising attorneys or composing emails to be sent to supervisors and the public. The goal is to streamline these tasks and reduce the likelihood of errors, especially in fundamental aspects like memo formatting. You only get one chance to make a first impression. 
 
 ## Goals
 
