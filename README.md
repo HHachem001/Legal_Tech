@@ -7,7 +7,8 @@
 - Added new A.I. feedback feature that reads the text for grammar and cohesiveness and provides the user with feedback. (currently only for supervising attorney memos).
 - Added new A.I. citizen letter generator (replaced old system of selecting letter type).
 - Added new contract generator tool (experimental).
-- Minor UI enhancements. 
+- Added new tool to assist with responding to citizen complaints.
+- Minor UI / theme enhancements. 
   
 # Legal Draft
 
